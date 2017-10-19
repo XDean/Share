@@ -1,9 +1,10 @@
 package xdean.share.mybatis.resultmap.model;
 
+//t_user
 public class User {
-  private int id;
-  private String username;
-  private String hashedPassword;
+  private int id; // user_id
+  private String username;// user_name
+  private String hashedPassword;// hashed_password
 
   public int getId() {
     return id;

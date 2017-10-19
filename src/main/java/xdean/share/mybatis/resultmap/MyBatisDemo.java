@@ -1,5 +1,7 @@
 package xdean.share.mybatis.resultmap;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.type.JdbcType;
 
@@ -12,7 +14,8 @@ import xdean.share.mybatis.resultmap.model.User;
 @Mapper
 public interface MyBatisDemo {
   @Mapper
-  InitResultMap<User> USER_MAP = InitResultMap.create(User.class)
+  InitResultMap<User> USER_MAP = InitResultMap
+      .create(User.class)
       .namespace()
       .id(User.class.getName())
       .resultMap(b -> b
@@ -23,6 +26,7 @@ public interface MyBatisDemo {
           .build())
       .build();
 
+  List<User> getAll();
 }
 
 interface t_user {
