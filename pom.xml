@@ -10,16 +10,24 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
+
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
-			<groupId>xdean</groupId>
+			<groupId>com.github.XDean</groupId>
 			<artifactId>JUnit-EX</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>master-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>xdean</groupId>
+			<groupId>com.github.XDean</groupId>
 			<artifactId>MyBatisExtension</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
+			<version>master-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
