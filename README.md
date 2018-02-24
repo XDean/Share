@@ -14,5 +14,5 @@ Knowledge Sharing
 - [Java9 except Jigsaw](../../../Java9-Learning)
 
 ## 02.24
-- [Extension of JavaFX](doc/Extension of JavaFX.md)
-- [Hints of using JavaFX beans](doc/Hints of using JavaFX beans.md)
+- [Extension of JavaFX](doc/Extension-of-JavaFX.md)
+- [Hints of using JavaFX beans](doc/Hints-of-using-JavaFX-beans.md)
