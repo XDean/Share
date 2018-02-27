@@ -4,12 +4,19 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoints;
-import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
-import org.junit.runner.RunWith;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
 
-@RunWith(Theories.class)
+@RunWithThories
 public class ThoryDemo {
+  
+  public static void main(String[] args) {
+    Result result = JUnitCore.runClasses(ThoryDemo.class);
+    System.out.println(result.getRunCount());
+    System.out.println(result.getFailureCount());
+  }
+  
   @DataPoints
   public static final int[] PARAM = { 1, 2, 3 };
 

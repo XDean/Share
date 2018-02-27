@@ -14,6 +14,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.github.XDean</groupId>
+			<artifactId>deannotation-aggregation</artifactId>
+			<version>0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.XDean</groupId>
 			<artifactId>JUnit-EX</artifactId>
 			<version>0.0.2</version>
 		</dependency>
