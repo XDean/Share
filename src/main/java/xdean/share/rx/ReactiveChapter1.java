@@ -1,5 +1,7 @@
 package xdean.share.rx;
 
+import java.util.function.Supplier;
+
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -8,12 +10,12 @@ import com.google.common.base.MoreObjects;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
+import lombok.ToString;
 
 public class ReactiveChapter1 {
   public static void main(String[] args) {
-    Eater dean = new Eater("Dean");
-    Publisher<Chicken> kfc = new KFC();
+    Eater<Chicken> dean = new Eater<>("Dean");
+    Publisher<Chicken> kfc = new KFC<>(Chicken::new);
     kfc.subscribe(dean);
     dean.getOrder().request(2);
     dean.getOrder().request(1);
@@ -21,15 +23,18 @@ public class ReactiveChapter1 {
     dean.getOrder().request(3);
   }
 
-  public static class KFC implements Publisher<Chicken> {
+  @RequiredArgsConstructor
+  public static class KFC<T> implements Publisher<T> {
+    public final Supplier<T> factory;
+
     @Override
-    public void subscribe(Subscriber<? super Chicken> s) {
+    public void subscribe(Subscriber<? super T> s) {
       s.onSubscribe(new ChikenOrder(s));
     }
 
     @RequiredArgsConstructor
-    private static class ChikenOrder implements Subscription {
-      final Subscriber<? super Chicken> subscriber;
+    public class ChikenOrder implements Subscription {
+      final Subscriber<? super T> subscriber;
       boolean cancel = false;
       int left = 5;
 
@@ -37,11 +42,15 @@ public class ReactiveChapter1 {
       public void request(long n) {
         System.out.printf("Request %d chicken\n", n);
         if (cancel) {
-          System.out.println("But the order is canceled");
+          System.out.println("But the order is finished");
           return;
         }
         while (!cancel && n-- > 0 && left-- > 0) {
-          subscriber.onNext(new Chicken(5 - left));
+          subscriber.onNext(factory.get());
+        }
+        if (left <= 0) {
+          cancel = true;
+          subscriber.onComplete();
         }
       }
 
@@ -63,7 +72,7 @@ public class ReactiveChapter1 {
 
   @RequiredArgsConstructor
   @Getter
-  public static class Eater implements Subscriber<Chicken> {
+  public static class Eater<T> implements Subscriber<T> {
     final String name;
     Subscription order;
 
@@ -74,7 +83,7 @@ public class ReactiveChapter1 {
     }
 
     @Override
-    public void onNext(Chicken t) {
+    public void onNext(T t) {
       System.out.printf("%s eat chicken: %s\n", name, t);
     }
 
@@ -87,11 +96,11 @@ public class ReactiveChapter1 {
     public void onComplete() {
       System.out.println("Clean! All chiken eated");
     }
-
   }
 
-  @Value
-  static class Chicken {
-    int id;
+  @ToString
+  public static class Chicken {
+    private static int counter = 0;
+    public final int id = ++counter;
   }
 }
