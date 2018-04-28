@@ -4,11 +4,13 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoints;
+import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
+import org.junit.runner.RunWith;
 
-@RunWithThories
+@RunWith(Theories.class)
 public class ThoryDemo {
   
   public static void main(String[] args) {
