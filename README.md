@@ -18,4 +18,4 @@ Knowledge Sharing
 - [Hints of using JavaFX beans](doc/Hints-of-using-JavaFX-beans.md)
 
 ## 04.28
-- [Reactive and RxJava](doc/rxjava/1. Reactive API.md) 
+- [Reactive and RxJava](doc/rxjava/1-Reactive-API.md) 
