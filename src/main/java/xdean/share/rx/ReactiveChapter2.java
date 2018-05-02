@@ -6,7 +6,6 @@ import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import xdean.share.rx.ReactiveChapter1.Eater;
@@ -16,32 +15,32 @@ import xdean.share.rx.ReactiveChapter2.Chicken.Type;
 public class ReactiveChapter2 {
   public static void main(String[] args) {
     Eater<Chicken> dean = new Eater<>("Dean");
-    Publisher<Chicken> kfc = new KFC<>(Chicken::new);
-    kfc.subscribe(new ChickenTypeWaiter(dean, Type.RIB));
+    KFC2<Chicken> kfc = new KFC2<>(Chicken::new);
+    kfc.filter(Type.RIB).subscribe(dean);
     dean.getOrder().request(2);
     dean.getOrder().request(1);
     dean.getOrder().request(3);
   }
 
-  public static class KFC2<T> extends KFC<T> {
+  public static class KFC2<T extends Chicken> extends KFC<T> {
     public KFC2(Supplier<T> factory) {
       super(factory);
     }
 
-    public Publisher<T> dontGiveMe(Type type) {
+    public Publisher<Chicken> filter(Type type) {
       return s -> subscribe(new ChickenTypeWaiter(s, type));
     }
   }
 
   @RequiredArgsConstructor
   public static class ChickenTypeWaiter implements Subscriber<Chicken> {
-    final Subscriber<? super Chicken> eater;
+    final Subscriber<? super Chicken> actual;
     final Type not;
     Subscription s;
 
     @Override
     public void onSubscribe(Subscription s) {
-      eater.onSubscribe(s);
+      actual.onSubscribe(s);
       this.s = s;
     }
 
@@ -51,18 +50,18 @@ public class ReactiveChapter2 {
         System.out.println("Drop rib and request one more.");
         s.request(1);
       } else {
-        eater.onNext(t);
+        actual.onNext(t);
       }
     }
 
     @Override
     public void onError(Throwable t) {
-      eater.onError(t);
+      actual.onError(t);
     }
 
     @Override
     public void onComplete() {
-      eater.onComplete();
+      actual.onComplete();
     }
   }
 

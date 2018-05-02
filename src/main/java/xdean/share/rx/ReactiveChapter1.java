@@ -48,7 +48,7 @@ public class ReactiveChapter1 {
         while (!cancel && n-- > 0 && left-- > 0) {
           subscriber.onNext(factory.get());
         }
-        if (left <= 0) {
+        if (!cancel&&left <= 0) {
           cancel = true;
           subscriber.onComplete();
         }
