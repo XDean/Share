@@ -16,6 +16,7 @@ public class ReactiveChapter2 {
   public static void main(String[] args) {
     Eater<Chicken> dean = new Eater<>("Dean");
     KFC2<Chicken> kfc = new KFC2<>(Chicken::new);
+//    kfc.subscribe(new ChickenTypeWaiter(dean, Type.RIB));
     kfc.filter(Type.RIB).subscribe(dean);
     dean.getOrder().request(2);
     dean.getOrder().request(1);
