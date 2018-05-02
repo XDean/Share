@@ -26,7 +26,7 @@ void request(long n);
 void cancel();
 ```
 
-由于这些方法都太直观了没什么好说的，我就简单[举个例子](/src/main/java/xdean/share/rx/ReactiveChapter1.java)
+由于这些方法都太直观了没什么好说的，我就[举个例子](/src/main/java/xdean/share/rx/ReactiveChapter1.java)
 
 - 我(`Subscriber`)向KFC(`Publisher`)订购(`subscribe(Dean)`)了5块吮指原味鸡。
 - KFC把订单连同兑换券(`Subscription`)发送(`onSubscribe(5块鸡的订单)`)给我。
@@ -36,6 +36,10 @@ void cancel();
 - 如果有一天我不想吃了，我就告诉KFC不要了(`cancel()`)。
 
 
+
+[Sample Code](/src/main/java/xdean/share/rx/ReactiveChapter1.java)
+
+
 | Previous | Next |
 | --- | --- |
-|   | [Operator](2-Operator.md)
+|   | [Operator](2-Operator.md) |
