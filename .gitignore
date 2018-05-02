@@ -1,2 +1,33 @@
-/target/
-/.settings/
+*.class
+
+hs_err_pid*
+
+### Eclipse ###
+.settings/
+target/
+bin/
+.classpath
+.project
+.factorypath
+.apt_generated
+.springBeans
+rebel.xml
+/javadoc/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+### other ###
+.svn/
+.*.md.html
