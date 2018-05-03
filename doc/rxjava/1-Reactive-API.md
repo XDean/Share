@@ -32,12 +32,12 @@ void cancel();
 - KFC把订单连同兑换券(`Subscription`)发送(`onSubscribe(5块鸡的订单)`)给我。
 - 当我想吃鸡的时候，我就向KFC要一块鸡(`request(1)`)，KFC就会给我一块鸡(`onNext(鸡)`)。
 - 如果有一天KFC倒闭了，KFC得通知我(`onError(倒闭Exception)`)。
-- 如果我30块鸡吃完了，KFC也得通知我(`onCompelete()`)。
+- 如果我5块鸡吃完了，KFC也得通知我(`onCompelete()`)。
 - 如果有一天我不想吃了，我就告诉KFC不要了(`cancel()`)。
 
 
-
 [Sample Code](/src/main/java/xdean/share/rx/ReactiveChapter1.java)
+
 
 
 | Previous | Next |
