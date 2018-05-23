@@ -6,22 +6,51 @@ import org.junit.Test;
 
 import io.reactivex.Flowable;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.DisposableSubscriber;
 import xdean.jex.util.reflect.ReflectUtil;
 
 public class ReactiveChapter3 {
   @Test
   public void testSchedule() throws Exception {
     splitor();
-    Flowable.range(1, 5)
-        .doOnNext(e -> System.out.println("doOnNext 1: " + e + " on" + Thread.currentThread()))
-        .doOnSubscribe(s -> System.out.println("doOnSubscribe 1: " + Thread.currentThread()))
+    Flowable.range(1, 3)
+        .doOnNext(e -> System.out.println("doOnNext 1: \t" + e + " \t" + Thread.currentThread()))
+        .doOnSubscribe(s -> System.out.println("doOnSubscribe 1: \t" + Thread.currentThread()))
+        .doOnRequest(e -> System.out.println("doOnRequest 1: \t" + e + " \t" + Thread.currentThread()))
         .subscribeOn(Schedulers.newThread())
-        .doOnNext(e -> System.out.println("doOnNext 2: " + e + " on" + Thread.currentThread()))
-        .doOnSubscribe(s -> System.out.println("doOnSubscribe 2: " + Thread.currentThread()))
-        .observeOn(Schedulers.newThread())
-        .doOnNext(e -> System.out.println("doOnNext 3: " + e + " on" + Thread.currentThread()))
-        .doOnSubscribe(s -> System.out.println("doOnSubscribe 3: " + Thread.currentThread()))
-        .blockingSubscribe();
+        .doOnNext(e -> System.out.println("doOnNext 2: \t" + e + " \t" + Thread.currentThread()))
+        .doOnSubscribe(s -> System.out.println("doOnSubscribe 2: \t" + Thread.currentThread()))
+        .doOnRequest(e -> System.out.println("doOnRequest 2: \t" + e + " \t" + Thread.currentThread()))
+        .observeOn(Schedulers.io(), true, 1)
+        .doOnNext(e -> System.out.println("doOnNext 3: \t" + e + " \t" + Thread.currentThread()))
+        .doOnSubscribe(s -> System.out.println("doOnSubscribe 3: \t" + Thread.currentThread()))
+        .doOnRequest(e -> System.out.println("doOnRequest 3: \t" + e + " \t" + Thread.currentThread()))
+        .subscribeOn(Schedulers.computation())
+        .doOnNext(e -> System.out.println("doOnNext 4: \t" + e + " \t" + Thread.currentThread()))
+        .doOnSubscribe(s -> System.out.println("doOnSubscribe 4: \t" + Thread.currentThread()))
+        .doOnRequest(e -> System.out.println("doOnRequest 4: \t" + e + " \t" + Thread.currentThread()))
+        .subscribe(new DisposableSubscriber<Integer>() {
+          @Override
+          public void onStart() {
+            request(1);
+          };
+
+          @Override
+          public void onNext(Integer t) {
+            request(1);
+          }
+
+          @Override
+          public void onError(Throwable t) {
+
+          }
+
+          @Override
+          public void onComplete() {
+
+          }
+        });
+    Thread.sleep(1000);
   }
 
   @Test
