@@ -16,7 +16,7 @@ public class RxJava2 {
         .reduce((a, b) -> a + b)
         .subscribe(e -> System.out.println(e));
   }
-  
+
   public static void schedule() {
     new Thread(() -> {
       int value = calc();
@@ -25,6 +25,7 @@ public class RxJava2 {
         System.out.println(value);
       });
     }).start();
+
     Observable.fromCallable(() -> calc())
         .subscribeOn(Schedulers.computation())
         .observeOn(JavaFxScheduler.platform())
