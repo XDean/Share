@@ -1,15 +1,41 @@
 package xdean.share.rx;
 
+import static xdean.jex.util.lang.ExceptionUtil.uncheck;
+
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 
 import io.reactivex.Flowable;
+import io.reactivex.Observable;
+import io.reactivex.rxjavafx.schedulers.JavaFxScheduler;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
+import javafx.application.Platform;
 import xdean.jex.util.reflect.ReflectUtil;
 
 public class ReactiveChapter3 {
+
+  public static void schedule() {
+    new Thread(() -> {
+      int value = calc();
+      Platform.runLater(() -> {
+        // UI work
+        System.out.println(value);
+      });
+    }).start();
+
+    Observable.fromCallable(() -> calc())
+        .subscribeOn(Schedulers.computation())
+        .observeOn(JavaFxScheduler.platform())
+        .subscribe(e -> System.out.println(e));
+  }
+
+  public static int calc() {
+    uncheck(() -> Thread.sleep(1000));
+    return 1;
+  }
+
   @Test
   public void testSchedule() throws Exception {
     splitor();
