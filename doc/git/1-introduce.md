@@ -53,3 +53,9 @@
 - Merged
 - Conflict
 - Fail (rarely, such as not-related history)
+
+
+
+| Previous | Next |
+| --- | --- |
+|   | [Work Flow](2-workflow.md) |

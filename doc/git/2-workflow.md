@@ -58,4 +58,6 @@
 
 
 
-
+| Previous | Next |
+| --- | --- |
+| [Introduce](1-introduce.md) | [Bitbucket and EGit](3-egit-and-bitbucket.md) |
