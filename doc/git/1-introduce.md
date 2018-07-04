@@ -48,3 +48,8 @@
 ![merge1](https://git-scm.com/book/en/v2/images/basic-branching-4.png)
 
 ![merge2](https://git-scm.com/book/en/v2/images/basic-merging-1.png)
+
+- Fast-forward
+- Merged
+- Conflict
+- Fail (rarely, such as not-related history)
