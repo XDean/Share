@@ -9,4 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Bean {
   int i = 0;
+
+  public void print() {
+    System.out.println("print: " + this);
+  }
+
+  public void print(Object o) {
+    System.out.println("print: " + o + "\t" + this);
+  }
 }

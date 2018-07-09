@@ -1,7 +1,9 @@
 package xdean.share.lambda;
 
-import static xdean.share.lambda.Util.*;
+import static xdean.share.lambda.Util.printLambda;
+import static xdean.share.lambda.Util.setFinalStatic;
 import static xdean.share.lambda.Util.startTest;
+import static xdean.share.lambda.Util.subTitle;
 
 import java.util.function.Supplier;
 
@@ -9,16 +11,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import lombok.ToString;
-
-@ToString
 @FixMethodOrder(MethodSorters.JVM)
-public class TestColusre {
-
-  static final Bean staticFinalField = new Bean(1);
-  static Bean staticField = new Bean(2);
-  final Bean finalField = new Bean(3);
-  Bean field = new Bean(4);
+public class TestLambda extends TestBase {
 
   @Test
   public void testCaptureField() throws Exception {
@@ -53,7 +47,7 @@ public class TestColusre {
     startTest();
     Supplier<Object> r = () -> finalField;
     printLambda(r);
-    setFinalStatic(this.getClass().getDeclaredField("finalField"), this, new Bean(1000));
+    setFinalStatic(this.getClass().getField("finalField"), this, new Bean(1000));
     printLambda(r);
   }
 
@@ -74,12 +68,20 @@ public class TestColusre {
 
     subTitle("change local field data");
 
-    field.i = 1;
+    field.i = 100;
     printLambda(r);
 
     subTitle("change local field value");
 
-    field = new Bean(2);
+    field = new Bean(200);
+    printLambda(r);
+  }
+
+  @Test
+  public void testCaptureFinalFieldAsLocal() throws Exception {
+    Bean local = finalField;
+    startTest();
+    Supplier<Object> r = () -> local;
     printLambda(r);
   }
 }
