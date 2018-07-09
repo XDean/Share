@@ -1,12 +1,16 @@
-# Hints for lambda
+# Lambda
+
+[code](../src/main/java/xdean/share/lambda)
+
+## Hints
 
 1. Only use input arguments as far as possible
 2. Do not use method ref on non-final instance. (`this` is final)
 3. Be careful of `this` reference
 
-# Samples
+## Samples
 
-## `this` escape 
+### `this` escape 
 
 ```java
 class Domain{
@@ -24,7 +28,7 @@ class UI {
 domain.name.addListener(weak(this, (obj, o, n) -> obj.updateNameColumn()))
 ```
 
-## Capture wrong instance
+### Capture wrong instance
 
 ```java
 class UI {
@@ -46,7 +50,7 @@ class UI {
 ```
 
 
-## Avoid capture `this`
+### Avoid capture `this`
 
 ```java
 class GetLineHelper {
