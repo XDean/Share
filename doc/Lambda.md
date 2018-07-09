@@ -29,6 +29,7 @@ domain.name.addListener(weak(this, (obj, o, n) -> obj.updateNameColumn()))
 ```java
 class UI {
   Session session;
+
   void initEvent(){
     EventBus.observe(MaskEvent.class)
             .filterSource(session::containsMask)
@@ -38,9 +39,39 @@ class UI {
     session = newSession;
   }
 }
+```
 
 ```java
 .filterSource(source -> session.containsMask(source))
 ```
 
+
+## Avoid capture `this`
+
+```java
+class GetLineHelper {
+  final File file;
+  final ByteBuffer buffer;
+  final List<String> result;
+  
+  IntFunction<String> lineGetter(){
+    return i -> result.get(i);
+  }
+}
+```
+
+```java
+  IntFunction<String> lineGetter(){
+    return result::get;
+  }
+```
+
+```java
+  IntFunction<String> lineGetter(){
+    List<String> result = this.result;
+    return i -> {
+      LOGGER.debug("get line " + i);
+      return result.get(i);
+    };
+  }
 ```
