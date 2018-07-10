@@ -24,4 +24,4 @@ Knowledge Sharing
 - [Git](doc/git/1-introduce.md)
 
 ## 07.09
-- Lambda [[doc](doc/Lambda.md)] [[code](src/main/java/xdean/share/lambda)]
+- Lambda [[doc](doc/lambda/1-lambda-vs-anonymous.md)] [[code](src/main/java/xdean/share/lambda)]

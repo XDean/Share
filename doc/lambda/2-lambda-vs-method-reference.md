@@ -42,3 +42,8 @@ list.stream()
   .reduce(Long::sum);
   .reduce(String::concat);
 ```
+
+
+| Previous | Next |
+| --- | --- |
+| [Lambda VS Anonymous](1-lambda-vs-anonymous.md) | [Samples and Hints](3-samples-and-hints.md) |

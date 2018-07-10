@@ -77,3 +77,8 @@ class GetLineHelper {
     };
   }
 ```
+
+
+| Previous | Next |
+| --- | --- |
+| [Lambda VS Method Reference](2-lambda-vs-method-reference.md) |   |
