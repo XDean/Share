@@ -7,6 +7,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import lombok.AllArgsConstructor;
+
 @FixMethodOrder(MethodSorters.JVM)
 public class TestMethodReference extends TestBase {
   @Test
@@ -20,6 +22,27 @@ public class TestMethodReference extends TestBase {
     ref.run();
     lam.run();
     field = new Bean(100);
+    ref.run();
+    lam.run();
+  }
+
+  @Test
+  public void testRefLocalField() throws Exception {
+    @AllArgsConstructor
+    class Wrapper {
+      Bean bean;
+    }
+    startTest();
+    Bean bean = new Bean(1);
+    Wrapper w = new Wrapper(bean);
+    Runnable ref = w.bean::print;
+    Runnable lam = () -> w.bean.print();
+    printLambda(ref);
+    printLambda(lam);
+
+    ref.run();
+    lam.run();
+    w.bean = new Bean(100);
     ref.run();
     lam.run();
   }

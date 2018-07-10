@@ -1,12 +1,10 @@
-# Lambda
-
-[code](../src/main/java/xdean/share/lambda)
-
 ## Hints
 
-1. Only use input arguments as far as possible
-2. Do not use method ref on non-final instance. (`this` is final)
-3. Be careful of `this` reference
+1. Only use method ref on final variable.
+2. With rule 1, use method ref rather than lambda
+3. Only use input arguments in lambda as far as possible
+4. Be careful of `this` reference, in both lambda and method reference 
+5. With rule 1-4, use lambda rather than anonymous class
 
 ## Samples
 
