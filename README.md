@@ -3,9 +3,9 @@ Knowledge Sharing
 
 ## 10.19
 - MyBatis
-	- Plugin
-	- ResultMap
-- JUnit Param Runner
+	- [Plugin](src/main/java/xdean/share/mybatis/plugin)
+	- [ResultMap](src/main/java/xdean/share/mybatis/resultmap)
+- [JUnit Param Runner](src/main/java/xdean/share/junit/param)
 
 ## 11.20
 - [ConvertRMI](src/main/java/xdean/share/rmi/javassist/ConvertRMI.java)
