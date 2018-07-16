@@ -1,5 +1,7 @@
 # Lambda VS Anonymous
 
+[[code](../src/main/java/xdean/share/lambda)]
+
 ## Anonymous force capture `outer.this`
 
 ```
