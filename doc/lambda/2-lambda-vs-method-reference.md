@@ -13,11 +13,12 @@ public class Hello {
 }
 
 public class Test {
-  Hello hello;
+  Hello hello = new Hello("a");
   
   public void sayHelloLater(){
-    new Thread(() -> hello.say()).start();
-    new Thread(hello::say).start;
+    new Thread(() -> hello.say()).start(); // not sure
+    new Thread(hello::say).start(); // print "a"
+    hello = new Hello("b");
   }
 }
 ```

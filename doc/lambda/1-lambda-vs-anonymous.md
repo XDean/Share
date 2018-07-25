@@ -5,8 +5,8 @@
 ## Anonymous force capture `outer.this`
 
 ```
-new Test().sayHelloLaterAnonymous(100000);
-new Test().sayHelloLaterLambda(100000);
+new Test().sayHelloLaterAnonymous(100000); // Test will not be gc
+new Test().sayHelloLaterLambda(100000); // Test will be gc
 
 class Test {
   public void sayHelloLaterAnonymous(int millis) {
