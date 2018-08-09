@@ -4,3 +4,4 @@ volatile
   - not atomic, is atomic, 64bit double
 happens-before
 CAS
+Do not communicate by sharing memory; instead, share memory by communicating
