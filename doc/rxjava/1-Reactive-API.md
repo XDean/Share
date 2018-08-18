@@ -4,13 +4,13 @@
 
 `Reactive-streams`只定义了4个接口共计7个方法，这7个方法构成了整个`Reactive`世界。
 
-#### *Publisher<T>*
+#### `Publisher<T>`
 
 ```java
 void subscribe(Subscriber<? super T> subscriber)
 ```
 
-#### *Subscriber<T>*
+#### `Subscriber<T>`
 
 ```java
 void onSubscribe(Subscription s);
@@ -19,7 +19,7 @@ void onError(Throwable t);
 void onComplete();
 ```
 
-#### *Subscription*
+#### `Subscription`
 
 ```java
 void request(long n);

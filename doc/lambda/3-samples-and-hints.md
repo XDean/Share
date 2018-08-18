@@ -1,9 +1,9 @@
 ## Hints
 
-1. Only use method ref on final variable.
+1. Only use method ref on final variable. (NPE in method reference will be confused in debug)
 2. With rule 1, use method ref rather than lambda
 3. Only use input arguments in lambda as far as possible
-4. Be careful of `this` reference, in both lambda and method reference 
+4. Be careful of `this` reference, in both lambda and method reference
 5. With rule 1-4, use lambda rather than anonymous class
 
 ## Samples
@@ -17,13 +17,13 @@ class Domain{
 
 class UI {
   void init () {
-    domain.name.addListener((ob, o, n) -> updateNameColumn());
+    domain.name.addListener((ob, o, n) -> updateNameColumn()); // Don't do this, domain will hold this reference
   }
 }
 ```
 
 ```java
-domain.name.addListener(weak(this, (obj, o, n) -> obj.updateNameColumn()))
+domain.name.addListener(weak(this, (obj, o, n) -> obj.updateNameColumn())) // Do this, it only capture weak reference of this
 ```
 
 ### Capture wrong instance
@@ -34,7 +34,7 @@ class UI {
 
   void initEvent(){
     EventBus.observe(MaskEvent.class)
-            .filterSource(session::containsMask)
+            .filterSource(session::containsMask) // Don't do this, session is changeable, unless you really only care about session in this moment.
   }
   
   void bind(Session newSession){
@@ -44,7 +44,7 @@ class UI {
 ```
 
 ```java
-.filterSource(source -> session.containsMask(source))
+.filterSource(source -> session.containsMask(source)) // Do this, it will check in current session
 ```
 
 
@@ -57,18 +57,19 @@ class GetLineHelper {
   final List<String> result;
   
   IntFunction<String> lineGetter(){
-    return i -> result.get(i);
+    return i -> result.get(i); // Dont' do this, it capture `this`.
   }
 }
 ```
 
 ```java
   IntFunction<String> lineGetter(){
-    return result::get;
+    return result::get; // Do this, it capture result only.
   }
 ```
 
 ```java
+  // If it can't represent as method reference, you can let the final field be a local variable and then capture it.
   IntFunction<String> lineGetter(){
     List<String> result = this.result;
     return i -> {

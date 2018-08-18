@@ -71,7 +71,7 @@ public class TestLambda extends TestBase {
     field.i = 100;
     printLambda(r);
 
-    subTitle("change local field value");
+    subTitle("change field value");
 
     field = new Bean(200);
     printLambda(r);

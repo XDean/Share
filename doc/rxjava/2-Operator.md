@@ -29,7 +29,7 @@ subscriber.onNext(chicken);
 ```
 
 但是很快我们就发现了问题
-- 从现实的角度，KFC从此再也生产鸡肋了，很不科学
+- 从现实的角度，KFC从此再也不生产鸡肋了，很不科学
 - 从代码的角度，我们的改动侵入了`KFC`类，难以拓展
 
 想象一条流水线，KFC是起点，我是终点，我们不应该让KFC再也不生产鸡肋，而是应该在流水线上安排一个工人(KFC服务员)，由服务员来帮我们过滤鸡肋。KFC对服务员负责，服务员对我负责。
@@ -105,7 +105,7 @@ Flowable.range(1, 10)
     .subscribe(e -> System.out.println(e));
 ```
 
-![Reactive-Model.svg](Reactive-Model.svg)
+![Reactive-Model.png](Reactive-Model.png)
 
 
 [Sample Code](/src/main/java/xdean/share/rx/ReactiveChapter2.java)

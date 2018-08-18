@@ -4,7 +4,7 @@ RxJava 为我们提供了两个调度操作符`subscribeOn`和`observeOn`.
 
 ## How they work
 
-![Scheduler.svg](Scheduler.svg)
+![Scheduler.png](Scheduler.png)
 
 ## Delay error
 
