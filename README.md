@@ -25,3 +25,6 @@ Knowledge Sharing
 
 ## 07.09
 - Lambda [[doc](doc/lambda/1-lambda-vs-anonymous.md)] [[code](src/main/java/xdean/share/lambda)]
+
+## 10.12
+- [Memory Model](doc/memory-model/1-memory-model.md)
