@@ -57,3 +57,8 @@ public class ThisEscape {
 ```
 
 构造过程中应尽量避免传出this引用。
+
+# Reference
+
+- https://docs.oracle.com/javase/specs/jls/se10/html/jls-17.html#jls-17.4
+- http://www.cs.umd.edu/~pugh/java/memoryModel/jsr-133-faq.html
