@@ -35,7 +35,7 @@
 
 这个问题先按下不表
 
-## 从单线程开始
+## 从单线程来
 
 *Note that all variable declaration is `int a = 0;`, and all `r1` like variable is local.*
 
@@ -120,3 +120,41 @@ If one action happens-before another, then the first is visible to and ordered b
 > - If hb(x, y) and hb(y, z), then hb(x, z).
 
 `happens-before`其实就是保证了我们常说的有序性和可见性。
+
+### final语义
+
+一个特殊的情况是final句柄，final有着特殊的语义，final在构造完成后总是可见的。
+
+```java
+class FinalFieldExample { 
+    final int x;
+    int y; 
+    static FinalFieldExample f;
+
+    public FinalFieldExample() {
+        x = 3; 
+        y = 4; 
+    } 
+
+    static void writer() {
+        f = new FinalFieldExample();
+    } 
+
+    static void reader() {
+        if (f != null) {
+            int i = f.x;  // guaranteed to see 3  
+            int j = f.y;  // could see 0
+        } 
+    } 
+}
+```
+
+## 回到起点
+
+现在我们回到原来的问题，大家是不是都能回答@Nik Kotovski的问题了呢？
+
+另一方面，谈到并发谈到内存模型，常常被提起的几个性质，现在是否有了更深的理解了呢？
+
+- 原子性
+- 可见性
+- 有序性
