@@ -2,7 +2,7 @@
 
 ## 从一个问题开始
 
-几天前我在stackoverflow上遇到了一个[有趣的问题](https://stackoverflow.com/questions/51647337/java-volatile-reordering-prevention-scope/51647983#51647983)，我们从这个问题开谈起
+几天前我在stackoverflow上遇到了一个[有趣的问题](https://stackoverflow.com/questions/51647337/java-volatile-reordering-prevention-scope/51647983)，我们从这个问题开谈起
 
 @Nik Kotovski:
 
