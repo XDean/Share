@@ -28,3 +28,6 @@ Knowledge Sharing
 
 ## 10.12
 - [Memory Model](doc/memory-model/1-memory-model.md)
+
+## 11.27
+- [All About Annotation](doc/annotation/1-introduce.md)
