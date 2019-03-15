@@ -15,9 +15,9 @@
 ## Test link
 
 # Contents
-- [Title 1](#title-1)
-  - [Title 1-1](#title-1-1)
-    - [Title 1-1-1](#title-1-1-1)
+- [Title 1](#markdown-header-title-1)
+  - [Title 1-1](#markdown-header-title-1-1)
+    - [Title 1-1-1](#markdown-header-title-1-1-1)
     - [Title 1-1-2](#title-1-1-2)
 - [Title 2](#title-2)
 - [Title 3](#title-3)
