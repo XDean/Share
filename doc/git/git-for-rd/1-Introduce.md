@@ -41,7 +41,7 @@
 ![branch-1](images/branch-1.png)
 </kbd>
 
-<kbd><img src="images/branch-2.png"></kbd>
+<kbd><img src="images/branch-2.png" border="5"></kbd>
 
 <kbd>
 ![branch-3](images/branch-3.png)
