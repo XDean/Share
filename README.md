@@ -31,3 +31,6 @@ Knowledge Sharing
 
 ## 11.27
 - [All About Annotation](doc/annotation/1-introduce.md)
+
+## 3.17
+- [Refactor in CHD](doc/design/19-03-11/Refactor.md)
