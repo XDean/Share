@@ -36,12 +36,17 @@
 - a pointer to the commit tree
 - usually is an independent develop process
 - `HEAD`, a special pointer that direct to local branch you are currently on.
-<p>
-1. ![branch-1](images/branch-1.png)
-2. ![branch-2](images/branch-2.png)
-3. ![branch-3](images/branch-3.png)
-4. ![branch-4](images/branch-4.png)
-5. ![branch-5](images/branch-5.png)
+
+
+![branch-1](images/branch-1.png)
+
+![branch-2](images/branch-2.png)
+
+![branch-3](images/branch-3.png)
+
+![branch-4](images/branch-4.png)
+
+![branch-5](images/branch-5.png)
 
 
 ### Stage
