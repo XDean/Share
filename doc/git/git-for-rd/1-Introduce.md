@@ -37,23 +37,25 @@
 - usually is an independent develop process
 - `HEAD`, a special pointer that direct to local branch you are currently on.
 
-<kbd>
+1.
+
 ![branch-1](images/branch-1.png)
-</kbd>
 
-<kbd><img src="images/branch-2.png" border="5"></kbd>
+2.
 
-<kbd>
+![branch-2](images/branch-2.png)
+
+3.
+
 ![branch-3](images/branch-3.png)
-</kbd>
 
-<kbd>
+4.
+
 ![branch-4](images/branch-4.png)
-</kbd>
 
-<kbd>
+5.
+
 ![branch-5](images/branch-5.png)
-</kbd>
 
 
 ### Stage
