@@ -1,5 +1,7 @@
 # Introduce
 
+[Demo Project](https://git-brion-us.asml.com:8443/users/dxu/repos/git-demo/browse)
+
 ## What is Version Control System?
 
 - Which changes were made?
@@ -29,24 +31,22 @@
 - has 0 to n parent commit node
 - has 0 to n child commit node
 
-### Branch
+### Branch and Merge
 
 - a pointer to the commit tree
 - usually is an independent develop process
 - `HEAD`, a special pointer that direct to local branch you are currently on.
+<p>
+1. ![branch-1](images/branch-1.png)
+2. ![branch-2](images/branch-2.png)
+3. ![branch-3](images/branch-3.png)
+4. ![branch-4](images/branch-4.png)
+5. ![branch-5](images/branch-5.png)
 
-### Merge
-
-![merge](images/merge.png)
-
-- Fast-forward
-- Merged
-- Conflict
-- Fail (rarely, such as not-related history)
 
 ### Stage
 
-> ![stage](https://git-scm.com/book/en/v2/images/areas.png)
+![stage](https://git-scm.com/book/en/v2/images/areas.png)
 
 
 | Previous | Next |
