@@ -1,0 +1,5 @@
+- .gitconfig
+  - core.autocrlf
+  - core.whitespace
+  - credential.helper
+  - http.sslVerify
