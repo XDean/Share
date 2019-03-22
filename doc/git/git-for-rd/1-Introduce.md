@@ -31,29 +31,36 @@
 - has 0 to n parent commit node
 - has 0 to n child commit node
 
+![commit-tree](images/commit-tree.png)
+
 ### Branch and Merge
 
 - a pointer to the commit tree
 - usually is an independent develop process
 - `HEAD`, a special pointer that direct to local branch you are currently on.
 
-1.
+---
+At the beginning, we have `master` branch
 
 ![branch-1](images/branch-1.png)
 
-2.
+---
+Create Branch `feature/GIT-1`
 
 ![branch-2](images/branch-2.png)
 
-3.
+---
+New change in `master` branch
 
 ![branch-3](images/branch-3.png)
 
-4.
+---
+New change in `feature/GIT-1` branch
 
 ![branch-4](images/branch-4.png)
 
-5.
+---
+Merge `feature/GIT-1` into `master`
 
 ![branch-5](images/branch-5.png)
 
