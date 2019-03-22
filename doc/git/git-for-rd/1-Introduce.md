@@ -1,5 +1,6 @@
 # Introduce
 
+[Git Guide](https://git-scm.com/book/en/v2)
 [Demo Project](https://git-brion-us.asml.com:8443/users/dxu/repos/git-demo/browse)
 
 ## What is Version Control System?
@@ -33,6 +34,12 @@
 
 ![commit-tree](images/commit-tree.png)
 
+
+### Stage
+
+![stage](https://git-scm.com/book/en/v2/images/areas.png)
+
+
 ### Branch and Merge
 
 - a pointer to the commit tree
@@ -64,11 +71,9 @@ Merge `feature/GIT-1` into `master`
 
 ![branch-5](images/branch-5.png)
 
+### Remote
 
-### Stage
-
-![stage](https://git-scm.com/book/en/v2/images/areas.png)
-
+- A git repository on server, that's all
 
 | Previous | Next |
 | --- | --- |

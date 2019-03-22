@@ -3,3 +3,5 @@
   - core.whitespace
   - credential.helper
   - http.sslVerify
+- small commit
+- merge every day
