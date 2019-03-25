@@ -211,6 +211,8 @@ Merge made by the 'recursive' strategy.
 
 Now we have both bug fixed in `master` branch.
 
+*Note that in actual developing work flow, we should do merge on server(Bitbucket). This content is in next chapter.*
+
 ### Conflict
 
 
@@ -221,7 +223,7 @@ Suppose you are another developer. You local repository is still have old commit
 
 ![command-remote-1](images/command-remote-1.png)
 
-Now you want to get the newest code, you can use `git pull`.
+Before start your ticket. You want(must) to get the newest code, you can use `git pull`.
 
 *In fact, `git pull` is `git fetch` and `git merge`. If your local branch is not tracking, it will not do auto merge.*
 
@@ -238,3 +240,35 @@ Fast-forward
  create mode 100644 git-5.source
 ```
 
+
+![command-remote-2](images/command-remote-2.png)
+
+After pull, your HEAD is on the latest commit. Now, let's do ourselves work.
+
+```
+$ git branch bugfix/GIT-6-fix-some-else
+$ echo 'fix it!' > git-6.source
+$ git add .
+$ git commit -m "GIT-6 fix some else"
+[master b2521df] GIT-6 fix some else
+ 1 file changed, 1 insertion(+)
+ create mode 100644 git-6.source
+```
+
+We have committed our changes, how can we publish our changes so that others can fetch them? You can use `git push`
+
+```
+$ git push
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 283 bytes | 283.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+To https://git-brion-us.asml.com:8443/scm/~dxu/git-command-demo.git
+   10d55f3..b2521df  master -> master
+```
+
+![command-remote-3](images/command-remote-3.png)
+
+Congratulations! You have pushed your change and finish this chapter.
