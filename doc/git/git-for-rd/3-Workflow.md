@@ -1,63 +1,112 @@
-## Create repository
+# Git + Bitbucket + Jira WorkFlow
 
-### Brand New Project
+## A new concept, Pull Request
 
-- `git init`. Initialize current path to a git repository. It will create a hidden folder `.git` which save git's data.
+- Pull Request is not a Git concept
+- Pull Request is a merge process
 
-### Exist Project from Remote
+## Checkout repository
 
-- `git clone https://git-brion-us.asml.com:8443/scm/~dxu/git-demo.git`. Clone a repository from remote url. It will create a folder named by the repository's name (here is `Share`) and download all data from remote repository. And the remote configuration is set up automatically (named `origin`).
+### Get URL from Bitbucket
 
-`git clone url-to-remote/repo-name.git` is equals to following commands
+![bitbucket-checkout](images/bitbucket-checkout.png)
 
-- `mkdir repo-name`
-- `cd repo-name`
-- `git init`
-- `git remote add origin url`
-- `git pull`
+1. Click the button to checkout(clone) the repository
+2. By default the url is `SSH`, but I prefer to use `HTTP`. To use `SSH`, you may need to [configure your public key](https://confluence.atlassian.com/bitbucketserver0514/using-bitbucket-server/controlling-access-to-code/using-ssh-keys-to-secure-git-operations/ssh-user-keys-for-personal-use).
 
-## Work with a branch
+### Clone in local
 
-### Create a branch
+```
+cd <your path>
+git clone <your-url>
+```
 
-- `git branch -b issue-54`. Create a new branch named `issue-54` from `HEAD` and switch to the new branch
+## Create branch
 
-### Do your update on your working tree
+When a ticket comes, the first thing you should do is to create a branch. 
 
-### Commit the branch
+You can create branch on remote(Jira) or in local.
 
-- `git add README.md`. Add your changes onto stage.
-- `git commit -m 'update README'`. Commit your stage with message.
-- `git push origin issue-54`. Push the commit to remote.
+### Create branch on Jira
 
-*after commit*
+You can create a branch for the ticket on Jira
 
-![](https://git-scm.com/book/en/v2/images/small-team-4.png)
+![jira-branch](images/jira-branch.png)
 
-### Get up-to-date remote branches
+1. Click `create branch` on your ticket
+2. Select correct repository
+3. Select your change type, there are
+  - Bugfix
+  - Feature
+  - Hotfix
+  - Release
+  - Custom
+4. Select where you want to branch from. Usually it's `master` branch
+5. Input your branch name. Usually the automatic name from ticket title is ok.
 
-- `git fetch`. Get data from remote.
-- `git pull`. Get data from remote and merge automatically.
+After the branch created, you can fetch and checkout it in local.
 
-*after fetch*
+```
+$ git fetch
+From https://git-brion-us.asml.com:8443/scm/brion_rnd_sjb/chd_pwo_main
+ * [new branch]          bugfix/PFM-8942-give-valid-selection-item -> origin/bugfix/PFM-8942-give-valid-selection-item
 
-![](https://git-scm.com/book/en/v2/images/small-team-5.png)
+$ git checkout bugfix/PFM-8942-give-valid-selection-item 
+Branch 'bugfix/PFM-8942-give-valid-selection-item' set up to track remote branch 'bugfix/PFM-8942-give-valid-selection-item' from 'origin'.
+Switched to a new branch 'bugfix/PFM-8942-give-valid-selection-item'
+```
 
-### Merge with remote branch
+### Create branch in local directly
 
-- `git checkout master`
-- `git merge origin/master`
-- `git merge issue-54`
+In fact, Jira `create branch` is to help you create branch that match its convention. So we can create branch in local directly.
 
-![](https://git-scm.com/book/en/v2/images/small-team-6.png)
+```
+git checkout -b bugfix/PFM-8942-fix-something
+```
 
-- `git push origin master`
+## Do your change in local
 
-![](https://git-scm.com/book/en/v2/images/small-team-7.png)
+Do your changes for the ticket in local. `add` and `commit` them. Note that each commit should starts with the ticket number.
 
+## Push changes and create pull request
 
+After fix the ticket in local, you can push your changes onto remote(Bitbucket).
 
+```
+$ git push
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (6/6), 609 bytes | 203.00 KiB/s, done.
+Total 6 (delta 2), reused 0 (delta 0)
+remote:
+remote: Create pull request for bugfix/GIT-8-fix-something:
+remote:   https://git-brion-us.asml.com:8443/users/dxu/repos/git-command-demo/compare/commits?sourceBranch=refs/heads/bugfix/GIT-8-fix-something
+remote:
+To https://git-brion-us.asml.com:8443/scm/~dxu/git-command-demo.git
+ * [new branch]      bugfix/GIT-8-fix-something -> bugfix/GIT-8-fix-something
+Branch 'bugfix/GIT-8-fix-something' set up to track remote branch 'bugfix/GIT-8-fix-something' from 'origin'.
+```
 
-| Previous | Next |
-| --- | --- |
-| [Introduce](1-introduce.md) | [Bitbucket and EGit](3-egit-and-bitbucket.md) |
+Then, open Bitbucket page to create pull request to check in your changes into `master` branch
+
+![bitbucket-pullrequest-create-1](images/bitbucket-pullrequest-create-1.png)
+
+1. Click the button to create pull request
+
+![bitbucket-pullrequest-create-2](images/bitbucket-pullrequest-create-2.png) 
+
+1. Select source branch. The branch where your changes are.
+2. Select target branch, usually is `master` branch.
+3. You can review what changes before create the pull request
+4. You can review which commits will be in the pull request
+5. Click continue button
+
+![bitbucket-pullrequest-create-3](images/bitbucket-pullrequest-create-3.png)
+
+1. Input your pull request title. By default, it's your branch name
+2. Input the description. You should describe what you change.
+3. Input reviewers. By default, there are default reviewers for each repository configured by admin.
+4. Click create button
+
