@@ -213,13 +213,9 @@ Now we have both bug fixed in `master` branch.
 
 *Note that in actual developing work flow, we should do merge on server(Bitbucket). This content is in next chapter.*
 
-### Conflict
-
-
-
 ## Remote
 
-Suppose you are another developer. You local repository is still have old commits. 
+Suppose you are another developer. You are going to fix `GIT-6`, but your local repository is still have old commits. 
 
 ![command-remote-1](images/command-remote-1.png)
 
@@ -246,7 +242,6 @@ Fast-forward
 After pull, your HEAD is on the latest commit. Now, let's do ourselves work.
 
 ```
-$ git branch bugfix/GIT-6-fix-some-else
 $ echo 'fix it!' > git-6.source
 $ git add .
 $ git commit -m "GIT-6 fix some else"
@@ -271,4 +266,93 @@ To https://git-brion-us.asml.com:8443/scm/~dxu/git-command-demo.git
 
 ![command-remote-3](images/command-remote-3.png)
 
-Congratulations! You have pushed your change and finish this chapter.
+Now you have pushed your change to remote.
+
+
+## Conflict
+
+Suppose you are working on `GIT-8` 
+
+```java
+$ git checkout -b bugfix/GIT-8-fix-something
+Switched to a new branch 'bugfix/GIT-8-fix-something'
+
+$ echo 'do work 2' > conflict.source
+
+$ git add .
+
+$ git commit -m "GIT-8 fix something"
+[bugfix/GIT-8-fix-something cda882e] GIT-8 fix something
+ 1 file changed, 1 insertion(+)
+ create mode 100644 conflict.source
+```
+
+Everything is OK until now. While you should confirm you are ahead `master` branch so that you can merge into `master` fast-forward.
+
+*Note that `git pull <remote> <branch>` is abbreviation of `git fetch <remote>; git merge <remote>/<branch>`*
+
+```
+$ git pull origin master
+
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 1), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From https://git-brion-us.asml.com:8443/scm/~dxu/git-command-demo
+ * branch            master     -> FETCH_HEAD
+   b2521df..1479139  master     -> origin/master
+Auto-merging conflict.source
+CONFLICT (add/add): Merge conflict in conflict.source
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+Oops, git told me it can't merge automatically and we need to resolve the conflict.
+
+You can use `git status` to check conflict status
+
+```
+$ git status
+On branch bugfix/GIT-8-fix-something
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+
+        both added:      conflict.source
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+To resolve the conflict, the simplest way is to write the conflict file directly.
+
+```
+$ vi conflict.source
+
+<<<<<<< HEAD
+do work 2
+=======
+do work 1
+>>>>>>> 1479139ac6c2750bf894b80aa5cfcbc7ad0629de
+```
+
+Or you can use `git mergetool` to do the merge with visual tool.
+
+*You can use `git mergetool --tool-help` to check available tools*
+
+```
+$ git mergetool --tool=<tool> #e.g. <tool> can be vimdiff or p4merge
+```
+
+After merge, we can commit the merge change just like common changes
+
+```
+$ git add .
+
+$ git commit  # Git will prepare merge commit message
+```
+
+![command-conflict-1](images/command-conflict-1.png)
+
