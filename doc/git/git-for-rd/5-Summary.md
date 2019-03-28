@@ -21,6 +21,7 @@
   - credential.helper
   - http.sslVerify
 - Load `/etc/bash_completion.d/git` in bash to get Git auto completion
+- `commit --amend` and `push --force`
 
 ## Visual Client
 
