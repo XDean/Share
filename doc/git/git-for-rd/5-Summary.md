@@ -8,6 +8,8 @@
   - hotfix/issue-3-what-fix
 - Add ticket number before every commit
   - `git commit -m 'issue-4 do something'`
+- Do commit for each little piece
+- Don't let your branch behind source branch too much. Do merge every day.
 
 ## Practice
 
@@ -19,9 +21,6 @@
   - credential.helper
   - http.sslVerify
 - Load `/etc/bash_completion.d/git` in bash to get Git auto completion
-
-- Do commit for each little piece
-- Don't let your branch behind source branch too much. Do merge every day.
 
 ## Visual Client
 
