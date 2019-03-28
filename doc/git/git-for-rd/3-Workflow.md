@@ -110,3 +110,18 @@ Then, open Bitbucket page to create pull request to check in your changes into `
 3. Input reviewers. By default, there are default reviewers for each repository configured by admin.
 4. Click create button
 
+Now your pull request has been created. After reviewer approved, you can merge it.
+
+## Introduce and Use Bitbucket Pull Request Page
+
+Except basic informations, there are many other functions in a Bitbucket pull request page
+
+![bitbucket-pullrequest-page-1](images/bitbucket-pullrequest-page-1.png)
+
+1. Reviewer list
+  - It will show who approved the pull request ![bitbucket-pullrequest-page-2](images/bitbucket-pullrequest-page-2.png)
+  - If you are reviewer, you can click button to approve/reject ![bitbucket-pullrequest-page-3](images/bitbucket-pullrequest-page-3.png)
+  - If you are not reviewer, you can click add button to add yourself as reviewer
+2. Merge Button
+  -  It will be disabled if there are merge check not pass, like reviewer not approve, task not resolve or merge conflict ![bitbucket-pullrequest-conflict.png](images/bitbucket-pullrequest-conflict.png) 
+  - After click it, you are going to confirm the merge again. Notice that you prefer to check the `Delete...` box because a branch is useless after merge ![bitbucket-pullrequest-merge-confirm.png](images/bitbucket-pullrequest-merge-confirm.png)
