@@ -356,4 +356,7 @@ $ git commit  # Git will prepare merge commit message
 
 ![command-conflict-1](images/command-conflict-1.png)
 
-[](PAGE TABLE)
+| Previous | Next |
+| --- | --- |
+| [Introduce](1-Introduce.md) | [Git + Bitbucket + Jira WorkFlow](3-Workflow.md) |
+

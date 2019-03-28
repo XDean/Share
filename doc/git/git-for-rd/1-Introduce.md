@@ -75,4 +75,7 @@ Merge `feature/GIT-1` into `master`
 
 - A git repository on server, that's all
 
-[](PAGE TABLE)
+| Previous | Next |
+| --- | --- |
+|  | [Git Basic Commands](2-Basics.md) |
+

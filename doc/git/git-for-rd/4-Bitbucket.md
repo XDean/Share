@@ -51,4 +51,7 @@ This is pull request diff page
 4. Select `Merge commit`
 5. Add default reviewer
 
-[](PAGE TABLE)
+| Previous | Next |
+| --- | --- |
+| [Git + Bitbucket + Jira WorkFlow](3-Workflow.md) | [Summary](5-Summary.md) |
+
