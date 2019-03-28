@@ -356,3 +356,4 @@ $ git commit  # Git will prepare merge commit message
 
 ![command-conflict-1](images/command-conflict-1.png)
 
+[](PAGE TABLE)

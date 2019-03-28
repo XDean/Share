@@ -75,6 +75,4 @@ Merge `feature/GIT-1` into `master`
 
 - A git repository on server, that's all
 
-| Previous | Next |
-| --- | --- |
-|   | [Work Flow](2-workflow.md) |
+[](PAGE TABLE)

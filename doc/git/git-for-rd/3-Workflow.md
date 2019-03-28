@@ -111,3 +111,5 @@ Then, open Bitbucket page to create pull request to check in your changes into `
 4. Click create button
 
 Now your pull request has been created. After reviewer approved, you can merge it.
+
+[](PAGE TABLE)
