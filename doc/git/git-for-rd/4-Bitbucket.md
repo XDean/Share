@@ -52,8 +52,10 @@ This is pull request diff page
 5. Add default reviewer
 
 [](PAGE TABLE START)
+
 | Previous | Next |
 | --- | --- |
 | [Git + Bitbucket + Jira WorkFlow](3-Workflow.md) | [Summary](5-Summary.md) |
+
 [](PAGE TABLE END)
 

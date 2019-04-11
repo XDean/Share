@@ -44,8 +44,10 @@
 ![command-pretty-tree.png](images/command-pretty-tree.png)
 
 [](PAGE TABLE START)
+
 | Previous | Next |
 | --- | --- |
 | [Introduce Bitbucket](4-Bitbucket.md) | [Back to parent](.) |
+
 [](PAGE TABLE END)
 
