@@ -114,11 +114,10 @@ Then, open Bitbucket page to create pull request to check in your changes into `
 
 Now your pull request has been created. After reviewer approved, you can merge it.
 
-[](PAGE TABLE START)
+<!-- PAGE TABLE START -->
 
 | Previous | Next |
 | --- | --- |
 | [Git Basic Commands](2-Basics.md) | [Introduce Bitbucket](4-Bitbucket.md) |
 
-[](PAGE TABLE END)
-
+<!-- PAGE TABLE END -->

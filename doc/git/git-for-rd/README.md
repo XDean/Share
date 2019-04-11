@@ -1,4 +1,4 @@
-[](CONTENT TABLE START)
+<!-- CONTENT TABLE START -->
 
 # Contents
 - [Introduce](1-Introduce.md)
@@ -7,6 +7,4 @@
 - [Introduce Bitbucket](4-Bitbucket.md)
 - [Summary](5-Summary.md)
 
-[](CONTENT TABLE END)
-
-
+<!-- CONTENT TABLE END -->
