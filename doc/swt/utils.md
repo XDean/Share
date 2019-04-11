@@ -131,4 +131,37 @@ public static void alignLabelWidth(GC gc, String[] labels) {
     labels[i] = repeat(" ", left) + labels[i] + repeat(" ", right);
   }
 }
+
+public static String repeat(String st, int times) {
+  StringBuilder sb = new StringBuilder();
+  while (times-- > 0) {
+    sb.append(st);
+  }
+  return sb.toString();
+}
+
+/**
+ * Find monotonically increasing function approximate root(right side), suppose y of from is
+ * negative and y of to is positive
+ */
+public static double findRoot(DoubleUnaryOperator function, double from, double to, double precision) {
+  if (function.applyAsDouble(from) > 0 || function.applyAsDouble(to) < 0) {
+    return Double.NaN;
+  }
+  double f = from;
+  double t = to;
+  double m = (f + t) / 2;
+  while (true) {
+    double v = function.applyAsDouble(m);
+    if ((v >= 0 && v < precision) || (t - f) < 1e-6) {
+      return m;
+    }
+    if (v > 0) {
+      t = m;
+    } else {
+      f = m;
+    }
+    m = (f + t) / 2;
+  }
+}
 ```
