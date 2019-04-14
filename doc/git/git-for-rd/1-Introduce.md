@@ -76,7 +76,9 @@ Merge `feature/GIT-1` into `master`
 
 ### Remote
 
-- A git repository on server, that's all
+- A git repository on server
+
+![remote](images/remote.png)
 
 <!-- PAGE TABLE START -->
 
