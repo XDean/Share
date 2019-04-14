@@ -114,6 +114,25 @@ Then, open Bitbucket page to create pull request to check in your changes into `
 
 Now your pull request has been created. After reviewer approved, you can merge it.
 
+## Release branch work flow
+
+For example, we have master branch (going to 2.0) and release/v1.0 branch.
+
+- A  release branch `release/v1.0` will be created by SCM (or DEV leader)
+  - If you are fixing a 1.0 bug
+    - Branch out from `release/v1.0`
+    - Do your changes
+    - Create pull request from the `bugfix` branch into `release/v1.0`, DEV leader will approve and merge it
+    - Create pull request from the `bugfix` branch into `master` branch just like normal work flow <sup>Note</sup>
+  - If you are doing a 2.0 feature. You should branch out from `master`. Then create pull request from the `feature` branch to master branch just like `release/v1.0` not exist
+  
+![release-merge-1](images/release-merge-1.png)
+
+*Note, If your repository has enabled `Auto merging`, this step will be completed automatically*
+
+![bitbucket-auto-merge-1](images/bitbucket-auto-merge-1.png)
+![bitbucket-auto-merge-2](images/bitbucket-auto-merge-2.png)
+
 <!-- PAGE TABLE START -->
 
 | Previous | Next |
