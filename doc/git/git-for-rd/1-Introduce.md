@@ -76,7 +76,8 @@ Merge `feature/GIT-1` into `master`
 
 ### Remote
 
-- A git repository on server
+- A Git repository on server
+- Default remote name is `origin` 
 
 ![remote](images/remote.png)
 

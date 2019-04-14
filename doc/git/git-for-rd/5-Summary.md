@@ -20,7 +20,6 @@
   - core.whitespace
   - credential.helper
   - http.sslVerify
-- Load `/etc/bash_completion.d/git` in bash to get Git auto completion
 - `commit --amend` and `push --force`
 
 ## Visual Client
@@ -34,6 +33,7 @@
 
 **If you have any useful commands or tools, you can create pull request to add it**
 
+- Load `/etc/bash_completion.d/git` in bash to get Git auto completion
 - [git-quick-stats](https://github.com/arzzen/git-quick-stats)
 
 ![git-quick-stat-list.png](images/git-quick-stat-list.png)
