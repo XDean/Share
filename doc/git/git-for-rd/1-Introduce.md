@@ -6,6 +6,8 @@
 
 [Demo Project For Command](https://git-brion-us.asml.com:8443/users/dxu/repos/git-command-demo/browse)
 
+[Git In Practice](https://git-brion-us.asml.com:8443/users/dxu/repos/git-in-practice/browse)
+
 ## What is Version Control System?
 
 - Which changes were made?
