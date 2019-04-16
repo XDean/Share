@@ -43,7 +43,7 @@ Git will track all the changes of your local files.
 
 - a pointer to the commit tree
 - usually is an independent develop process
-- `master`, every repository has a master branch, just like P4 main branch. It may has another name, like `tychyon-RDI-10` in Lee's video
+- `master`, every repository has a master branch, just like P4 main branch. It may has another name, like `tychyon-RDI-10` in PWE
 - `HEAD`, a special pointer that direct to local branch you are currently on.
 
 ![GitTree](images/GitTree.png)

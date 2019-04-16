@@ -7,7 +7,7 @@
 ![bitbucket-checkout](images/bitbucket-checkout.png)
 
 1. Click the `clone` button
-2. By default the url is `SSH`, but personally I prefer to use `HTTP`. To use `SSH`, you may need to [configure your public key](https://confluence.atlassian.com/bitbucketserver0514/using-bitbucket-server/controlling-access-to-code/using-ssh-keys-to-secure-git-operations/ssh-user-keys-for-personal-use).
+2. By default the url is `SSH`, also you can use `HTTPS`. To use `SSH`, you need to [configure your public key](https://confluence.atlassian.com/bitbucketserver0514/using-bitbucket-server/controlling-access-to-code/using-ssh-keys-to-secure-git-operations/ssh-user-keys-for-personal-use).
 
 ### Clone in local
 
