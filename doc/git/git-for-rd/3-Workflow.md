@@ -6,8 +6,8 @@
 
 ![bitbucket-checkout](images/bitbucket-checkout.png)
 
-1. Click the button to checkout(clone) the repository
-2. By default the url is `SSH`, but I prefer to use `HTTP`. To use `SSH`, you may need to [configure your public key](https://confluence.atlassian.com/bitbucketserver0514/using-bitbucket-server/controlling-access-to-code/using-ssh-keys-to-secure-git-operations/ssh-user-keys-for-personal-use).
+1. Click the `clone` button
+2. By default the url is `SSH`, but personally I prefer to use `HTTP`. To use `SSH`, you may need to [configure your public key](https://confluence.atlassian.com/bitbucketserver0514/using-bitbucket-server/controlling-access-to-code/using-ssh-keys-to-secure-git-operations/ssh-user-keys-for-personal-use).
 
 ### Clone in local
 
@@ -93,7 +93,7 @@ Then, open Bitbucket page to create pull request to check in your changes into `
 ![bitbucket-pullrequest-create-2](images/bitbucket-pullrequest-create-2.png) 
 
 1. Select source branch. The branch where your changes are.
-2. Select target branch, usually is `master` branch.
+2. Select target branch, by default is `master` branch.
 3. You can review what changes before create the pull request
 4. You can review which commits will be in the pull request
 5. Click continue button
