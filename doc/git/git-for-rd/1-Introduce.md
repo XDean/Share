@@ -8,12 +8,13 @@
 
 [Git In Practice](https://git-brion-us.asml.com:8443/users/dxu/repos/git-in-practice/browse)
 
-## What is Version Control System?
+## Compare with Perforce
 
-- Which changes were made?
-- Who made the changes?
-- When were the changes made?
-- Why were changes needed?
+![P4Flow](images/P4Flow.svg)
+
+![GitFlow](images/GitFlow.svg)
+
+![GitTree](images/GitTree.svg)
 
 ## Why Git?
 
