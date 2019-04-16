@@ -18,7 +18,7 @@ For 99% cases, you only need to following commands:
 
 Even you don't need to know their parameters, because git will tell you.
 
-## Repository
+## Clone Repository
 
 - `git clone https://git-brion-us.asml.com:8443/scm/~dxu/git-demo.git`. Clone a repository from remote url. It will create a folder named by the repository's name (here is `git-demo`) and download all data from remote repository. The remote configuration is set up automatically (named `origin`).
 

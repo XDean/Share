@@ -20,9 +20,6 @@ git clone <your-url>
 
 When a ticket comes, the first thing you should do is to create a branch. 
 
-You can create branch on remote(Jira) or in local.
-
-### Create branch on Jira
 
 You can create a branch for the ticket on Jira
 
@@ -49,14 +46,6 @@ From https://git-brion-us.asml.com:8443/scm/brion_rnd_sjb/chd_pwo_main
 $ git checkout bugfix/PFM-8942-give-valid-selection-item 
 Branch 'bugfix/PFM-8942-give-valid-selection-item' set up to track remote branch 'bugfix/PFM-8942-give-valid-selection-item' from 'origin'.
 Switched to a new branch 'bugfix/PFM-8942-give-valid-selection-item'
-```
-
-### Create branch in local directly
-
-In fact, Jira `create branch` is to help you create branch that match its convention. So we can create branch in local directly.
-
-```
-git checkout -b bugfix/PFM-8942-fix-something
 ```
 
 ## Do your change in local
