@@ -1,12 +1,5 @@
 # Git + Bitbucket + Jira WorkFlow
 
-## A new concept, Pull Request
-
-Pull Request is not a Git concept
-
-> Pull requests are a feature that makes it easier for developers to collaborate using Bitbucket. They provide a user-friendly web interface for discussing proposed changes before integrating them into the official project.
-> In their simplest form, pull requests are a mechanism for a developer to notify team members that they have completed a feature. Once their feature branch is ready, the developer files a pull request via their Bitbucket account. This lets everybody involved know that they need to review the code and merge it into the master branch.
-
 ## Checkout repository
 
 ### Get URL from Bitbucket

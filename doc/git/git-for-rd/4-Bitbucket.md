@@ -41,16 +41,6 @@ This is pull request diff page
 
 ![bitbucket-branch-compare.png](images/bitbucket-branch-compare.png)
 
-## Setting Page
-
-![bitbucket-setting.png](images/bitbucket-setting.png)
-
-1. Give project member write permission
-2. Protect master branch (maybe also release branch) from change without pull request
-3. Add merge check, such as at least one reviewer approve
-4. Select `Merge commit`
-5. Add default reviewer
-
 <!-- PAGE TABLE START -->
 
 | Previous | Next |

@@ -11,6 +11,7 @@
 
 ## Practice
 
+- Load `/etc/bash_completion.d/git` in bash to get Git auto completion
 - Do commit for each little piece
 - Don't let your branch behind source branch too much. Do merge every day.
 - [.gitconfig](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration)
@@ -28,21 +29,6 @@
 - [Git in Eclipse](https://wiki.eclipse.org/EGit/User_Guide)
 - [Git in Sublime](https://www.sublimetext.com/docs/3/git_integration.html)
 - [Git Client for windows](https://git-scm.com/download/win)
-
-## Useful commands and tools
-
-**If you have any useful commands or tools, you can create pull request to add it**
-
-- Load `/etc/bash_completion.d/git` in bash to get Git auto completion
-- [git-quick-stats](https://github.com/arzzen/git-quick-stats)
-
-![git-quick-stat-list.png](images/git-quick-stat-list.png)
-![git-quick-stat-result.png](images/git-quick-stat-result.png)
-
-- Pretty print commit tree
-`git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all`
-![command-pretty-tree.png](images/command-pretty-tree.png)
-
 
 <!-- PAGE TABLE START -->
 
