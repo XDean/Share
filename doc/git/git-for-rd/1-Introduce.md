@@ -10,11 +10,11 @@
 
 ## Compare with Perforce
 
-![P4Flow](images/P4Flow.svg)
+![P4Flow](images/P4Flow.png)
 
-![GitFlow](images/GitFlow.svg)
+![GitFlow](images/GitFlow.png)
 
-![GitTree](images/GitTree.svg)
+![GitTree](images/GitTree.png)
 
 ## Why Git?
 
