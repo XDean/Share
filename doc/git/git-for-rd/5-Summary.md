@@ -6,7 +6,7 @@
   - feature/issue-1-what-feature
   - bugfix/issue-2-what-bug
   - hotfix/issue-3-what-fix
-- Add ticket number before every commit
+- Add ticket number at the beginning of every commit's message
   - `git commit -m 'issue-4 do something'`
 
 ## Practice
@@ -17,11 +17,7 @@
 - [.gitconfig](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration)
   - user.name
   - user.email
-  - core.autocrlf
-  - core.whitespace
-  - credential.helper
-  - http.sslVerify
-- `commit --amend` and `push --force`
+- Never use `commit --amend` and `rebase`
 
 ## Visual Client
 

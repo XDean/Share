@@ -171,7 +171,9 @@ You can use `git merge` to merge other branch into your branch.
 Git will auto merge the content and provide default merge message.
 
 ```
-$ git merge origin/master
+$ git fetch
+
+$ git merge origin/master 
 
 ~
 Merge remote-tracking branch 'origin/master' into bugfix/GIT-8-fix-something
@@ -207,7 +209,7 @@ $ git commit -m "GIT-8 fix something"
  create mode 100644 conflict.source
 ```
 
-Everything is OK until now. While you should confirm you are ahead `master` branch so that you can merge into `master` fast-forward.
+Everything is OK. While you should confirm you are ahead `master` branch so that you can merge into `master` fast-forward.
 
 *Note that `git pull <remote> <branch>` is abbreviation of `git fetch <remote>; git merge <remote>/<branch>`*
 

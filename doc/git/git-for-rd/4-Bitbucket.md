@@ -2,28 +2,34 @@
 
 ## Pull Request Page
 
-Except basic informations, there are many other functions in a Bitbucket pull request page
+### Overview Part
 
 ![bitbucket-pullrequest-page-1](images/bitbucket-pullrequest-page-1.png)
 
 1. Reviewer list
-  - It will show who approved the pull request ![bitbucket-pullrequest-page-2](images/bitbucket-pullrequest-page-2.png)
-  - If you are reviewer, you can click button to approve/reject ![bitbucket-pullrequest-page-3](images/bitbucket-pullrequest-page-3.png)
-  - If you are not reviewer, you can click add button to add yourself as reviewer
+    - It will show who approved the pull request ![bitbucket-pullrequest-page-2](images/bitbucket-pullrequest-page-2.png)
+    - If you are reviewer, you can click button to approve/reject ![bitbucket-pullrequest-page-3](images/bitbucket-pullrequest-page-3.png)
+    - If you are not reviewer, you can click add button to add yourself as reviewer
 2. Merge Button
-  -  It will be disabled if there are merge check not pass, like reviewer not approve, task not resolve or merge conflict ![bitbucket-pullrequest-conflict.png](images/bitbucket-pullrequest-conflict.png) 
-  - After click it, you are going to confirm the merge again. Notice that you prefer to check the `Delete...` box because a branch is useless after merge ![bitbucket-pullrequest-merge-confirm.png](images/bitbucket-pullrequest-merge-confirm.png)
+    -  It will be disabled if there are merge check not pass, like reviewer not approve, task not resolve or merge conflict ![bitbucket-pullrequest-conflict.png](images/bitbucket-pullrequest-conflict.png) 
+    - After click it, you are going to confirm the merge again. Notice that you prefer to check the `Delete...` box because a branch is useless after merge ![bitbucket-pullrequest-merge-confirm.png](images/bitbucket-pullrequest-merge-confirm.png)
 3. If your project are using Sonarqube, you can see the newly sonar issues here
 4. Build of the pull requests
 5. Related issue
 
-![bitbucket-pullrequest-activity.png](images/bitbucket-pullrequest-activity.png)
+### Activity Part
 
 Under the overview page, there is activity part. You can track the pull request changes and leave comments here
 
-![bitbucket-pullrequest-diff.png](images/bitbucket-pullrequest-diff.png)
+![bitbucket-pullrequest-activity.png](images/bitbucket-pullrequest-activity.png)
+
+Unlike P4 with ReviewBoard. If you have new changes, just commit in the branch and push it onto remote. You don't need to create new pull request. Bitbucket will notify all reviewers to review the new changes.
+
+### Diff Part
 
 This is pull request diff page
+
+![bitbucket-pullrequest-diff.png](images/bitbucket-pullrequest-diff.png)
 
 1. You can review all changes or select specific commit to review
 2. You can create inline comment on file or on line 

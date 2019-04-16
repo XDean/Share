@@ -4,10 +4,11 @@
 
 ### Get URL from Bitbucket
 
-![bitbucket-checkout](images/bitbucket-checkout.png)
+![bitbucket-clone](images/bitbucket-clone.png)
 
 1. Click the `clone` button
-2. By default the url is `SSH`, also you can use `HTTPS`. To use `SSH`, you need to [configure your public key](https://confluence.atlassian.com/bitbucketserver0514/using-bitbucket-server/controlling-access-to-code/using-ssh-keys-to-secure-git-operations/ssh-user-keys-for-personal-use).
+2. By default the protocol is `SSH`, also you can use `HTTPS`. To use `SSH`, you need to [configure your public key](https://confluence.atlassian.com/bitbucketserver0514/using-bitbucket-server/controlling-access-to-code/using-ssh-keys-to-secure-git-operations/ssh-user-keys-for-personal-use).
+3. If you are using BC server, you can select BC mirror
 
 ### Clone in local
 
@@ -19,7 +20,6 @@ git clone <your-url>
 ## Create branch
 
 When a ticket comes, the first thing you should do is to create a branch. 
-
 
 You can create a branch for the ticket on Jira
 
@@ -94,19 +94,30 @@ Then, open Bitbucket page to create pull request to check in your changes into `
 3. Input reviewers. By default, there are default reviewers for each repository configured by admin.
 4. Click create button
 
-Now your pull request has been created. After reviewer approved, you can merge it.
+Now your pull request has been created. 
+
+All the reviewers will receive notification e-mail.
+
+![mail-review](images/bitbucket-mail-review.png)
+
+The reviewer will comment or approve your pull request
+
+![mail-comment](images/bitbucket-mail-comment.png)
+
+![mail-approve](images/bitbucket-mail-approve.png)
+
+After reviewer approved, you can merge it.
 
 ## Release branch work flow
 
-For example, we have master branch (going to 2.0) and release/v1.0 branch.
+For example, we have development branch `tachyon-RDI-10` and release branch `tachyon-RDI-30`.
 
-- A  release branch `release/v1.0` will be created by SCM (or DEV leader)
-  - If you are fixing a 1.0 bug
-    - Branch out from `release/v1.0`
-    - Do your changes
-    - Create pull request from the `bugfix` branch into `release/v1.0`, DEV leader will approve and merge it
-    - Create pull request from the `bugfix` branch into `master` branch just like normal work flow <sup>Note</sup>
-  - If you are doing a 2.0 feature. You should branch out from `master`. Then create pull request from the `feature` branch to master branch just like `release/v1.0` not exist
+- If you are fixing a bug of this release
+  - Branch out from `tachyon-RDI-30`
+  - Do your changes
+  - Create pull request from the `bugfix` branch into `tachyon-RDI-30`, DEV leader will approve and merge it
+  - Create pull request from the `bugfix` branch into `tachyon-RDI-10` branch just like normal work flow <sup>Note</sup>
+- If you are doing a new feature of next release. You should branch out from `tachyon-RDI-10`. Then create pull request from the `feature` branch to master branch just like `tachyon-RDI-30` not exist
   
 ![release-merge-1](images/release-merge-1.png)
 
