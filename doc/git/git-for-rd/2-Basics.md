@@ -139,10 +139,6 @@ Now you have pushed your change to remote.
 
 ## Branch
 
-Suppose you are going to do a feature `GIT-3`
-
-Let's create a branch first
-
 ```
 $ git branch
 * master
@@ -162,6 +158,8 @@ $ git branch
 ```
 
 Branch `bugfix/GIT-3` has been created and now we are on it. Then, we can do our changes, then commit and push to remote.
+
+**Here is to show you how to use branch comment, but in fact you can create branch on JIRA**
 
 ## Merge
 
