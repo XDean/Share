@@ -58,7 +58,7 @@ For every one of its non-trivial multivalued dependencies $X \twoheadrightarrow 
 
 Every non-trivial join dependency in that table is implied by the candidate keys.
 
-任意非平凡连接依赖都 ${A_1, A_2, A_3 ...}$, $A_i$是超键 
+任意非平凡连接依赖 $\\{A_1, A_2, A_3 ... A_n\\}$, $A_i$是超键 
 
 # 6NF
 
