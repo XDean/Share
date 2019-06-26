@@ -18,6 +18,12 @@ The domain of each attribute contains only atomic (indivisible) values, and the 
 
 所有列的值域都是由原子值组成；所有字段的值都只能是单一值。
 
+## Counterexample in CHD
+
+`pfc_aberrations.delta_size_coefficients VARCHAR(512) NULL  Semicolon separated per fitting method, comma separated per Zernike order, space separated coefficients per fitting order`
+
+`pfc_fem_markers.fem TEXT COMMENT '"," separated for each dose and " " separated for each focus'`
+
 # 2NF
 
 ## Definition
@@ -25,6 +31,10 @@ The domain of each attribute contains only atomic (indivisible) values, and the 
 Any non-prime attribute that is functionally dependent on any proper subset of any candidate key of the relation. A non-prime attribute of a relation is an attribute that is not a part of any candidate key of the relation.
 
 任意非键字段都完全依赖每个候选键
+
+## Counterexample in CHD
+
+`pfc_fem_markers` has candidate key `{defect_id, target_id}`. But it also have field `detector_id` and `reticle`. While exist functionally dependence `defect_id -> detector_id` and `target_id -> reticle`
 
 # 3NF
 
@@ -34,11 +44,15 @@ No non-prime (non-key) attribute is transitively dependent of any key i.e. no no
 
 不存在非键字段对其他非键字段的依赖
 
+## Counterexample in CHD
+
+`pfc_defects` had field `x` and `origin_x` while `x = origin_x + offset` i.e exist `origin_x -> x` functionally dependence
+
 # BCNF
 
 ## Definition
 
-For every one of its dependencies $X \rightarrow Y$, one of the following conditions hold true:
+For every dependency $X \rightarrow Y$, one of the following conditions hold true:
 - $X \rightarrow Y$ is a trivial functional dependency (i.e., $Y$ is a subset of $X$)
 - $X$ is a superkey for schema R
 
@@ -67,3 +81,10 @@ Every non-trivial join dependency in that table is implied by the candidate keys
 No nontrivial join dependencies at all.
 
 不存在非平凡连接依赖
+
+
+# Summary
+
+1. Un-Normalize
+2. Normalize
+3. Not-Only-Normalize (De-Normalize)
