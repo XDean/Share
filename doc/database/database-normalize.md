@@ -24,7 +24,7 @@ The domain of each attribute contains only atomic (indivisible) values, and the 
 
 Any non-prime attribute that is functionally dependent on any proper subset of any candidate key of the relation. A non-prime attribute of a relation is an attribute that is not a part of any candidate key of the relation.
 
-所有非键字段都完全依赖每个候选键
+任意非键字段都完全依赖每个候选键
 
 # 3NF
 
@@ -54,4 +54,16 @@ For every one of its non-trivial multivalued dependencies $X \twoheadrightarrow 
 
 # 5NF
 
+## Definition
+
+Every non-trivial join dependency in that table is implied by the candidate keys.
+
+任意非平凡连接依赖都 ${A_1, A_2, A_3 ...}$, $A_i$是超键 
+
 # 6NF
+
+## Definition
+
+No nontrivial join dependencies at all.
+
+不存在非平凡连接依赖
