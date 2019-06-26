@@ -38,19 +38,19 @@ No non-prime (non-key) attribute is transitively dependent of any key i.e. no no
 
 ## Definition
 
-For every one of its dependencies $X -> Y$, one of the following conditions hold true:
-- $X -> Y$ is a trivial functional dependency (i.e., $Y$ is a subset of $X$)
+For every one of its dependencies $X \rightarrow Y$, one of the following conditions hold true:
+- $X \rightarrow Y$ is a trivial functional dependency (i.e., $Y$ is a subset of $X$)
 - $X$ is a superkey for schema R
 
-任意非平凡依赖$X -> Y$，$X$是超键
+任意非平凡依赖$X \rightarrow Y$，$X$是超键
 
 # 4NF
 
 ## Definition
 
-For every one of its non-trivial multivalued dependencies $X {\displaystyle \twoheadrightarrow } \twoheadrightarrow  Y$, $X$ is a superkey—that is, $X$ is a super key.
+For every one of its non-trivial multivalued dependencies $X \twoheadrightarrow  Y$, $X$ is a superkey—that is, $X$ is a super key.
  
-任意非平凡多值依赖$X -> Y$，$X$是超键
+任意非平凡多值依赖$X \twoheadrightarrow Y$，$X$是超键
 
 # 5NF
 
