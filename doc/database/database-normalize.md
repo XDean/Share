@@ -42,7 +42,7 @@ For every one of its dependencies X → Y, one of the following conditions hold 
 - X → Y is a trivial functional dependency (i.e., Y is a subset of X)
 - X is a superkey for schema R
 
-任意非平凡依赖$$X->Y$$，X是超键
+任意非平凡依赖\\(X -> Y\\)，X是超键
 
 # 4NF
 
