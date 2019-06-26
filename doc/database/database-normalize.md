@@ -46,7 +46,7 @@ For every one of its dependencies \\(X -> Y\\), one of the following conditions 
 
 # 4NF
 
-任意非平凡多值依赖\\(X -> Y\\)，\\(X\\)是超键
+任意非平凡多值依赖$X -> Y$，\\(X\\)是超键
 
 # 5NF
 
