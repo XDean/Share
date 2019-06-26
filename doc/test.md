@@ -1,5 +1,11 @@
 # Test
 
+## Test Math
+
+$$a + b$$
+
+$$x_{balabala}^{bala}$$
+
 ## Test details
 
 <details><summary>CLICK ME</summary>
