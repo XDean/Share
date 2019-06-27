@@ -76,13 +76,16 @@ The domain of each attribute contains only atomic (indivisible) values, and the 
 <summary>Click to show</summary>
 <p>
 <br>
+
 | Name    | Product   | Type    |
 |-------- |---------  |-------- |
 | Dean    | CHD       | GUI     |
 | Ashkan  | CHD       | Server  |
 | Jason   | D4C       | GUI     |
 | David   | D4C       | Server  |
+
 <br>
+
 | Name    | Phone       |
 |-------- |------------ |
 | Dean    | 1801234567  |
@@ -91,6 +94,7 @@ The domain of each attribute contains only atomic (indivisible) values, and the 
 | Jason   | 1807654321  |
 | David   | 9962653208  |
 | David   | 86021230    |
+
 <br>
 </p>
 </details>
@@ -129,16 +133,20 @@ Any non-prime attribute that is functionally dependent on any proper subset of a
 <summary>Click to show</summary>
 <p>
 <br>
+
 | Name      | Location  | Manager   |
 |---------- |---------- |---------  |
 | WenZhe    | SZ        | Liang     |
 | XiaoLong  | SJ        | George    |
+
 <br>
+
 | Name      | Type        | ProjectName   |
 |---------- |-----------  |-------------  |
 | WenZhe    | SharkTank   | FindCode      |
 | XiaoLong  | SharkTank   | STAR          |
 | WenZhe    | ABC         | Golang        |
+
 <br>
 </p>
 </details>
