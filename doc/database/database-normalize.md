@@ -233,6 +233,8 @@ For every one of its non-trivial multivalued dependencies $X \twoheadrightarrow 
 | KFC         | Rice    | E.Trimble       |
 | BK          | Burger  | W.Trimble       |
 
+*Suppose that for each area they have same food*
+
 **Defects**
 
 - KFC has new food: dumpling
@@ -274,6 +276,53 @@ For every one of its non-trivial multivalued dependencies $X \twoheadrightarrow 
 Every non-trivial join dependency in that table is implied by the candidate keys.
 
 任意非平凡连接依赖 $\left\{A_1, A_2, A_3 ... A_n\right\}$, $A_i$是超键 
+
+## Sample
+
+| Restaurant  |  Food   | Delivery Area   |
+|------------ |:------: |--------------:  |
+| KFC         | Burger  | China           |
+| KFC         | Burger  | US              |
+| KFC         | Rice    | China           |
+| BK          | Burger  | US              |
+
+**Defects**
+
+- KFC has new food dumpling that only Chinese eat it
+- KFC has new Delivery Area, North Korea, where need Rice but not Burger 
+
+**With 4NF**
+
+<details>
+<summary>Click to show</summary>
+<p>
+<br>
+
+| Restaurant  |  Food   |
+|------------ |:------: |
+| KFC         | Burger  |
+| KFC         | Rice    |
+| BK          | Burger  |
+
+<br>
+
+| Restaurant  | Delivery Area   |
+|------------ |--------------:  |
+| KFC         | China           |
+| KFC         | US              |
+| BK          | US              |
+
+<br>
+
+|  Food   | Delivery Area   |
+|:------: |--------------:  |
+| Burger  | China           |
+| Burger  | US              |
+| Rice    | China           |
+
+<br>
+</p>
+</details>
 
 # 6NF
 
