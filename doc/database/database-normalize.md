@@ -76,14 +76,12 @@ The domain of each attribute contains only atomic (indivisible) values, and the 
 <summary>Click to show</summary>
 <p>
 <br>
-
 | Name    | Product   | Type    |
 |-------- |---------  |-------- |
 | Dean    | CHD       | GUI     |
 | Ashkan  | CHD       | Server  |
 | Jason   | D4C       | GUI     |
 | David   | D4C       | Server  |
-
 <br>
 | Name    | Phone       |
 |-------- |------------ |
@@ -93,7 +91,6 @@ The domain of each attribute contains only atomic (indivisible) values, and the 
 | Jason   | 1807654321  |
 | David   | 9962653208  |
 | David   | 86021230    |
-
 <br>
 </p>
 </details>
@@ -111,6 +108,40 @@ The domain of each attribute contains only atomic (indivisible) values, and the 
 Any non-prime attribute that is functionally dependent on any proper subset of any candidate key of the relation. A non-prime attribute of a relation is an attribute that is not a part of any candidate key of the relation.
 
 任意非键字段都完全依赖每个候选键
+
+## Sample
+
+| Name      | Location  | Manager   | Type        | ProjectName   |
+|---------- |---------- |---------  |-----------  |-------------  |
+| WenZhe    | SZ        | Liang     | SharkTank   | FindCode      |
+| XiaoLong  | SJ        | George    | SharkTank   | STAR          |
+| WenZhe    | SZ        | Liang     | ABC         | Golang        |
+
+**Defects**
+
+- Location and Manager duplicate many times
+- WenZhe transfer to SJ
+- If XiaoLong exit the project, after we delete the row. Where is XiaoLong? Who is his manager?
+
+**With 2NF**
+
+<details>
+<summary>Click to show</summary>
+<p>
+<br>
+| Name      | Location  | Manager   |
+|---------- |---------- |---------  |
+| WenZhe    | SZ        | Liang     |
+| XiaoLong  | SJ        | George    |
+<br>
+| Name      | Type        | ProjectName   |
+|---------- |-----------  |-------------  |
+| WenZhe    | SharkTank   | FindCode      |
+| XiaoLong  | SharkTank   | STAR          |
+| WenZhe    | ABC         | Golang        |
+<br>
+</p>
+</details>
 
 ## Counterexample in CHD
 
