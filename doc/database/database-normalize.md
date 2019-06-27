@@ -9,13 +9,13 @@
 
 # Concepts
 
-### Superkey
+### Superkey 超键
 
 A superkey or super-key is defined in the relational model of database organization as a set of attributes of a relation variable for which it holds that in all relations assigned to that variable, there are no two distinct tuples (rows) that have the same values for the attributes in this set.[1] It can be defined as a set of attributes of a relation schema upon which all attributes of the schema are functionally dependent.
 
 在关系模式中能够唯一标示多元组（即“行”）的属性集
 
-### Candidate Key
+### Candidate Key 候选键
 
 A minimal superkey for that relation; that is, a set of attributes such that:
 
@@ -24,25 +24,25 @@ A minimal superkey for that relation; that is, a set of attributes such that:
 
 超键且不存在真子集亦为超键
 
-### Functionally Dependent
+### Functionally Dependent 函数依赖
 
 Given a relation R, a set of attributes X in R is said to functionally determine another set of attributes Y, also in R, (written $X → Y$) if, and only if, each X value in R is associated with precisely one Y value in R; R is then said to satisfy the functional dependency $X → Y$. Equivalently, the projection $\Pi _{X,Y}R$ is a function, i.e. Y is a function of X. In simple words, if the values for the X attributes are known (say they are x), then the values for the Y attributes corresponding to x can be determined by looking them up in any tuple of R containing x. Customarily X is called the determinant set and Y the dependent set. A functional dependency FD: $X → Y$ is called trivial if Y is a subset of X.
 
 在关系R中，X的值可以确定Y的值，称Y函数依赖X，记作 $X \rightarrow Y$
 
-#### Fully 完全依赖
+#### Fully Functionally Dependent 完全函数依赖
 
-#### Partial 部分依赖
+#### Partial Functionally Dependent 部分函数依赖
 
-#### Delivery 传递依赖
+#### Delivery Functionally Dependent 传递函数依赖
 
-### Multivalued Dependency
+### Multivalued Dependency 多值依赖
 
 if we denote by $(x,y,z)$ the tuple having values for $\alpha, \beta, R-\alpha -\beta$ collectively equal to $x, y, z$, correspondingly, then whenever the tuples $(a,b,c)$ and $(a,d,e)$ exist in {\displaystyle r} r, the tuples {\displaystyle (a,b,e)} (a,b,e) and $(a,d,c)$ should also exist in $r$.
 
 对于关系$R$的一组分解$(A,B,C)$，对于给定的$a \in A$，存在 $C^* \subseteq C$，对于任意 $b \in B$，值域 $C_(a,b)=C^*$，称C多值依赖A，记作 $X \twoheadrightarrow Y$
 
-### Join Dependency
+### Join Dependency 连接依赖
 
 A table $T$ is subject to a join dependency if $T$ can always be recreated by joining multiple tables each having a subset of the attributes of $T$. If one of the tables in the join has all the attributes of the table $T$, the join dependency is called trivial.
 
@@ -177,7 +177,7 @@ No non-prime (non-key) attribute is transitively dependent of any key i.e. no no
 - PLT transfer to another manager
 - Team without member has no manager
 
-**With 2NF**
+**With 3NF**
 
 <details>
 <summary>Click to show</summary>
@@ -222,6 +222,50 @@ For every dependency $X \rightarrow Y$, one of the following conditions hold tru
 For every one of its non-trivial multivalued dependencies $X \twoheadrightarrow  Y$, $X$ is a superkey—that is, $X$ is a super key.
  
 任意非平凡多值依赖$X \twoheadrightarrow Y$，$X$是超键
+
+## Sample
+
+| Restaurant  |  Food   | Delivery Area   |
+|------------ |:------: |--------------:  |
+| KFC         | Burger  | W.Trimble       |
+| KFC         | Burger  | E.Trimble       |
+| KFC         | Rice    | W.Trimble       |
+| KFC         | Rice    | E.Trimble       |
+| BK          | Burger  | W.Trimble       |
+
+**Defects**
+
+- KFC has new food: dumpling
+- KFC has new Delivery Area: N.Trimble
+
+**With 4NF**
+
+<details>
+<summary>Click to show</summary>
+<p>
+<br>
+
+| Restaurant  |  Food   |
+|------------ |:------: |
+| KFC         | Burger  |
+| KFC         | Rice    |
+| BK          | Burger  |
+
+<br>
+
+| Restaurant  | Delivery Area   |
+|------------ |--------------:  |
+| KFC         | W.Trimble       |
+| KFC         | E.Trimble       |
+| BK          | W.Trimble       |
+
+<br>
+</p>
+</details>
+
+## Counterexample in CHD
+
+`pfc_hotspots` has hotspots before and after decking. That means each origin defect has n copies.
 
 # 5NF
 
