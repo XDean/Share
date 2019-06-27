@@ -275,7 +275,7 @@ For every one of its non-trivial multivalued dependencies $X \twoheadrightarrow 
 
 Every non-trivial join dependency in that table is implied by the candidate keys.
 
-任意非平凡连接依赖 $\left\{A_1, A_2, A_3 ... A_n\right\}$, $A_i$是超键 
+任意非平凡连接依赖 $\left\{A_1, A_2, A_3 ... A_n\right\}$, $A_i$是超键
 
 ## Sample
 
@@ -332,9 +332,14 @@ No nontrivial join dependencies at all.
 
 不存在非平凡连接依赖
 
-
 # Summary
 
-1. Un-Normalize
-2. Normalize
-3. Not-Only-Normalize (De-Normalize)
+数据库规范化旨在减少数据库中数据冗余，保证一致性，防止异常操作。通过各级范式可以快速发现数据库设计中的缺陷。
+
+然而也有另一种声音存在，即反正则化。例如有些场景下会放弃伸缩性来获取性能。
+
+但是这并不意味着正则化存在缺陷，反而只有在深入理解了正则化后才能设计出兼顾逻辑与性能的优秀数据库。
+
+1. Un-Normalize 看山是山
+2. Normalize 看山不是山
+3. De-Normalize (Not-Only-Normalize) 看山还是山(看山不只是山)
