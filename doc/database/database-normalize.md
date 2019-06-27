@@ -115,16 +115,16 @@ Any non-prime attribute that is functionally dependent on any proper subset of a
 
 ## Sample
 
-| Name      | Location  | Manager   | Type        | ProjectName   |
-|---------- |---------- |---------  |-----------  |-------------  |
-| WenZhe    | SZ        | Liang     | SharkTank   | FindCode      |
-| XiaoLong  | SJ        | George    | SharkTank   | STAR          |
-| WenZhe    | SZ        | Liang     | ABC         | Golang        |
+| Name      | Location  | Team | Manager   | Type        | ProjectName   |
+|---------- |---------- |----- |---------- |-----------  |-------------  |
+| WenZhe    | SZ        | PLT  | Liang     | SharkTank   | FindCode      |
+| XiaoLong  | SJ        | PM   | George    | SharkTank   | STAR          |
+| WenZhe    | SZ        | PLT  | Liang     | ABC         | Golang        |
 
 **Defects**
 
-- Location and Manager duplicate many times
-- WenZhe transfer to SJ
+- Some data duplicate many times
+- WenZhe transfer to another team
 - If XiaoLong exit the project, after we delete the row. Where is XiaoLong? Who is his manager?
 
 **With 2NF**
@@ -134,10 +134,10 @@ Any non-prime attribute that is functionally dependent on any proper subset of a
 <p>
 <br>
 
-| Name      | Location  | Manager   |
-|---------- |---------- |---------  |
-| WenZhe    | SZ        | Liang     |
-| XiaoLong  | SJ        | George    |
+| Name      | Location  | Team | Manager   |
+|---------- |---------- |----- |---------- |
+| WenZhe    | SZ        | PLT  | Liang     |
+| XiaoLong  | SJ        | PM   | George    |
 
 <br>
 
@@ -162,6 +162,44 @@ Any non-prime attribute that is functionally dependent on any proper subset of a
 No non-prime (non-key) attribute is transitively dependent of any key i.e. no non-prime attribute depends on other non-prime attributes. All the non-prime attributes must depend on the primary key only.
 
 不存在非键字段对其他非键字段的依赖
+
+## Sample
+
+| Name      | Location  | Team | Manager   |
+|---------- |---------- |----- |---------- |
+| WenZhe    | SZ        | PLT  | Liang     |
+| ZhengPu   | SZ        | PLT  | Liang     |
+| XiaoLong  | SJ        | PM   | George    |
+
+**Defects**
+
+- WenZhe transfer to another team
+- PLT transfer to another manager
+- Team without member has no manager
+
+**With 2NF**
+
+<details>
+<summary>Click to show</summary>
+<p>
+<br>
+
+| Name      | Location  | Team |
+|---------- |---------- |----- |
+| WenZhe    | SZ        | PLT  |
+| ZhengPu   | SZ        | PLT  |
+| XiaoLong  | SJ        | PM   |
+
+<br>
+
+| Location  | Team | Manager   |
+|---------- |----- |---------- |
+| SZ        | PLT  | Liang     |
+| SJ        | PM   | George    |
+
+<br>
+</p>
+</details>
 
 ## Counterexample in CHD
 
