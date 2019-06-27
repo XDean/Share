@@ -40,13 +40,13 @@ Given a relation R, a set of attributes X in R is said to functionally determine
 
 if we denote by $(x,y,z)$ the tuple having values for $\alpha, \beta, R-\alpha -\beta$ collectively equal to $x, y, z$, correspondingly, then whenever the tuples $(a,b,c)$ and $(a,d,e)$ exist in {\displaystyle r} r, the tuples {\displaystyle (a,b,e)} (a,b,e) and $(a,d,c)$ should also exist in $r$.
 
-对于关系$R$的一组分解$(A,B,C)$，对于给定的$a \in A$，存在 $C* \subseteq C$，对于任意 $b \in B$，值域 $C_(a,b)=C*$，称C多值依赖A，记作 $X \twoheadrightarrow Y$
+对于关系$R$的一组分解$(A,B,C)$，对于给定的$a \in A$，存在 $C^* \subseteq C$，对于任意 $b \in B$，值域 $C_(a,b)=C^*$，称C多值依赖A，记作 $X \twoheadrightarrow Y$
 
 ### Join Dependency
 
 A table $T$ is subject to a join dependency if $T$ can always be recreated by joining multiple tables each having a subset of the attributes of $T$. If one of the tables in the join has all the attributes of the table $T$, the join dependency is called trivial.
 
-对于关系$R$的一组分解$(A_1, A_2, ... A_n)$，可以通过连接重建关系$R$，称$R$有连接依赖$*(A_1, A_2, ... A_n)$
+对于关系$R$的一组分解$(A_1, A_2, ... A_n)$，可以通过连接重建关系$R$，称$R$有连接依赖 $*(A_1, A_2, ... A_n)$
 
 # 1NF
 
@@ -55,6 +55,15 @@ A table $T$ is subject to a join dependency if $T$ can always be recreated by jo
 The domain of each attribute contains only atomic (indivisible) values, and the value of each attribute contains only a single value from that domain.
 
 所有列的值域都是由原子值组成；所有字段的值都只能是单一值。
+
+## Sample
+
+| Name    | Type        | Phone                 |
+|-------- |------------ |---------------------  |
+| Dean    | CHD GUI     | 1801234567            |
+| Ashkan  | CHD Server  | 9962653205,86010123   |
+| Jason   | D4C GUI     | 1807654321            |
+| David   | D4C Server  | 9962653208,86021230   |
 
 ## Counterexample in CHD
 
