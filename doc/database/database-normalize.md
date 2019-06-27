@@ -72,8 +72,10 @@ The domain of each attribute contains only atomic (indivisible) values, and the 
 
 **With 1NF**
 
-<details><summary>Click to show</summary>
+<details>
+<summary>Click to show</summary>
 <p>
+<br>
 
 | Name    | Product   | Type    |
 |-------- |---------  |-------- |
@@ -82,6 +84,7 @@ The domain of each attribute contains only atomic (indivisible) values, and the 
 | Jason   | D4C       | GUI     |
 | David   | D4C       | Server  |
 
+<br>
 | Name    | Phone       |
 |-------- |------------ |
 | Dean    | 1801234567  |
@@ -91,6 +94,7 @@ The domain of each attribute contains only atomic (indivisible) values, and the 
 | David   | 9962653208  |
 | David   | 86021230    |
 
+<br>
 </p>
 </details>
 
