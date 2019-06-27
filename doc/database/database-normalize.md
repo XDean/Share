@@ -40,7 +40,7 @@ Given a relation R, a set of attributes X in R is said to functionally determine
 
 if we denote by $(x,y,z)$ the tuple having values for $\alpha, \beta, R-\alpha -\beta$ collectively equal to $x, y, z$, correspondingly, then whenever the tuples $(a,b,c)$ and $(a,d,e)$ exist in {\displaystyle r} r, the tuples {\displaystyle (a,b,e)} (a,b,e) and $(a,d,c)$ should also exist in $r$.
 
-对于关系$R$的一组分解$(A,B,C)$，对于给定的$a\inA$，存在$C*\subseteqC$，对于任意$b\inB$，值域$C_(a,b)=C*$，称C多值依赖A，记作 $X \twoheadrightarrow Y$
+对于关系$R$的一组分解$(A,B,C)$，对于给定的$a \in A$，存在 $C* \subseteq C$，对于任意 $b \in B$，值域 $C_(a,b)=C*$，称C多值依赖A，记作 $X \twoheadrightarrow Y$
 
 ### Join Dependency
 
