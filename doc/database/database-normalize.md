@@ -65,6 +65,33 @@ The domain of each attribute contains only atomic (indivisible) values, and the 
 | Jason   | D4C GUI     | 1807654321            |
 | David   | D4C Server  | 9962653208,86021230   |
 
+**Defects**
+
+- Find all GUI team members or find all CHD team members
+- Dean get a new phone number or Ashkan need to remove a phone number
+
+**With 1NF**
+
+<details><summary>Click to show</summary>
+<p>
+| Name    | Product   | Type    |
+|-------- |---------  |-------- |
+| Dean    | CHD       | GUI     |
+| Ashkan  | CHD       | Server  |
+| Jason   | D4C       | GUI     |
+| David   | D4C       | Server  |
+
+| Name    | Phone       |
+|-------- |------------ |
+| Dean    | 1801234567  |
+| Ashkan  | 9962653205  |
+| Ashkan  | 86010123    |
+| Jason   | 1807654321  |
+| David   | 9962653208  |
+| David   | 86021230    |
+</p>
+</details>
+
 ## Counterexample in CHD
 
 `pfc_aberrations.delta_size_coefficients VARCHAR(512) NULL  Semicolon separated per fitting method, comma separated per Zernike order, space separated coefficients per fitting order`
