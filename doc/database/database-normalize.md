@@ -74,6 +74,7 @@ The domain of each attribute contains only atomic (indivisible) values, and the 
 
 <details><summary>Click to show</summary>
 <p>
+
 | Name    | Product   | Type    |
 |-------- |---------  |-------- |
 | Dean    | CHD       | GUI     |
@@ -89,6 +90,7 @@ The domain of each attribute contains only atomic (indivisible) values, and the 
 | Jason   | 1807654321  |
 | David   | 9962653208  |
 | David   | 86021230    |
+
 </p>
 </details>
 
