@@ -22,7 +22,7 @@ $$
 &= \frac{\partial E}{\partial a_{l,j}} a_{l,j} (1 - a_{l,j}) a_{l-1,i} \\\\
 {\rm If} \quad l = L \\\\
 \frac{\partial E}{\partial a_{L,j}} &= a_{L,j} - t_j \\\\
-{\rm Else} \\\\
+{\rm If} \quad l \notequal L \\\\
 \frac{\partial E}{\partial a_{l,j}} &= \frac{\partial E(net_{l+1,0}, net_{l+1,1}, \cdots , net_{l+1,n_{l+1}})}{\partial a_{l,j}} \\\\
 &= \sum_{k=0}^{n{l+1}}\frac{\partial E}{\partial net_{l+1,k}}\frac{\partial net_{l+1,k}}{\partial a_{l,j}} \\\\
 &= \sum_{k=0}^{n{l+1}}\frac{\partial E}{\partial net_{l+1,k}}\omega_{l,j,k}
