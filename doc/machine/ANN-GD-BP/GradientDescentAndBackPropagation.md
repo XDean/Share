@@ -1,5 +1,7 @@
 # Artificial Neural Network: Gradient Descent and Back Propagation
 
+**NOTICE:本人非专业数据学家，如有错误欢迎指正**
+
 ## Regression Analysis 回归分析
 
 世界由数据（值）和过程（函数），而过程又有白盒和黑盒。对于黑盒的过程，我们虽然能够得到输入输出却不能确切了解到系统内部。例如
@@ -92,7 +94,7 @@ $$
 梯度是导数在动员空间中的拓展。正如向量表示了一元函数的斜率，梯度表示了多元函数的最大增长方向，其模表示了增长速度。
 
 $$
-\nabla F = [\frac{\parital F}{\partial x_1},\frac{\parital F}{\partial x_2},\cdots, \frac{\parital F}{\partial x_n}]
+\nabla F = (\frac{\parital F}{\partial x_1},\frac{\parital F}{\partial x_2},\cdots, \frac{\parital F}{\partial x_n})^T
 $$
 
 梯度下降法即是通过向梯度反方向移动来迭代寻找局部极小值。
@@ -134,8 +136,8 @@ $$
 
 $$
 \begin{aligned}
-输入 & A_0 &= (a_{0,0}, a_{0,1}, \cdots , a_{0,n_0})^T \\\\
-输出 & T &= (t_0,t_1,\cdots,t_{n_L})^T 
+输入 & A_0 = (a_{0,0}, a_{0,1}, \cdots , a_{0,n_0})^T \\\\
+输出 & T = (t_0,t_1,\cdots,t_{n_L})^T 
 \end{aligned}
 $$
 
