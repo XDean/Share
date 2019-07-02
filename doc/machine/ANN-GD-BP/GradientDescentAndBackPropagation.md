@@ -79,7 +79,7 @@ $$
 上一节我们演绎了一输入一输出的简单形式，但是显然我们不能满足于此，因为大部分的过程(例如我们将要应用到的神经网络)显然是多输入多输出的
 
 $$
-Y=F_{\Omega}(X),\quad {\rm 其中}\Omega,X,Y{\rm 都是向量}
+Y=F_{\Omega}(X),\quad \mbox{其中}\Omega,X,Y\mbox{都是向量}
 $$
 
 那么我们就有两个问题
@@ -136,8 +136,8 @@ $$
 
 $$
 \begin{aligned}
-输入 & A_0 = (a_{0,0}, a_{0,1}, \cdots , a_{0,n_0})^T \\\\
-输出 & T = (t_0,t_1,\cdots,t_{n_L})^T 
+\mbox{输入} & A_0 = (a_{0,0}, a_{0,1}, \cdots , a_{0,n_0})^T \\\\
+\mbox{输出} & T = (t_0,t_1,\cdots,t_{n_L})^T 
 \end{aligned}
 $$
 
@@ -187,7 +187,7 @@ $$
 (a_{L,j} - t_j)a_{L,j}(1-a_{L,j}),\quad l=L \\\\
 \sum_{k=0}^{n{l+1}}\delta_{l+1,k}\omega_{l,j,k}a_{l,j}(1-a_{l,j}), \quad l \not= L
 \end{cases} \\\\
-\omega_{l,i,j}* = \omega_{l,i,j} + \Delta_{l,i,j}
+\omega_{l,i,j}* &= \omega_{l,i,j} - \eta \Delta_{l,i,j}
 \end{aligned}
 $$
 
