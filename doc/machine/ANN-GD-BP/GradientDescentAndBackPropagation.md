@@ -12,7 +12,7 @@
 
 这个简单的问题所有人脑都是一个实现，但是没有人可以用数字符号精确描述人脑是如何做到的。如何解析人脑构造似乎是脑科学家的工作，而统计学家（数据科学家）想要的只是以最低成本解答这一问题。这便开启了统计学回归分析的大门。(分类也可以看作是离散回归的一种，后文不作区分)
 
-![unknown-system-fitting.png](unknown-system-fitting.png)
+![unknown-system-fitting.svg](unknown-system-fitting.svg)
 
 ## Classic Regression methods 经典回归方法
 
