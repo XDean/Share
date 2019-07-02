@@ -70,15 +70,70 @@ $$
 
 先让我们去掉“反向”，来看一看误差传播。这是概率论与数理统计中的概念，设有函数$y=f(x)$，对于存在误差的输入$x'=x+\Delta x$，一定会得到存在误差的输出$y'=y+\Delta y$，这就是误差传播，易知当$\Delta x$足够小，$x$对$y$的误差传播系数为$\frac{dy}{dx}$。
 
-那么回到我们的问题上，现在我们有$y=f_{\hat{\omega}}(x)$，其中$\hat{\omega}$为估计参数，有样本集$T$，求最佳参数$\omega*$。现在的问题是我们不知道$\hat{\omega}$的误差，而样本集中又是精确值，这时我们不妨把$f$看作是以每一个样本的$x$为参数，以$\hat\omega$为输入的函数，即$y=f_{x_i}(\omega)$。对于输入$\omega *$有误差$\Delta \omega = \hat\omega - \omega *$，导致了输出误差$\Delta y = \hat{y} - y_i$。而此时$\Delta y$是已知的，我们可以由此求得$\Delta \omega \approx \Delta y \frac{dx}{dy}$。这便完成了从输出到输入的误差估计，即反响误差传播。
+那么回到我们的问题上，现在我们有$y=f_{\hat{\omega}}(x)$，其中$\hat{\omega}$为估计参数，有样本集$T$，求最佳参数$\omega*$。现在的问题是我们不知道$\hat{\omega}$的误差，而样本集中又是精确值，这时我们不妨把$f$看作是以每一个样本的$x$为参数，以$\hat\omega$为输入的函数，即$y=f_{x_i}(\omega)$。对于输入$\omega *$有误差$\Delta \omega = \hat\omega - \omega *$，导致了输出误差$\Delta y = \hat{y} - y_i$。而此时$\Delta y$是已知的，我们可以由此求得$\Delta \omega \approx \Delta y \frac{dx}{dy}$。这便完成了从输出到输入的误差估计，即反向误差传播。
+
+## Gradient Descent 梯度下降
+
+上一节我们演绎了一输入一输出的简单形式，但是显然我们不能满足于此，因为大部分的过程(例如我们将要应用到的神经网络)显然是多输入多输出的
+
+$$
+Y=F_{\Omega}(X),\quad {\rm 其中}\Omega,X,Y{\rm 都是向量}
+$$
+
+那么我们就有两个问题
+
+- 误差是向量而不是标量
+- 如何同时调节多个参数
+
+为了解决它们，我们需要引入一个误差函数(Loss Function)将误差从向量转为标量，并引入一个最优化方法来进行参数修正。
+
+本文我们采用最常用的方式，误差函数取平方损失$E=\sum_i \Delta_{y_i}^2$，最优化方法采用梯度下降法。
+
+梯度是导数在动员空间中的拓展。正如向量表示了一元函数的斜率，梯度表示了多元函数的最大增长方向，其模表示了增长速度。
+
+$$
+\nabla F = [\frac{\parital F}{\partial x_1},\frac{\parital F}{\partial x_2},\cdots, \frac{\parital F}{\partial x_n}]
+$$
+
+梯度下降法即是通过向梯度反方向移动来迭代寻找局部极小值。
+
+$$
+X_{n+1}=X_n-\eta_n \nabla F(X_n)
+$$
+
+其中$\eta_n$为每次下降的步长，当其足够小时有$F(X_n)>=F(X_{n+1})$。通过不断迭代便可以逐步接近局部极小值。
+
+![gradient-descent.png](gradient-descent.png)
 
 
-## 梯度下降
+## 神经网络中反向传播算法的完整演绎
 
+有神经网络模型$M$，有$L+1$层神经元，其中第$0$层为输入层，第$L$层为输出层，第$l$层神经元有$n_l$个节点。记第$l$层输出值为$A_l$，其第$i$个节点输出值为$a_{l,i}$；输人值为$NET_l$，其第$i$个节点输入值为$net_{l,i}$。
 
+取用激活函数
 
+$$
+Sigmoid(x)=\frac{1}{1+e^{-x}}
+$$
 
-## Temp
+平方误差函数
+
+$$
+E=\sum_i \Delta_{a_{L,i}}^2/2
+$$
+
+现有一样本数据
+
+$$
+\begin{aligned}
+输入 & A_0 &= (a_{0,0}, a_{0,1}, \cdots , a_{0,n_0})^T \\\\
+输出 & T &= (t_0,t_1,\cdots,t_{n_L})^T 
+\end{aligned}
+$$
+
+用反向传播+梯度下降进行参数调整。
+
+**首先进行正向传播**
 
 $$
 \begin{aligned}
@@ -88,9 +143,16 @@ A_l &= (a_{l,0}, a_{l,1}, \cdots , a_{l,n_l})^T \\\\
 &= Sigmoid( \Omega_l \times A_{l-1} + b_l ) \\\\
 a_{l,i} &= Sigmoid(net_{l,i}) \\\\
 &= Sigmoid(\sum_{k=0}^{n_{l-1}}\omega_{l,k,i} + b_l) \\\\
-E &= \sum_{k=0}^{n_L}(a_{L,k}-t_k)^2 / 2
 \end{aligned}
 $$
+
+**接着计算误差**
+
+$$
+E &= \sum_{k=0}^{n_L}(a_{L,k}-t_k)^2 / 2
+$$
+
+**计算梯度**
 
 $$
 \begin{aligned}
@@ -101,9 +163,16 @@ $$
 \frac{\partial E}{\partial a_{L,j}} &= a_{L,j} - t_j \\\\
 {\rm If} \quad l \not= L \\\\
 \frac{\partial E}{\partial a_{l,j}} &= \frac{\partial E(net_{l+1,0}, net_{l+1,1}, \cdots , net_{l+1,n_{l+1}})}{\partial a_{l,j}} \\\\
-&= \sum_{k=0}^{n{l+1}}\frac{\partial E}{\partial net_{l+1,k}}\frac{\partial net_{l+1,k}}{\partial a_{l,j}} \\\\
-&= \sum_{k=0}^{n{l+1}}\frac{\partial E}{\partial net_{l+1,k}}\omega_{l,j,k} \\\\
-{\rm Let} \quad  \Delta_{l,i,j}=\delta_{l,j}a_{l-1,i} \\\\
+&= \sum_{k=0}^{n_{l+1}}\frac{\partial E}{\partial net_{l+1,k}}\frac{\partial net_{l+1,k}}{\partial a_{l,j}} \\\\
+&= \sum_{k=0}^{n_{l+1}}\frac{\partial E}{\partial net_{l+1,k}}\omega_{l,j,k} \\\\
+\end{aligned}
+$$
+
+**得到结果**
+
+$$
+\begin{aligned}
+{\rm Let} \quad  \Delta_{l,i,j}&=\delta_{l,j}a_{l-1,i} \\\\
 \delta_{l,j}&=\begin{cases}
 (a_{L,j} - t_j)a_{L,j}(1-a_{L,j}),\quad l=L \\\\
 \sum_{k=0}^{n{l+1}}\delta_{l+1,k}\omega_{l,j,k}a_{l,j}(1-a_{l,j}), \quad l \not= L
