@@ -34,3 +34,12 @@ Knowledge Sharing
 
 ## 3.17
 - [Refactor in CHD](doc/design/19-03-11/Refactor.md)
+
+## 4.15
+- [Git for BC RD](doc/git/git-for-rd/)
+
+## 6.30
+- [Database Normalize](doc/database/database-normalize.md)
+
+## 7.2
+- [Artificial Neural Network: Gradient Descent and Back Propagation](doc/machine/ANN-GD-BP/GradientDescentAndBackPropagation.md)
