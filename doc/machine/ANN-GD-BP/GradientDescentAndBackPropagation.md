@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 # Artificial Neural Network: Gradient Descent and Back Propagation
 
 **NOTICE:本人非专业数据学家，如有错误欢迎指正**
