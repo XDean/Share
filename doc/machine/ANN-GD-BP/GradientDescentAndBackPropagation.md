@@ -94,7 +94,7 @@ $$
 梯度是导数在动员空间中的拓展。正如向量表示了一元函数的斜率，梯度表示了多元函数的最大增长方向，其模表示了增长速度。
 
 $$
-\nabla F = (\frac{\parital F}{\partial x_1},\frac{\parital F}{\partial x_2},\cdots, \frac{\parital F}{\partial x_n})^T
+\nabla F = (\frac{\partial F}{\partial x_1},\frac{\partial F}{\partial x_2},\cdots, \frac{\partial F}{\partial x_n})^T
 $$
 
 梯度下降法即是通过向梯度反方向移动来迭代寻找局部极小值。
