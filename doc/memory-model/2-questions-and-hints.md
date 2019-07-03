@@ -62,3 +62,4 @@ public class ThisEscape {
 
 - https://docs.oracle.com/javase/specs/jls/se10/html/jls-17.html#jls-17.4
 - http://www.cs.umd.edu/~pugh/java/memoryModel/jsr-133-faq.html
+- http://ifeve.com/wp-content/uploads/2014/03/JSR133%E4%B8%AD%E6%96%87%E7%89%88.pdf

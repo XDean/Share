@@ -158,3 +158,11 @@ class FinalFieldExample {
 - 原子性
 - 可见性
 - 有序性
+
+# 后记
+
+事实上java内存模型的定义远不止SO和HB，但是掌握了这两项可以找到解决大部分数据竞争问题。
+
+如果想要根除数据竞争带来的多线程问题——
+
+> Do not communicate by sharing memory; instead, share memory by communicating
