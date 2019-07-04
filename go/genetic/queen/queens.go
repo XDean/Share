@@ -11,11 +11,17 @@ type (
 	}
 )
 
-func New(value []int) Queens {
-	q := Queens{
-		Size:  len(value),
-		Value: make([]int, len(value)),
+func (q Queens) Random(queen int) Queens {
+	value := make([]int, queen)
+	for i := range value {
+		value[i] = rand.Intn(queen)
 	}
+	return q.New(value)
+}
+
+func (q Queens) New(value []int) Queens {
+	q.Size = len(value)
+	q.Value = make([]int, len(value))
 	copy(q.Value, value)
 	score := make([]int, len(q.Value))
 	sum := 0
@@ -47,11 +53,11 @@ func (q Queens) Crossover(o Queens) (Queens, Queens) {
 			c2[i] = q.Value[i]
 		}
 	}
-	return New(c1), New(c2)
+	return Queens{}.New(c1), Queens{}.New(c2)
 }
 
 func (q Queens) Copy() Queens {
-	return New(q.Value)
+	return Queens{}.New(q.Value)
 }
 
 func (q Queens) Variant(factor float64) Queens {
@@ -61,9 +67,12 @@ func (q Queens) Variant(factor float64) Queens {
 		r := rand.Float64()
 		if r < per {
 			new[i] = (new[i] + int((float64(int(1/per)%2)-0.5)*2)*(int(per/r)+1)) % q.Size
+			if new[i] < 0 {
+				new[i] += q.Size
+			}
 		}
 	}
-	return New(new)
+	return Queens{}.New(new)
 }
 
 func Assert(b bool, msg string) {
