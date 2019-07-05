@@ -24,7 +24,7 @@ func CalcAndPlotBox(population Population, outputFile string) {
 
 	plot.Add(grid)
 
-	result := Single{}
+	var result Single = nil
 	score := 0.0
 	totalScores := plotter.XYs{}
 

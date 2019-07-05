@@ -6,19 +6,19 @@ import (
 )
 
 func Random(p model.Population) model.Single {
-	value := make([]int, p.Dim)
+	value := make(Queen, p.Dim)
 	for i := range value {
 		value[i] = i
 	}
 	rand.Shuffle(len(value), func(i, j int) {
 		value[i], value[j] = value[j], value[i]
 	})
-	return model.NewSingle(value)
+	return value
 }
 
 func Score(p model.Population, qi int) ([]float64, float64) {
-	q := p.Value[qi]
-	score := make([]float64, len(q))
+	q := p.Value[qi].(Queen)
+	score := make([]float64, p.Dim)
 	sum := 0.0
 	for c1, r1 := range q {
 		for c2, r2 := range q {
@@ -36,10 +36,10 @@ func Score(p model.Population, qi int) ([]float64, float64) {
 }
 
 func Crossover(p model.Population, ai int, bi int) (model.Single, model.Single) {
-	a := p.Value[ai]
-	b := p.Value[bi]
-	c1 := make([]int, p.Dim)
-	c2 := make([]int, p.Dim)
+	a := p.Value[ai].(Queen)
+	b := p.Value[bi].(Queen)
+	c1 := make(Queen, p.Dim)
+	c2 := make(Queen, p.Dim)
 	for i := 0; i < p.Dim; i++ {
 		if p.SingleGeneScore[ai][i] > p.SingleGeneScore[bi][i] {
 			c1[i] = a[i]
@@ -49,12 +49,12 @@ func Crossover(p model.Population, ai int, bi int) (model.Single, model.Single) 
 			c2[i] = a[i]
 		}
 	}
-	return model.NewSingle(c1), model.NewSingle(c2)
+	return c1, c2
 }
 
 func Variant(p model.Population, q model.Single) model.Single {
 	per := p.VariantFactor / float64(p.Dim)
-	new := q.Copy()
+	new := q.Copy().(Queen)
 	for i := 0; i < p.Dim; i++ {
 		r := rand.Float64()
 		if r < per {
@@ -64,7 +64,7 @@ func Variant(p model.Population, q model.Single) model.Single {
 			}
 		}
 	}
-	return model.NewSingle(new)
+	return new
 }
 
 func Abs(x int) int {

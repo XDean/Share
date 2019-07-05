@@ -21,7 +21,7 @@ func ScoreNormalizeLossReciprocal(factor float64) func(model.ScoreFunc) model.Sc
 
 func ScorePower(n float64) model.ScoreFunc {
 	return func(p model.Population, qi int) (float64s []float64, f float64) {
-		q := p.Value[qi]
+		q := p.Value[qi].(Queen)
 		score := make([]float64, len(q))
 		sum := 0.0
 		for c1, r1 := range q {
@@ -47,10 +47,10 @@ func ScorePower(n float64) model.ScoreFunc {
 }
 
 func CrossoverEachGene(p model.Population, ai int, bi int) (model.Single, model.Single) {
-	a := p.Value[ai]
-	b := p.Value[bi]
-	c1 := make([]int, p.Dim)
-	c2 := make([]int, p.Dim)
+	a := p.Value[ai].(Queen)
+	b := p.Value[bi].(Queen)
+	c1 := make(Queen, p.Dim)
+	c2 := make(Queen, p.Dim)
 	for i := 0; i < p.Dim; i++ {
 		as := p.SingleGeneScore[ai][i]
 		bs := p.SingleGeneScore[bi][i]
@@ -69,14 +69,14 @@ func CrossoverEachGene(p model.Population, ai int, bi int) (model.Single, model.
 			c2[i] = b[i]
 		}
 	}
-	return model.NewSingle(c1), model.NewSingle(c2)
+	return c1, c2
 }
 
 func CrossoverLR(p model.Population, ai int, bi int) (model.Single, model.Single) {
-	a := p.Value[ai]
-	b := p.Value[bi]
-	c1 := make(model.Single, p.Dim)
-	c2 := make(model.Single, p.Dim)
+	a := p.Value[ai].(Queen)
+	b := p.Value[bi].(Queen)
+	c1 := make(Queen, p.Dim)
+	c2 := make(Queen, p.Dim)
 
 	mid := rand.Intn(p.Dim)
 
