@@ -6,12 +6,12 @@ import (
 	"xdean/genetic/model"
 )
 
-func SimpleMain() {
+func GeneticMain() {
 	rand.Seed(time.Now().Unix())
-	dim := 20
+	dim := 200
 
 	population := model.Population{
-		Size:            200,
+		Size:            500,
 		Dim:             dim,
 		CrossoverFactor: 1,
 		VariantFactor:   0.2,
