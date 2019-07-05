@@ -16,25 +16,6 @@ func Random(p model.Population) model.Single {
 	return value
 }
 
-func Score(p model.Population, qi int) ([]float64, float64) {
-	q := p.Value[qi].(Queen)
-	score := make([]float64, p.Dim)
-	sum := 0.0
-	for c1, r1 := range q {
-		for c2, r2 := range q {
-			if c1 <= c2 || r1 == r2 || Abs(c1-c2) == Abs(r1-r2) {
-				continue
-			}
-			score[c1]++
-			score[c2]++
-			sum++
-		}
-	}
-	dim := float64(p.Dim)
-	sum = sum / (dim * (dim - 1) / 2)
-	return score, sum
-}
-
 func CrossoverRing(p model.Population, ai int, bi int) (model.Single, model.Single) {
 	a := p.Value[ai].(Queen)
 	b := p.Value[bi].(Queen)

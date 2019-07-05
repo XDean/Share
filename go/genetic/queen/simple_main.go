@@ -14,14 +14,14 @@ func GeneticMain() {
 		Size:            500,
 		Dim:             dim,
 		CrossoverFactor: 1,
-		VariantFactor:   0.2,
+		VariantFactor:   0.05,
 		Target:          1,
 		MaxGen:          5000,
 
 		RandomFunc:    Random,
 		CrossoverFunc: CrossoverRing,
 		VariantFunc:   Variant,
-		ScoreFunc:     ScorePower(10),
+		ScoreFunc:     ScorePower(1),
 		SelectFunc:    model.ScoreOrderSelectTop(0.05, 0.9),
 	}.Random()
 

@@ -58,7 +58,7 @@ func CalcAndPlotBox(population Population, outputFile string) {
 	if err != nil {
 		panic(err)
 	}
-	if err := plot.Save(vg.Length(population.Gen*20+15), vg.Length(600), outputFile); err != nil {
+	if err := plot.Save(vg.Length(population.Gen*20+100), vg.Length(600), outputFile); err != nil {
 		panic(err)
 	}
 }
