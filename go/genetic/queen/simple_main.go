@@ -3,20 +3,20 @@ package queen
 import "xdean/genetic/model"
 
 func SimpleMain() {
-	dim := 8
+	dim := 20
 
 	population := model.Population{
 		Size:            100,
 		Dim:             dim,
-		CrossoverFactor: 0.9,
-		VariantFactor:   0.1,
+		CrossoverFactor: 0.8,
+		VariantFactor:   0.2,
 		Target:          0.999,
 		MaxGen:          5000,
 
 		RandomFunc:    Random,
-		CrossoverFunc: Crossover,
+		CrossoverFunc: CrossoverLR,
 		VariantFunc:   Variant,
-		ScoreFunc:     ScoreSquare,
+		ScoreFunc:     Score,
 	}.Random()
 
 	model.CalcAndPlotBox(population, "points.svg")

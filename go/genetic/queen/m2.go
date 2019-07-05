@@ -1,6 +1,9 @@
 package queen
 
-import "xdean/genetic/model"
+import (
+	"math/rand"
+	"xdean/genetic/model"
+)
 
 func ScoreSquare(p model.Population, qi int) ([]float64, float64) {
 	q := p.Value[qi]
@@ -20,4 +23,20 @@ func ScoreSquare(p model.Population, qi int) ([]float64, float64) {
 	t := dim * (dim - 1) / 2
 	sum = (sum * sum) / (t * t)
 	return score, sum
+}
+
+func CrossoverLR(p model.Population, ai int, bi int) (model.Single, model.Single) {
+	a := p.Value[ai]
+	b := p.Value[bi]
+	c1 := make(model.Single, p.Dim)
+	c2 := make(model.Single, p.Dim)
+
+	mid := rand.Intn(p.Dim)
+
+	copy(c1[0:mid], a[0:mid])
+	copy(c1[mid:], b[mid:])
+	copy(c2[0:mid], b[0:mid])
+	copy(c2[mid:], a[mid:])
+
+	return c1, c2
 }
