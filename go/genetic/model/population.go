@@ -2,6 +2,7 @@ package model
 
 import (
 	"math/rand"
+	"sort"
 )
 
 type (
@@ -9,6 +10,7 @@ type (
 	CrossoverFunc func(Population, int, int) (Single, Single)
 	VariantFunc   func(Population, Single) Single
 	ScoreFunc     func(Population, int) ([]float64, float64)
+	SelectFunc    func(Population) int
 
 	Population struct {
 		Gen             int
@@ -23,6 +25,7 @@ type (
 		CrossoverFunc CrossoverFunc
 		VariantFunc   VariantFunc
 		ScoreFunc     ScoreFunc
+		SelectFunc    SelectFunc
 
 		Value           []Single
 		TotalScore      float64
@@ -79,6 +82,8 @@ func (p Population) Score() Population {
 		sum += total
 	}
 	p.TotalScore = sum
+
+	sort.Sort(p)
 	return p
 }
 
@@ -97,8 +102,8 @@ func (p Population) NextGen() Population {
 }
 
 func (p Population) next2(output chan<- Single) {
-	q1 := p.next()
-	q2 := p.next()
+	q1 := p.SelectFunc(p)
+	q2 := p.SelectFunc(p)
 
 	var r1, r2 Single
 
@@ -113,13 +118,16 @@ func (p Population) next2(output chan<- Single) {
 	output <- r2
 }
 
-func (p Population) next() int {
-	r := rand.Float64() * p.TotalScore
-	for q, s := range p.SingleScore {
-		r -= s
-		if r < 0 {
-			return q
-		}
-	}
-	panic("never happen")
+func (p Population) Len() int {
+	return p.Size
+}
+
+func (p Population) Less(i, j int) bool {
+	return p.SingleScore[i] > p.SingleScore[j]
+}
+
+func (p Population) Swap(i, j int) {
+	p.Value[i], p.Value[j] = p.Value[j], p.Value[i]
+	p.SingleScore[i], p.SingleScore[j] = p.SingleScore[j], p.SingleScore[i]
+	p.SingleGeneScore[i], p.SingleGeneScore[j] = p.SingleGeneScore[j], p.SingleGeneScore[i]
 }
