@@ -11,14 +11,6 @@ type (
 	}
 )
 
-func (q Queens) Random(queen int) Queens {
-	value := make([]int, queen)
-	for i := range value {
-		value[i] = rand.Intn(queen)
-	}
-	return q.New(value)
-}
-
 func (q Queens) New(value []int) Queens {
 	q.Size = len(value)
 	q.Value = make([]int, len(value))

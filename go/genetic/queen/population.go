@@ -10,25 +10,33 @@ type Population struct {
 	VariantFactor   float64
 	Target          int
 
-	Value      []Queens
-	TotalScore int
+	RandomFunc    func(Population) Queens
+	CrossoverFunc func(Population, Queens, Queens) (Queens, Queens)
+	VariantFunc   func(Population, Queens) Queens
+	ScoreFunc     func(Population, Queens) ([]float64, float64)
+
+	Value           []Queens
+	TotalScore      float64
+	SingleGeneScore map[Queens][]float64
+	SingleScore     map[Queens]float64
 }
 
 func (p Population) Random() Population {
 	value := make([]Queens, p.Size)
 	for i := range value {
-		value[i] = Queens{}.Random(p.Dim)
+		value[i] = p.RandomFunc(p)
 	}
-	return p.Brother(value)
+	result := p.Brother(value)
+	result.Score()
+	return result
 }
 
 func (p Population) Brother(value []Queens) Population {
 	p.Value = value
-	total := 0
-	for _, q := range p.Value {
-		total += q.TotalScore
-	}
-	p.TotalScore = total
+	p.SingleScore = map[Queens]float64{}
+	p.SingleGeneScore = map[Queens][]float64{}
+	p.TotalScore = 0
+	p.Score()
 	return p
 }
 
@@ -38,8 +46,18 @@ func (p Population) Child(value []Queens) Population {
 	return bro
 }
 
-func (p Population) NextGen() Population {
+func (p Population) Score() {
+	sum := 0.0
+	for _, q := range p.Value {
+		per, total := p.ScoreFunc(p, q)
+		p.SingleGeneScore[q] = per
+		p.SingleScore[q] = total
+		sum += total
+	}
+	p.TotalScore = sum
+}
 
+func (p Population) NextGen() Population {
 	output := make(chan Queens, 10)
 	for i := 0; i < p.Size; i += 2 {
 		go p.next2(output)
@@ -58,10 +76,10 @@ func (p Population) next2(output chan<- Queens) {
 	q2 := p.next()
 
 	if rand.Float64() < p.CrossoverFactor {
-		q1, q2 = q1.Crossover(q2)
+		q1, q2 = p.CrossoverFunc(p, q1, q2)
 	}
-	q1 = q1.Variant(p.VariantFactor)
-	q2 = q2.Variant(p.VariantFactor)
+	q1 = p.VariantFunc(p, q1)
+	q2 = p.VariantFunc(p, q2)
 	output <- q1
 	output <- q2
 }

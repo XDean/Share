@@ -23,12 +23,23 @@ func Main() {
 
 	plot.Add(grid)
 
+	dim := 15
+
 	population := Population{
 		Size:            1000,
-		Dim:             15,
+		Dim:             dim,
 		CrossoverFactor: 0.8,
 		VariantFactor:   0.2,
-		Target:          105,
+
+		RandomFunc: RandomQueen,
+		CrossoverFunc: func(p Population, a Queens, b Queens) (Queens, Queens) {
+			return a.Crossover(b)
+		},
+		VariantFunc: func(p Population, q Queens) Queens {
+			return q.Variant(p.VariantFactor)
+		},
+
+		Target: dim * (dim + 1) / 2,
 	}.Random()
 	result := Queens{}
 outside:
