@@ -8,8 +8,11 @@ import (
 func Random(p model.Population) model.Single {
 	value := make([]int, p.Dim)
 	for i := range value {
-		value[i] = rand.Intn(p.Dim)
+		value[i] = i
 	}
+	rand.Shuffle(len(value), func(i, j int) {
+		value[i], value[j] = value[j], value[i]
+	})
 	return model.NewSingle(value)
 }
 

@@ -4,25 +4,32 @@ import (
 	"math/rand"
 )
 
-type Population struct {
-	Gen             int
-	Size            int
-	Dim             int
-	CrossoverFactor float64
-	VariantFactor   float64
-	Target          float64
-	MaxGen          int
-
+type (
 	RandomFunc    func(Population) Single
 	CrossoverFunc func(Population, int, int) (Single, Single)
 	VariantFunc   func(Population, Single) Single
 	ScoreFunc     func(Population, int) ([]float64, float64)
 
-	Value           []Single
-	TotalScore      float64
-	SingleGeneScore [][]float64
-	SingleScore     []float64
-}
+	Population struct {
+		Gen             int
+		Size            int
+		Dim             int
+		CrossoverFactor float64
+		VariantFactor   float64
+		Target          float64
+		MaxGen          int
+
+		RandomFunc    RandomFunc
+		CrossoverFunc CrossoverFunc
+		VariantFunc   VariantFunc
+		ScoreFunc     ScoreFunc
+
+		Value           []Single
+		TotalScore      float64
+		SingleGeneScore [][]float64
+		SingleScore     []float64
+	}
+)
 
 func (p Population) Random() Population {
 	value := make([]Single, p.Size)
