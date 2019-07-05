@@ -8,20 +8,20 @@ import (
 
 func SimpleMain() {
 	rand.Seed(time.Now().Unix())
-	dim := 10
+	dim := 15
 
 	population := model.Population{
-		Size:            100,
+		Size:            500,
 		Dim:             dim,
-		CrossoverFactor: 0.8,
-		VariantFactor:   0.1,
+		CrossoverFactor: 1,
+		VariantFactor:   0.2,
 		Target:          0.999,
 		MaxGen:          5000,
 
 		RandomFunc:    Random,
-		CrossoverFunc: Crossover,
+		CrossoverFunc: CrossoverRing,
 		VariantFunc:   Variant,
-		ScoreFunc:     ScorePower(1),
+		ScoreFunc:     ScorePower(5),
 	}.Random()
 
 	model.CalcAndPlotBox(population, "points.svg")

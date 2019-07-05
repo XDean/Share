@@ -35,34 +35,33 @@ func Score(p model.Population, qi int) ([]float64, float64) {
 	return score, sum
 }
 
-func Crossover(p model.Population, ai int, bi int) (model.Single, model.Single) {
+func CrossoverRing(p model.Population, ai int, bi int) (model.Single, model.Single) {
 	a := p.Value[ai].(Queen)
 	b := p.Value[bi].(Queen)
-	c1 := make(Queen, p.Dim)
-	c2 := make(Queen, p.Dim)
-	for i := 0; i < p.Dim; i++ {
-		if p.SingleGeneScore[ai][i] > p.SingleGeneScore[bi][i] {
-			c1[i] = a[i]
-			c2[i] = b[i]
+
+	return crossover1(p, a, b), crossover1(p, a, b)
+}
+
+func crossover1(p model.Population, a Queen, b Queen) Queen {
+	r1 := make(Queen, p.Dim)
+	for _, r := range a.FindRings(b) {
+		if rand.Float64() > 0.5 {
+			for _, i := range r {
+				r1[i] = a[i]
+			}
 		} else {
-			c1[i] = b[i]
-			c2[i] = a[i]
+			for _, i := range r {
+				r1[i] = b[i]
+			}
 		}
 	}
-	return c1, c2
+	return r1
 }
 
 func Variant(p model.Population, q model.Single) model.Single {
-	per := p.VariantFactor / float64(p.Dim)
 	new := q.Copy().(Queen)
-	for i := 0; i < p.Dim; i++ {
-		r := rand.Float64()
-		if r < per {
-			new[i] = (new[i] + int((float64(int(1/per)%2)-0.5)*2)*(int(per/r)+1)) % p.Dim
-			if new[i] < 0 {
-				new[i] += p.Dim
-			}
-		}
+	for count := p.VariantFactor / rand.Float64(); count > 0; count-- {
+		new.RandomSwap()
 	}
 	return new
 }
