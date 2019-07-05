@@ -8,7 +8,7 @@ type Population struct {
 	Dim             int
 	CrossoverFactor float64
 	VariantFactor   float64
-	Target          int
+	Target          float64
 
 	RandomFunc    func(Population) Queens
 	CrossoverFunc func(Population, Queens, Queens) (Queens, Queens)
@@ -85,9 +85,9 @@ func (p Population) next2(output chan<- Queens) {
 }
 
 func (p Population) next() Queens {
-	r := rand.Intn(p.TotalScore)
-	for _, q := range p.Value {
-		r -= q.TotalScore
+	r := rand.Float64() * p.TotalScore
+	for q, s := range p.SingleScore {
+		r -= s
 		if r < 0 {
 			return q
 		}

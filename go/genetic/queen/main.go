@@ -31,22 +31,19 @@ func Main() {
 		CrossoverFactor: 0.8,
 		VariantFactor:   0.2,
 
-		RandomFunc: RandomQueen,
-		CrossoverFunc: func(p Population, a Queens, b Queens) (Queens, Queens) {
-			return a.Crossover(b)
-		},
-		VariantFunc: func(p Population, q Queens) Queens {
-			return q.Variant(p.VariantFactor)
-		},
+		RandomFunc:    RandomQueen,
+		CrossoverFunc: CrossoverQueen,
+		VariantFunc:   VariantQueen,
+		ScoreFunc:     ScoreQueen,
 
-		Target: dim * (dim + 1) / 2,
+		Target: float64(dim * (dim + 1) / 2),
 	}.Random()
 	result := Queens{}
 outside:
 	for {
 		scores := make(plotter.Values, population.Size)
 		for i, q := range population.Value {
-			scores[i] = float64(q.TotalScore)
+			scores[i] = population.SingleScore[q]
 		}
 		box, err := plotter.NewBoxPlot(10, float64(population.Gen), scores)
 		if err != nil {
@@ -55,16 +52,18 @@ outside:
 		plot.Add(box)
 
 		max := Queens{}
-		for _, q := range population.Value {
-			if q.TotalScore >= population.Target {
+		maxScore := 0.0
+		for q, score := range population.SingleScore {
+			if score >= population.Target {
 				result = q
 				break outside
 			}
-			if q.TotalScore > max.TotalScore {
+			if score > maxScore {
 				max = q
+				maxScore = score
 			}
 		}
-		fmt.Printf("Gen %d, best score %d, value %v \n", population.Gen, max.TotalScore, max.Value)
+		fmt.Printf("Gen %d, best score %d, value %v \n", population.Gen, maxScore, max.Value)
 		population = population.NextGen()
 	}
 	fmt.Println("Total Gen", population.Gen)
