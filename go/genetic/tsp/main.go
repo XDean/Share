@@ -31,5 +31,5 @@ func Main() {
 		SelectFunc:    model.ScoreOrderSelectTop(0.05, 0.9),
 	}.Random()
 
-	model.CalcAndPlotBox(population, "points.svg")
+	model.CalcAndPlotBox(population, "output/tsp.svg")
 }

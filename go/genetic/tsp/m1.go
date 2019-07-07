@@ -27,15 +27,31 @@ func Crossover(p model.Population, ai int, bi int) (model.Single, model.Single) 
 	a := p.Value[ai].(TSP)
 	b := p.Value[bi].(TSP)
 
-	return nil, nil
+	return crossover1(p, a, b), crossover1(p, a, b)
 }
 
 func crossover1(p model.Population, a, b TSP) TSP {
-
+	r1 := a.Copy().(TSP)
+	for _, r := range a.FindRings(b) {
+		if rand.Float64() > 0.5 {
+			for _, i := range r {
+				r1.Values[i] = a.Values[i]
+			}
+		} else {
+			for _, i := range r {
+				r1.Values[i] = b.Values[i]
+			}
+		}
+	}
+	return r1
 }
 
 func Variant(p model.Population, tsp model.Single) model.Single {
-	return nil
+	new := tsp.Copy().(TSP)
+	for count := p.VariantFactor / rand.Float64(); count > 0; count-- {
+		new.RandomSwap()
+	}
+	return new
 }
 
 func ScorePow(n float64) model.ScoreFunc {
@@ -57,8 +73,8 @@ func ScorePow(n float64) model.ScoreFunc {
 			}
 			distance1 := math.Pow(point.Distance(last), n)
 			distance2 := math.Pow(point.Distance(next), n)
-			score[i] = distance1 + distance2
-			sum += distance1 + distance2
+			score[i] = -distance1 - distance2
+			sum += -distance1 - distance2
 		}
 
 		return score, sum

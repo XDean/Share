@@ -6,7 +6,7 @@ func ScoreRollSelect(p Population) int {
 	r := rand.Float64() * p.TotalScore
 	for q, s := range p.SingleScore {
 		r -= s
-		if r < 0 {
+		if r*p.TotalScore < 0 {
 			return q
 		}
 	}
