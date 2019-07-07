@@ -8,7 +8,7 @@ import (
 )
 import "gonum.org/v1/plot"
 
-func CalcAndPlotBox(population Population, outputFile string) {
+func CalcAndPlotBox(p Population, outputFile string) {
 
 	plot, err := plot.New()
 	if err != nil {
@@ -18,41 +18,38 @@ func CalcAndPlotBox(population Population, outputFile string) {
 	plot.X.Label.Text = "Gen"
 	plot.Y.Label.Text = "Score"
 
-	var result Single = nil
-	score := 0.0
 	totalScores := plotter.XYs{}
 
-	for population.CanContinue() {
-		scores := make(plotter.Values, population.Size)
-		for i, s := range population.SingleScore {
+	for p.CanContinue() {
+		scores := make(plotter.Values, p.Size)
+		for i, s := range p.SingleScore {
 			scores[i] = s
 		}
-		box, err := plotter.NewBoxPlot(10, float64(population.Gen), scores)
+		box, err := plotter.NewBoxPlot(10, float64(p.Gen), scores)
 		if err != nil {
 			panic(err)
 		}
 		plot.Add(box)
-		totalScores = append(totalScores, plotter.XY{X: float64(population.Gen), Y: population.TotalScore / float64(population.Size)})
+		totalScores = append(totalScores, plotter.XY{X: float64(p.Gen), Y: p.TotalScore / float64(p.Size)})
 
-		if ok, maxScore, max := population.IsDone(); ok {
-			result = max
-			score = maxScore
+		if p.GetTarget() {
 			break
 		} else {
-			fmt.Printf("Gen %d, total score %.2f, best score %.2f, value %v \n", population.Gen, population.TotalScore, maxScore, max)
+			fmt.Printf("Gen %d, total score %.2f, best score %.2f, value %v \n", p.Gen, p.TotalScore, p.BestScore(), p.BestSingle())
 		}
-		population = population.NextGen()
+		p = p.NextGen()
 	}
 
-	fmt.Println("Total Gen", population.Gen)
-	fmt.Println("Score", score)
-	fmt.Println("Answer", result)
+	fmt.Println("Total Gen", p.Gen)
+	fmt.Println("Find Target", p.GetTarget())
+	fmt.Println("Best Score", p.BestScore())
+	fmt.Println("Best Answer", p.BestSingle())
 
 	err = plotutil.AddLinePoints(plot, totalScores)
 	if err != nil {
 		panic(err)
 	}
-	if err := plot.Save(vg.Length(population.Gen*20+100), vg.Length(600), outputFile); err != nil {
+	if err := plot.Save(vg.Length(p.Gen*20+100), vg.Length(600), outputFile); err != nil {
 		panic(err)
 	}
 }

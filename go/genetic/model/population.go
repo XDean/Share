@@ -11,6 +11,7 @@ type (
 	VariantFunc   func(Population, Single) Single
 	ScoreFunc     func(Population, int) ([]float64, float64)
 	SelectFunc    func(Population) int
+	TargetFunc    func(Population) bool
 
 	Population struct {
 		Gen             int
@@ -18,7 +19,6 @@ type (
 		Dim             int
 		CrossoverFactor float64
 		VariantFactor   float64
-		Target          float64
 		MaxGen          int
 
 		RandomFunc    RandomFunc
@@ -26,7 +26,9 @@ type (
 		VariantFunc   VariantFunc
 		ScoreFunc     ScoreFunc
 		SelectFunc    SelectFunc
+		TargetFunc    TargetFunc
 
+		// all below always sort by score descending
 		Value           []Single
 		TotalScore      float64
 		SingleGeneScore [][]float64
@@ -46,17 +48,16 @@ func (p Population) CanContinue() bool {
 	return p.Gen < p.MaxGen
 }
 
-func (p Population) IsDone() (ok bool, maxScore float64, maxValue Single) {
-	for i, score := range p.SingleScore {
-		if score >= p.Target {
-			return true, score, p.Value[i]
-		}
-		if score > maxScore {
-			maxValue = p.Value[i]
-			maxScore = score
-		}
-	}
-	return false, maxScore, maxValue
+func (p Population) GetTarget() bool {
+	return p.TargetFunc(p)
+}
+
+func (p Population) BestSingle() Single {
+	return p.Value[0]
+}
+
+func (p Population) BestScore() float64 {
+	return p.SingleScore[0]
 }
 
 func (p Population) Brother(value []Single) Population {

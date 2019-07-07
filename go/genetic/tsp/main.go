@@ -21,9 +21,9 @@ func Main() {
 		Dim:             len(tspMap),
 		CrossoverFactor: 1,
 		VariantFactor:   0.05,
-		Target:          1,
 		MaxGen:          5000,
 
+		TargetFunc:    model.TargetScore(1),
 		RandomFunc:    Random(&tspMap),
 		CrossoverFunc: Crossover,
 		VariantFunc:   Variant,

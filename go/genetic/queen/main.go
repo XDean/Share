@@ -15,9 +15,9 @@ func GeneticMain() {
 		Dim:             dim,
 		CrossoverFactor: 1,
 		VariantFactor:   0.05,
-		Target:          1,
 		MaxGen:          5000,
 
+		TargetFunc:    model.TargetScore(1),
 		RandomFunc:    Random,
 		CrossoverFunc: CrossoverRing,
 		VariantFunc:   Variant,
