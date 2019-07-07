@@ -43,6 +43,8 @@ type (
 	}
 )
 
+var EMPTY_PLUGIN_FUNC = func(p Population) Population { return p }
+
 func (p Population) Run() Population {
 	for _, plugin := range p.Plugins {
 		p = plugin.Start(p)

@@ -4,13 +4,14 @@ import (
 	"math/rand"
 	"time"
 	"xdean/genetic/genetic"
+	"xdean/genetic/genetic/plugin"
 )
 
 func GeneticMain() {
 	rand.Seed(time.Now().Unix())
 	dim := 200
 
-	population := genetic.Population{
+	genetic.Population{
 		Size:            500,
 		Dim:             dim,
 		CrossoverFactor: 1,
@@ -23,7 +24,7 @@ func GeneticMain() {
 		VariantFunc:   Variant,
 		ScoreFunc:     ScorePower(1),
 		SelectFunc:    genetic.ScoreOrderSelectTop(0.05, 0.9),
-	}.Random()
 
-	genetic.CalcAndPlotBox(population, "points.svg")
+		Plugins: []genetic.Plugin{plugin.Print(), plugin.BoxPlot("Queen by GA", "output/queen.svg")},
+	}.Random().Run()
 }

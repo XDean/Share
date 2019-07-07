@@ -4,6 +4,7 @@ import (
 	"math/rand"
 	"time"
 	"xdean/genetic/genetic"
+	"xdean/genetic/genetic/plugin"
 )
 
 func Main() {
@@ -16,7 +17,7 @@ func Main() {
 		{X: 106.54, Y: 29.59},
 	}
 
-	population := genetic.Population{
+	genetic.Population{
 		Size:            500,
 		Dim:             len(tspMap),
 		CrossoverFactor: 1,
@@ -29,7 +30,7 @@ func Main() {
 		VariantFunc:   Variant,
 		ScoreFunc:     ScorePow(2),
 		SelectFunc:    genetic.ScoreOrderSelectTop(0.05, 0.9),
-	}.Random()
 
-	genetic.CalcAndPlotBox(population, "output/tsp.svg")
+		Plugins: []genetic.Plugin{plugin.Print(), plugin.BoxPlot("TSP by GA", "output/tsp.svg")},
+	}.Random().Run()
 }
