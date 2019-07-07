@@ -20,7 +20,7 @@ func CalcAndPlotBox(p Population, outputFile string) {
 
 	totalScores := plotter.XYs{}
 
-	for p.CanContinue() {
+	for p.NeedContinue() {
 		scores := make(plotter.Values, p.Size)
 		for i, s := range p.SingleScore {
 			scores[i] = s
@@ -32,16 +32,13 @@ func CalcAndPlotBox(p Population, outputFile string) {
 		plot.Add(box)
 		totalScores = append(totalScores, plotter.XY{X: float64(p.Gen), Y: p.TotalScore / float64(p.Size)})
 
-		if p.GetTarget() {
-			break
-		} else {
-			fmt.Printf("Gen %d, total score %.2f, best score %.2f, value %v \n", p.Gen, p.TotalScore, p.BestScore(), p.BestSingle())
-		}
+		fmt.Printf("Gen %d, total score %.2f, best score %.2f, value %v \n", p.Gen, p.TotalScore, p.BestScore(), p.BestSingle())
+
 		p = p.NextGen()
 	}
 
 	fmt.Println("Total Gen", p.Gen)
-	fmt.Println("Find Target", p.GetTarget())
+	fmt.Println("Find Target", p.MatchTarget())
 	fmt.Println("Best Score", p.BestScore())
 	fmt.Println("Best Answer", p.BestSingle())
 

@@ -44,11 +44,11 @@ func (p Population) Random() Population {
 	return p.Brother(value).Score()
 }
 
-func (p Population) CanContinue() bool {
-	return p.Gen < p.MaxGen
+func (p Population) NeedContinue() bool {
+	return p.Gen < p.MaxGen && !p.MatchTarget()
 }
 
-func (p Population) GetTarget() bool {
+func (p Population) MatchTarget() bool {
 	return p.TargetFunc(p)
 }
 
