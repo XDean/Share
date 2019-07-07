@@ -12,6 +12,12 @@ type (
 	ScoreFunc     func(Population, int) ([]float64, float64)
 	SelectFunc    func(Population) int
 	TargetFunc    func(Population) bool
+	PluginFunc    func(Population) Population
+	Plugin        struct {
+		Start PluginFunc
+		Each  PluginFunc
+		End   PluginFunc
+	}
 
 	Population struct {
 		Gen             int
@@ -27,6 +33,7 @@ type (
 		ScoreFunc     ScoreFunc
 		SelectFunc    SelectFunc
 		TargetFunc    TargetFunc
+		Plugins       []Plugin
 
 		// all below always sort by score descending
 		Value           []Single
@@ -35,6 +42,25 @@ type (
 		SingleScore     []float64
 	}
 )
+
+func (p Population) Run() Population {
+	for _, plugin := range p.Plugins {
+		p = plugin.Start(p)
+	}
+	for _, plugin := range p.Plugins {
+		p = plugin.Each(p)
+	}
+	for p.NeedContinue() {
+		p = p.NextGen()
+		for _, plugin := range p.Plugins {
+			p = plugin.Each(p)
+		}
+	}
+	for _, plugin := range p.Plugins {
+		p = plugin.End(p)
+	}
+	return p
+}
 
 func (p Population) Random() Population {
 	value := make([]Single, p.Size)
