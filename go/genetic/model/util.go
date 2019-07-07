@@ -18,12 +18,6 @@ func CalcAndPlotBox(population Population, outputFile string) {
 	plot.X.Label.Text = "Gen"
 	plot.Y.Label.Text = "Score"
 
-	grid := plotter.NewGrid()
-	grid.Horizontal.Width = 0
-	grid.Vertical.Width = 1
-
-	plot.Add(grid)
-
 	var result Single = nil
 	score := 0.0
 	totalScores := plotter.XYs{}
