@@ -2,7 +2,7 @@ package tsp
 
 import (
 	"math"
-	"xdean/genetic/model"
+	"xdean/genetic/genetic"
 	"xdean/genetic/sutil"
 )
 
@@ -31,14 +31,14 @@ func (q TSP) Value(i int) Point {
 	return m[q.Values[i]]
 }
 
-func (q TSP) Copy() model.Single {
+func (q TSP) Copy() genetic.Single {
 	result := make([]int, len(q.Values))
 	copy(result, q.Values)
 	q.Values = result
 	return q
 }
 
-func (q TSP) Equal(o model.Single) bool {
+func (q TSP) Equal(o genetic.Single) bool {
 	switch t := o.(type) {
 	case TSP:
 		return q.Map == t.Map && sutil.Equal(q.Values, t.Values)

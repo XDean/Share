@@ -3,12 +3,12 @@ package queen
 import (
 	"math"
 	"math/rand"
-	"xdean/genetic/model"
+	"xdean/genetic/genetic"
 )
 
-func ScoreNormalizeLossReciprocal(factor float64) func(model.ScoreFunc) model.ScoreFunc {
-	return func(origin model.ScoreFunc) model.ScoreFunc {
-		return func(p model.Population, i int) ([]float64, float64) {
+func ScoreNormalizeLossReciprocal(factor float64) func(genetic.ScoreFunc) genetic.ScoreFunc {
+	return func(origin genetic.ScoreFunc) genetic.ScoreFunc {
+		return func(p genetic.Population, i int) ([]float64, float64) {
 			score, sum := origin(p, i)
 			sum = factor / (1 + factor - sum)
 			for i, s := range score {
@@ -19,8 +19,8 @@ func ScoreNormalizeLossReciprocal(factor float64) func(model.ScoreFunc) model.Sc
 	}
 }
 
-func ScorePower(n float64) model.ScoreFunc {
-	return func(p model.Population, qi int) (float64s []float64, f float64) {
+func ScorePower(n float64) genetic.ScoreFunc {
+	return func(p genetic.Population, qi int) (float64s []float64, f float64) {
 		q := p.Value[qi].(Queen)
 		score := make([]float64, len(q))
 		sum := 0.0
@@ -46,7 +46,7 @@ func ScorePower(n float64) model.ScoreFunc {
 	}
 }
 
-func CrossoverEachGene(p model.Population, ai int, bi int) (model.Single, model.Single) {
+func CrossoverEachGene(p genetic.Population, ai int, bi int) (genetic.Single, genetic.Single) {
 	a := p.Value[ai].(Queen)
 	b := p.Value[bi].(Queen)
 	c1 := make(Queen, p.Dim)
@@ -72,7 +72,7 @@ func CrossoverEachGene(p model.Population, ai int, bi int) (model.Single, model.
 	return c1, c2
 }
 
-func CrossoverLR(p model.Population, ai int, bi int) (model.Single, model.Single) {
+func CrossoverLR(p genetic.Population, ai int, bi int) (genetic.Single, genetic.Single) {
 	a := p.Value[ai].(Queen)
 	b := p.Value[bi].(Queen)
 	c1 := make(Queen, p.Dim)

@@ -3,7 +3,7 @@ package tsp
 import (
 	"math/rand"
 	"time"
-	"xdean/genetic/model"
+	"xdean/genetic/genetic"
 )
 
 func Main() {
@@ -16,20 +16,20 @@ func Main() {
 		{X: 106.54, Y: 29.59},
 	}
 
-	population := model.Population{
+	population := genetic.Population{
 		Size:            500,
 		Dim:             len(tspMap),
 		CrossoverFactor: 1,
 		VariantFactor:   0.05,
 		MaxGen:          5000,
 
-		TargetFunc:    model.TargetScore(1),
+		TargetFunc:    genetic.TargetScore(1),
 		RandomFunc:    Random(&tspMap),
 		CrossoverFunc: Crossover,
 		VariantFunc:   Variant,
 		ScoreFunc:     ScorePow(2),
-		SelectFunc:    model.ScoreOrderSelectTop(0.05, 0.9),
+		SelectFunc:    genetic.ScoreOrderSelectTop(0.05, 0.9),
 	}.Random()
 
-	model.CalcAndPlotBox(population, "output/tsp.svg")
+	genetic.CalcAndPlotBox(population, "output/tsp.svg")
 }

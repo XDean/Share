@@ -1,19 +1,19 @@
 package queen
 
 import (
-	"xdean/genetic/model"
+	"xdean/genetic/genetic"
 	"xdean/genetic/sutil"
 )
 
 type Queen []int
 
-func (q Queen) Copy() model.Single {
+func (q Queen) Copy() genetic.Single {
 	result := make(Queen, len(q))
 	copy(result, q)
 	return result
 }
 
-func (q Queen) Equal(o model.Single) bool {
+func (q Queen) Equal(o genetic.Single) bool {
 	switch t := o.(type) {
 	case Queen:
 		return sutil.Equal(q, t)

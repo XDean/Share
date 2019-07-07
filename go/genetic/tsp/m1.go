@@ -3,11 +3,11 @@ package tsp
 import (
 	"math"
 	"math/rand"
-	"xdean/genetic/model"
+	"xdean/genetic/genetic"
 )
 
-func Random(m *Map) model.RandomFunc {
-	return func(p model.Population) model.Single {
+func Random(m *Map) genetic.RandomFunc {
+	return func(p genetic.Population) genetic.Single {
 		result := TSP{
 			Map:    m,
 			Values: make([]int, p.Dim),
@@ -23,14 +23,14 @@ func Random(m *Map) model.RandomFunc {
 	}
 }
 
-func Crossover(p model.Population, ai int, bi int) (model.Single, model.Single) {
+func Crossover(p genetic.Population, ai int, bi int) (genetic.Single, genetic.Single) {
 	a := p.Value[ai].(TSP)
 	b := p.Value[bi].(TSP)
 
 	return crossover1(p, a, b), crossover1(p, a, b)
 }
 
-func crossover1(p model.Population, a, b TSP) TSP {
+func crossover1(p genetic.Population, a, b TSP) TSP {
 	r1 := a.Copy().(TSP)
 	for _, r := range a.FindRings(b) {
 		if rand.Float64() > 0.5 {
@@ -46,7 +46,7 @@ func crossover1(p model.Population, a, b TSP) TSP {
 	return r1
 }
 
-func Variant(p model.Population, tsp model.Single) model.Single {
+func Variant(p genetic.Population, tsp genetic.Single) genetic.Single {
 	new := tsp.Copy().(TSP)
 	for count := p.VariantFactor / rand.Float64(); count > 0; count-- {
 		new.RandomSwap()
@@ -54,8 +54,8 @@ func Variant(p model.Population, tsp model.Single) model.Single {
 	return new
 }
 
-func ScorePow(n float64) model.ScoreFunc {
-	return func(p model.Population, i int) (float64s []float64, f float64) {
+func ScorePow(n float64) genetic.ScoreFunc {
+	return func(p genetic.Population, i int) (float64s []float64, f float64) {
 		tsp := p.Value[i].(TSP)
 
 		sum := 0.0
