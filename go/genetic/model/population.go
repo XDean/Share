@@ -52,14 +52,6 @@ func (p Population) MatchTarget() bool {
 	return p.TargetFunc(p)
 }
 
-func (p Population) BestSingle() Single {
-	return p.Value[0]
-}
-
-func (p Population) BestScore() float64 {
-	return p.SingleScore[0]
-}
-
 func (p Population) Brother(value []Single) Population {
 	p.Value = value
 	p.SingleScore = make([]float64, p.Size)
@@ -131,4 +123,13 @@ func (p Population) Swap(i, j int) {
 	p.Value[i], p.Value[j] = p.Value[j], p.Value[i]
 	p.SingleScore[i], p.SingleScore[j] = p.SingleScore[j], p.SingleScore[i]
 	p.SingleGeneScore[i], p.SingleGeneScore[j] = p.SingleGeneScore[j], p.SingleGeneScore[i]
+}
+
+/*****KPI******/
+func (p Population) BestSingle() Single {
+	return p.Value[0]
+}
+
+func (p Population) BestScore() float64 {
+	return p.SingleScore[0]
 }

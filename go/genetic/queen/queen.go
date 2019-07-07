@@ -2,7 +2,7 @@ package queen
 
 import (
 	"xdean/genetic/model"
-	"xdean/genetic/util"
+	"xdean/genetic/sutil"
 )
 
 type Queen []int
@@ -13,14 +13,23 @@ func (q Queen) Copy() model.Single {
 	return result
 }
 
+func (q Queen) Equal(o model.Single) bool {
+	switch t := o.(type) {
+	case Queen:
+		return sutil.Equal(q, t)
+	default:
+		return false
+	}
+}
+
 func (q Queen) FindRings(o Queen) [][]int {
-	return util.FindRings(q, o)
+	return sutil.FindRings(q, o)
 }
 
 func (q Queen) IndexOf(pos int) int {
-	return util.IndexOf(q, pos)
+	return sutil.IndexOf(q, pos)
 }
 
 func (q Queen) RandomSwap() {
-	util.RandomSwap(q)
+	sutil.RandomSwap(q)
 }

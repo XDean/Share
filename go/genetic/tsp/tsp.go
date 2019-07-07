@@ -3,7 +3,7 @@ package tsp
 import (
 	"math"
 	"xdean/genetic/model"
-	"xdean/genetic/util"
+	"xdean/genetic/sutil"
 )
 
 type (
@@ -38,14 +38,23 @@ func (q TSP) Copy() model.Single {
 	return q
 }
 
+func (q TSP) Equal(o model.Single) bool {
+	switch t := o.(type) {
+	case TSP:
+		return q.Map == t.Map && sutil.Equal(q.Values, t.Values)
+	default:
+		return false
+	}
+}
+
 func (q TSP) FindRings(o TSP) [][]int {
-	return util.FindRings(q.Values, o.Values)
+	return sutil.FindRings(q.Values, o.Values)
 }
 
 func (q TSP) IndexOf(pos int) int {
-	return util.IndexOf(q.Values, pos)
+	return sutil.IndexOf(q.Values, pos)
 }
 
 func (q TSP) RandomSwap() {
-	util.RandomSwap(q.Values)
+	sutil.RandomSwap(q.Values)
 }
