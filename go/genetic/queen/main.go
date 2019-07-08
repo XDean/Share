@@ -25,6 +25,10 @@ func GeneticMain() {
 		ScoreFunc:     ScorePower(1),
 		SelectFunc:    genetic.ScoreOrderSelectTop(0.05, 0.9),
 
-		Plugins: []genetic.Plugin{plugin.Print(), plugin.BoxPlot("Queen by GA", "output/queen.svg")},
+		Plugins: []genetic.Plugin{
+			plugin.Print(),
+			plugin.BoxPlot("Queen by GA", "output/queen.svg"),
+			plugin.Gif("output/queen.gif", 100, ToImage),
+		},
 	}.Random().Run()
 }
