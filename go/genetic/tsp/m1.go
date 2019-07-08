@@ -51,13 +51,21 @@ func crossover1(p genetic.Population, a, b TSP) TSP {
 	return r1
 }
 
-func Variant(p genetic.Population, s genetic.Single) genetic.Single {
+func VariantSwap(p genetic.Population, s genetic.Single) genetic.Single {
 	tsp := s.(TSP)
 	new := tsp.Copy().(TSP)
 	if rand.Float64() < p.VariantFactor {
 		cut := rand.Intn(p.Dim-2) + 2
 		copy(new.Values[1:p.Dim-cut+1], tsp.Values[cut:p.Dim])
 		copy(new.Values[p.Dim-cut+1:p.Dim], tsp.Values[1:cut])
+	}
+	return new
+}
+
+func Variant(p genetic.Population, tsp genetic.Single) genetic.Single {
+	new := tsp.Copy().(TSP)
+	for count := p.VariantFactor / rand.Float64(); count > 0; count-- {
+		new.RandomSwap()
 	}
 	return new
 }
@@ -120,13 +128,12 @@ func ToImage(p genetic.Population, index int) image.Image {
 	gc.SetColor(color.Black)
 	gc.DrawStringAnchored(fmt.Sprintf("TSP Gen %d, Score %.4f", p.Gen, p.SingleScore[index]), float64(width/2), 15, 0.5, 0.5)
 
-	drawPointAndLine := func(last Point, point Point) {
+	drawPointAndLine := func(current int, last Point, point Point) {
 		last = last.Normalize(src0, src1, dst0, dst1)
 		point = point.Normalize(src0, src1, dst0, dst1)
-		gc.DrawCircle(last.X, 820-last.Y, 5)
-		gc.Fill()
 		gc.DrawCircle(point.X, 820-point.Y, 5)
 		gc.Fill()
+		gc.DrawStringAnchored(fmt.Sprintf("%d", current), point.X, 800-point.Y, 0.5, 0.5)
 		gc.DrawLine(last.X, 820-last.Y, point.X, 820-point.Y)
 		gc.Stroke()
 	}
@@ -134,9 +141,9 @@ func ToImage(p genetic.Population, index int) image.Image {
 	for i := 1; i < len(tsp.Values); i++ {
 		last := tsp.Value(i - 1)
 		point := tsp.Value(i)
-		drawPointAndLine(last, point)
+		drawPointAndLine(tsp.Values[i], last, point)
 	}
-	drawPointAndLine(tsp.Value(0), tsp.Value(len(tsp.Values)-1))
+	drawPointAndLine(tsp.Values[0], tsp.Value(len(tsp.Values)-1), tsp.Value(0))
 
 	img := gc.Image()
 	grayImg := image.NewGray(img.Bounds())

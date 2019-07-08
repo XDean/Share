@@ -18,7 +18,7 @@ func Print() genetic.Plugin {
 			return p
 		},
 		Each: func(p genetic.Population) genetic.Population {
-			fmt.Printf("Gen %d, total score %.2f, best score %.2f, value %v \n", p.Gen, p.TotalScore, p.BestScore(), p.BestSingle())
+			fmt.Printf("Gen %d, total score %.2f, best score %.4f, value %v \n", p.Gen, p.TotalScore, p.BestScore(), p.BestSingle())
 			return p
 		},
 		End: func(p genetic.Population) genetic.Population {

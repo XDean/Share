@@ -16,14 +16,24 @@ import (
 type ImageFunc func(population genetic.Population, index int) image.Image
 
 func ImageEachBest(folder string, imageFunc ImageFunc) genetic.Plugin {
+	return ImagePerGenBest(folder, imageFunc, 1)
+}
+
+func ImagePerGenBest(folder string, imageFunc ImageFunc, gen int) genetic.Plugin {
 	err := os.MkdirAll(folder, os.ModeType)
 	if err != nil {
 		panic(err)
 	}
 	wg := sync.WaitGroup{}
+	var last genetic.Single
 	return genetic.Plugin{
 		Start: genetic.EMPTY_PLUGIN_FUNC,
 		Each: func(p genetic.Population) genetic.Population {
+			if p.Gen%gen != 0 || p.Value[0].Equal(last) {
+				return p
+			} else {
+				last = p.Value[0]
+			}
 			wg.Add(1)
 			go func() {
 				defer wg.Done()
