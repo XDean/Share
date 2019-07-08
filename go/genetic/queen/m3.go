@@ -20,7 +20,7 @@ func ToImage(p genetic.Population, index int) image.Image {
 	gc.SetColor(color.White)
 	gc.Fill()
 	gc.SetColor(color.Black)
-	gc.DrawStringAnchored(fmt.Sprintf("Queen Gen %d", p.Gen), float64(width/2), 30, 0.5, 0.5)
+	gc.DrawStringAnchored(fmt.Sprintf("Queen Gen %d, Score %.4f", p.Gen, p.SingleScore[index]), float64(width/2), 30, 0.5, 0.5)
 
 	for row, column := range q {
 		for i := 0; i < len; i++ {

@@ -9,7 +9,7 @@ import (
 
 func GeneticMain() {
 	rand.Seed(time.Now().Unix())
-	dim := 200
+	dim := 50
 
 	genetic.Population{
 		Size:            500,
@@ -28,7 +28,7 @@ func GeneticMain() {
 		Plugins: []genetic.Plugin{
 			plugin.Print(),
 			plugin.BoxPlot("Queen by GA", "output/queen.svg"),
-			plugin.Gif("output/queen.gif", 100, ToImage),
+			plugin.ImageEachBest("output/queen/", ToImage),
 		},
 	}.Random().Run()
 }

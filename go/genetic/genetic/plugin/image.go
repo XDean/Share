@@ -1,17 +1,54 @@
 package plugin
 
 import (
+	"fmt"
 	"image"
 	"image/color"
 	"image/draw"
 	"image/gif"
+	"image/png"
 	"os"
 	"path/filepath"
+	"sync"
 	"xdean/genetic/genetic"
 )
 
 type ImageFunc func(population genetic.Population, index int) image.Image
 
+func ImageEachBest(folder string, imageFunc ImageFunc) genetic.Plugin {
+	err := os.MkdirAll(folder, os.ModeType)
+	if err != nil {
+		panic(err)
+	}
+	wg := sync.WaitGroup{}
+	return genetic.Plugin{
+		Start: genetic.EMPTY_PLUGIN_FUNC,
+		Each: func(p genetic.Population) genetic.Population {
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				img := imageFunc(p, 0)
+				path := filepath.Join(folder, fmt.Sprintf("%04d.png", p.Gen))
+				if file, err := os.Create(path); err != nil {
+					panic(err)
+				} else {
+					defer file.Close()
+					err := png.Encode(file, img)
+					if err != nil {
+						panic(err)
+					}
+				}
+			}()
+			return p
+		},
+		End: func(p genetic.Population) genetic.Population {
+			wg.Wait()
+			return p
+		},
+	}
+}
+
+// Not available
 func Gif(path string, delay float64, imageFunc ImageFunc) genetic.Plugin {
 	var images []*image.Paletted
 	var delays []int
