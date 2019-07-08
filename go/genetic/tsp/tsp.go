@@ -20,6 +20,14 @@ type (
 	}
 )
 
+func (p Point) Normalize(src0, src1, dst0, dst1 Point) Point {
+	ratio := math.Max((src1.X-src0.X)/(dst1.X-dst0.X), (src1.Y-src0.Y)/(dst1.Y-dst0.Y))
+	return Point{
+		X: (p.X-src0.X)/ratio + dst0.X,
+		Y: (p.Y-src0.Y)/ratio + dst0.Y,
+	}
+}
+
 func (p Point) Distance(o Point) float64 {
 	x := p.X - o.X
 	y := p.Y - o.Y
@@ -56,5 +64,19 @@ func (q TSP) IndexOf(pos int) int {
 }
 
 func (q TSP) RandomSwap() {
-	sutil.RandomSwap(q.Values)
+	sutil.RandomSwap(q.Values[1:])
+}
+
+func (m Map) Bounds() (x0, y0, x1, y1 float64) {
+	x0 = math.MaxInt16
+	y0 = math.MaxInt16
+	x1 = math.MinInt16
+	y1 = math.MinInt16
+	for _, p := range m {
+		x0 = math.Min(x0, p.X)
+		y0 = math.Min(y0, p.Y)
+		x1 = math.Max(x1, p.X)
+		y1 = math.Max(y1, p.Y)
+	}
+	return
 }

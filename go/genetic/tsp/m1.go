@@ -1,6 +1,11 @@
 package tsp
 
 import (
+	"fmt"
+	"github.com/fogleman/gg"
+	"image"
+	"image/color"
+	"image/draw"
 	"math"
 	"math/rand"
 	"xdean/genetic/genetic"
@@ -79,4 +84,52 @@ func ScorePow(n float64) genetic.ScoreFunc {
 
 		return score, sum
 	}
+}
+
+func ToImage(p genetic.Population, index int) image.Image {
+	tsp := p.Value[index].(TSP)
+	x0, y0, x1, y1 := tsp.Map.Bounds()
+
+	src0 := Point{x0, y0}
+	src1 := Point{x1, y1}
+	dst0 := Point{30, 60}
+	dst1 := Point{970, 770}
+
+	width := 1000
+	height := 800
+
+	gc := gg.NewContext(int(width), int(height))
+	gc.DrawRectangle(0, 0, float64(width), float64(height))
+	gc.SetColor(color.White)
+	gc.Fill()
+
+	gc.DrawRectangle(10, 40, float64(width-20), float64(height-60))
+	gc.SetColor(color.Black)
+	gc.Stroke()
+
+	gc.SetColor(color.Black)
+	gc.DrawStringAnchored(fmt.Sprintf("TSP Gen %d, Score %.4f", p.Gen, p.SingleScore[index]), float64(width/2), 15, 0.5, 0.5)
+
+	drawPointAndLine := func(last Point, point Point) {
+		last = last.Normalize(src0, src1, dst0, dst1)
+		point = point.Normalize(src0, src1, dst0, dst1)
+		gc.DrawCircle(last.X, last.Y, 2)
+		gc.Fill()
+		gc.DrawCircle(point.X, point.Y, 2)
+		gc.Fill()
+		gc.DrawLine(last.X, last.Y, point.X, point.Y)
+		gc.Stroke()
+	}
+
+	for i := 1; i < len(tsp.Values); i++ {
+		last := tsp.Value(i - 1)
+		point := tsp.Value(i)
+		drawPointAndLine(last, point)
+	}
+	drawPointAndLine(tsp.Value(0), tsp.Value(len(tsp.Values)-1))
+
+	img := gc.Image()
+	grayImg := image.NewGray(img.Bounds())
+	draw.Draw(grayImg, grayImg.Rect, img, image.ZP, draw.Src)
+	return grayImg
 }
