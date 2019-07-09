@@ -64,7 +64,8 @@ func VariantSwap(p genetic.Population, s genetic.Single) genetic.Single {
 
 func Variant(p genetic.Population, tsp genetic.Single) genetic.Single {
 	new := tsp.Copy().(TSP)
-	for count := p.VariantFactor / rand.Float64(); count > 0; count-- {
+	for count := p.VariantFactor / rand.Float64(); count > 2; count-- {
+		new.RandomSwap()
 		new.RandomSwap()
 	}
 	return new

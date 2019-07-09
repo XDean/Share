@@ -110,7 +110,9 @@ func (p Population) Score() Population {
 
 func (p Population) NextGen() Population {
 	output := make(chan Single, 10)
-	for i := 0; i < p.Size; i += 2 {
+	output <- p.Value[0]
+	output <- p.Value[1]
+	for i := 2; i < p.Size; i += 2 {
 		go p.next2(output)
 	}
 

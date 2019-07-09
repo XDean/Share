@@ -50,15 +50,15 @@ func Main() {
 		Size:            500,
 		Dim:             len(tspMap),
 		CrossoverFactor: 0.9,
-		VariantFactor:   0.2,
-		MaxGen:          2000,
+		VariantFactor:   1,
+		MaxGen:          200,
 
 		TargetFunc:    genetic.TargetScore(10000),
 		RandomFunc:    Random(&tspMap),
 		CrossoverFunc: CrossoverNearestPow(-1),
-		VariantFunc:   Variant,
+		VariantFunc:   VariantRevertSwap,
 		ScoreFunc:     ScoreDistancePow(-0.5),
-		SelectFunc:    genetic.ScoreOrderSelectTop(0.01, 0.8),
+		SelectFunc:    genetic.ScoreOrderSelectTop(0.05, 0.8),
 
 		Plugins: []genetic.Plugin{
 			plugin.Print(),

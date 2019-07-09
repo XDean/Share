@@ -49,7 +49,9 @@ func (q TSP) Copy() genetic.Single {
 func (q TSP) Equal(o genetic.Single) bool {
 	switch t := o.(type) {
 	case TSP:
-		return q.Map == t.Map && sutil.Equal(q.Values, t.Values)
+		c := q.Copy().(TSP)
+		c.Revert(1, len(c.Values)-1)
+		return q.Map == t.Map && (sutil.Equal(q.Values, t.Values) || sutil.Equal(c.Values, t.Values))
 	default:
 		return false
 	}
@@ -65,6 +67,15 @@ func (q TSP) IndexOf(pos int) int {
 
 func (q TSP) RandomSwap() {
 	sutil.RandomSwap(q.Values[1:])
+}
+
+func (q TSP) Revert(from, to int) {
+	if from > to {
+		from, to = to, from
+	}
+	for i := 0; i < (to+1-from)/2; i++ {
+		q.Values[from+i], q.Values[to-i] = q.Values[to-i], q.Values[from+i]
+	}
 }
 
 func (m Map) Bounds() (x0, y0, x1, y1 float64) {
