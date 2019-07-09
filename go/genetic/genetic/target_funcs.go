@@ -20,3 +20,15 @@ func TargetStableScore(gen int) TargetFunc {
 		return false
 	}
 }
+
+func (t TargetFunc) Or(o TargetFunc) TargetFunc {
+	return func(p Population) bool {
+		return t(p) || o(p)
+	}
+}
+
+func (t TargetFunc) And(o TargetFunc) TargetFunc {
+	return func(p Population) bool {
+		return t(p) && o(p)
+	}
+}

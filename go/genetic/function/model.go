@@ -6,7 +6,7 @@ import (
 )
 
 type (
-	Function *func([]float64) []float64
+	Function func([]float64) []float64
 	Input    struct {
 		Value []float64
 		Func  Function
@@ -14,18 +14,21 @@ type (
 )
 
 func (i Input) Copy() genetic.Single {
+	result := make([]float64, len(i.Value))
+	copy(result, i.Value)
+	i.Value = result
 	return i
 }
 
 func (i Input) Equal(o genetic.Single) bool {
 	switch t := o.(type) {
 	case Input:
-		return i.Func == t.Func && sutil.EqualFloat(i.Value, t.Value)
+		return sutil.EqualFloat(i.Value, t.Value)
 	default:
 		return false
 	}
 }
 
 func (i Input) Output() []float64 {
-	return (*i.Func)(i.Value)
+	return i.Func(i.Value)
 }
