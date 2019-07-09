@@ -42,7 +42,6 @@ func BoxPlot(title, path string) genetic.Plugin {
 	pt.Y.Label.Text = "Score"
 	ticks := make([]plot.Tick, 0)
 	pt.X.Tick.Marker = plot.TickerFunc(func(min, max float64) []plot.Tick {
-		fmt.Println(ticks)
 		return ticks
 	})
 

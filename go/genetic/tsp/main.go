@@ -49,13 +49,13 @@ func Main() {
 	genetic.Population{
 		Size:            500,
 		Dim:             len(tspMap),
-		CrossoverFactor: 0.9,
-		VariantFactor:   1,
-		MaxGen:          200,
+		CrossoverFactor: 1,
+		VariantFactor:   0.3,
+		MaxGen:          2000,
 
-		TargetFunc:    genetic.TargetScore(10000),
+		TargetFunc:    genetic.TargetStableScore(100),
 		RandomFunc:    Random(&tspMap),
-		CrossoverFunc: CrossoverNearestPow(-1),
+		CrossoverFunc: CrossoverNearestRevert(-2),
 		VariantFunc:   VariantRevertSwap,
 		ScoreFunc:     ScoreDistancePow(-0.5),
 		SelectFunc:    genetic.ScoreOrderSelectTop(0.05, 0.8),
@@ -63,7 +63,7 @@ func Main() {
 		Plugins: []genetic.Plugin{
 			plugin.Print(),
 			plugin.BoxPlot("TSP by GA", "output/tsp.svg"),
-			plugin.ImagePerGenBest("output/tsp", ToImage, 10),
+			plugin.ImagePerGenBest("output/tsp", ToImage, 1),
 		},
 	}.Random().Run()
 }

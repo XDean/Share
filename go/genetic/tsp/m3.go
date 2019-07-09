@@ -16,51 +16,46 @@ func VariantRevertSwap(p genetic.Population, tsp genetic.Single) genetic.Single 
 	return new
 }
 
-func CrossoverRevert(n float64) genetic.CrossoverFunc {
+func CrossoverNearestRevert(pow float64) genetic.CrossoverFunc {
 	return func(p genetic.Population, aIndex, bIndex int) (single genetic.Single, single2 genetic.Single) {
 		crossoverNearest := func() TSP {
-			a := p.Value[aIndex].(TSP)
-			b := p.Value[bIndex].(TSP)
-			r := a.Copy().(TSP)
+			a := p.Value[aIndex].Copy().(TSP)
+			b := p.Value[bIndex].Copy().(TSP)
 
 			if a.Equal(b) {
-				return r
+				return a
 			}
+			aUsed := make(map[int]bool)
 
-			use := make(map[int]bool)
-
-			findFirst := func(resultIndex int, tsp TSP) (value int, score float64) {
-				last := tsp.Value(r.Values[resultIndex-1])
-				ai := (tsp.IndexOf(r.Values[resultIndex-1]) + 1) % p.Dim
-				for {
-					if ai == 0 {
-						ai++
+			findBNearest := func(aIndex int) int {
+				av := a.Values[aIndex]
+				bi := b.IndexOf(av)
+				for i := 1; ; i++ {
+					bn := (bi + i) % p.Dim
+					if !aUsed[b.Values[bn]] {
+						return bn
 					}
-					av := tsp.Values[ai]
-					au := use[av]
-					current := tsp.Value(ai)
-					distance := last.Distance(current)
-					if au {
-						ai = (ai + 1) % p.Dim
-					} else {
-						return av, math.Pow(distance, n)
+					bl := (bi + p.Dim - i) % p.Dim
+					if !aUsed[b.Values[bl]] {
+						return bl
 					}
 				}
 			}
 
 			for i := 1; i < p.Dim; i++ {
-				av, as := findFirst(i, a)
-				bv, bs := findFirst(i, b)
-				rd := rand.Float64() * (as + bs)
-				if rd < as {
-					use[av] = true
-					r.Values[i] = av
-				} else {
-					use[bv] = true
-					r.Values[i] = bv
+				bIndex := findBNearest(i - 1)
+				aToIndex := a.IndexOf(b.Values[bIndex])
+				aToIndex2 := (aToIndex + 1) % p.Dim
+
+				distanceOld := math.Pow(a.Value(i-1).Distance(a.Value(i))+a.Value(aToIndex).Distance(a.Value(aToIndex2)), pow)
+				distanceNew := math.Pow(a.Value(i-1).Distance(a.Value(aToIndex))+a.Value(i).Distance(a.Value(aToIndex2)), pow)
+				rd := rand.Float64() * (distanceOld + distanceNew)
+				if rd < distanceNew {
+					a.Revert(i, aToIndex)
 				}
+				aUsed[a.Values[i]] = true
 			}
-			return r
+			return a
 		}
 		return crossoverNearest(), crossoverNearest()
 	}
