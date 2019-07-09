@@ -8,6 +8,7 @@ import (
 	"gonum.org/v1/plot/vg"
 	"os"
 	"path/filepath"
+	"strconv"
 	"xdean/genetic/genetic"
 )
 
@@ -32,13 +33,18 @@ func Print() genetic.Plugin {
 }
 
 func BoxPlot(title, path string) genetic.Plugin {
-	plot, err := plot.New()
+	pt, err := plot.New()
 	if err != nil {
 		panic(err)
 	}
-	plot.Title.Text = title
-	plot.X.Label.Text = "Gen"
-	plot.Y.Label.Text = "Score"
+	pt.Title.Text = title
+	pt.X.Label.Text = "Gen"
+	pt.Y.Label.Text = "Score"
+	ticks := make([]plot.Tick, 0)
+	pt.X.Tick.Marker = plot.TickerFunc(func(min, max float64) []plot.Tick {
+		fmt.Println(ticks)
+		return ticks
+	})
 
 	totalScores := plotter.XYs{}
 
@@ -53,17 +59,18 @@ func BoxPlot(title, path string) genetic.Plugin {
 			if err != nil {
 				panic(err)
 			}
-			plot.Add(box)
+			pt.Add(box)
+			ticks = append(ticks, plot.Tick{Value: float64(p.Gen), Label: strconv.Itoa(p.Gen)})
 			totalScores = append(totalScores, plotter.XY{X: float64(p.Gen), Y: p.TotalScore / float64(p.Size)})
 			return p
 		},
 		End: func(p genetic.Population) genetic.Population {
-			err = plotutil.AddLinePoints(plot, totalScores)
+			err = plotutil.AddLinePoints(pt, totalScores)
 			if err != nil {
 				panic(err)
 			}
 			_ = os.MkdirAll(filepath.Dir(path), os.ModeType)
-			if err := plot.Save(vg.Length(p.Gen*20+100), vg.Length(600), path); err != nil {
+			if err := pt.Save(vg.Length(p.Gen*20+100), vg.Length(600), path); err != nil {
 				panic(err)
 			}
 			return p
