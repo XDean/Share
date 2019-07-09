@@ -49,6 +49,18 @@ func Equal(a, b []int) bool {
 	return true
 }
 
+func EqualFloat(a, b []float64) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i, v := range a {
+		if v != b[i] {
+			return false
+		}
+	}
+	return true
+}
+
 func RandomSwap(q []int) {
 	a := rand.Intn(len(q))
 	b := rand.Intn(len(q) - 1)
