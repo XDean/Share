@@ -31,6 +31,7 @@ func ScorePow(baseInput, targetOutput []float64, inputFactor, pow float64) genet
 		for i, v := range targetOutput {
 			outputScore += math.Pow(1-math.Abs(output[i]-v), pow)
 		}
+		outputScore /= float64(len(targetOutput))
 
 		for i, v := range baseInput {
 			score[i] = (outputScore + math.Pow(1-math.Abs(input.Value[i]-v)*inputFactor, pow)) / 2

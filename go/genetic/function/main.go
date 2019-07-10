@@ -13,12 +13,13 @@ func Main() {
 
 	var function Function = func(input []float64) []float64 {
 		return []float64{
-			(input[0] + input[1] - input[2]),
+			input[0] + input[1] - input[2],
+			input[0] * input[1] * input[2],
 		}
 	}
 
 	baseInput := []float64{0.5, 0.5, 0.5}
-	targetOutput := []float64{0.6}
+	targetOutput := []float64{0.51, 0.13}
 
 	result := genetic.Population{
 		Size:            50,
