@@ -1,9 +1,9 @@
 package tsp
 
 import (
+	"github.com/xdean/share/go/genetic/genetic"
+	"github.com/xdean/share/go/genetic/sutil"
 	"math"
-	"xdean/share/genetic/genetic"
-	"xdean/share/genetic/sutil"
 )
 
 type (

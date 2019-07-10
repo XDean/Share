@@ -1,8 +1,8 @@
 package queen
 
 import (
-	"xdean/share/genetic/genetic"
-	"xdean/share/genetic/sutil"
+	"github.com/xdean/share/go/genetic/genetic"
+	"github.com/xdean/share/go/genetic/sutil"
 )
 
 type Queen []int

@@ -1,9 +1,9 @@
 package function
 
 import (
+	"github.com/xdean/share/go/genetic/genetic"
 	"math"
 	"math/rand"
-	"xdean/share/genetic/genetic"
 )
 
 func Random(f Function) genetic.RandomFunc {

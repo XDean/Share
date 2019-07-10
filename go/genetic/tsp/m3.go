@@ -1,9 +1,9 @@
 package tsp
 
 import (
+	"github.com/xdean/share/go/genetic/genetic"
 	"math"
 	"math/rand"
-	"xdean/share/genetic/genetic"
 )
 
 func VariantRevertSwap(p genetic.Population, tsp genetic.Single) genetic.Single {

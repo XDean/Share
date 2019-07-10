@@ -2,6 +2,7 @@ package plugin
 
 import (
 	"fmt"
+	"github.com/xdean/share/go/genetic/genetic"
 	"image"
 	"image/color"
 	"image/draw"
@@ -10,7 +11,6 @@ import (
 	"os"
 	"path/filepath"
 	"sync"
-	"xdean/share/genetic/genetic"
 )
 
 type ImageFunc func(population genetic.Population, index int) image.Image

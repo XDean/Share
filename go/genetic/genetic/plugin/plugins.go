@@ -2,6 +2,7 @@ package plugin
 
 import (
 	"fmt"
+	"github.com/xdean/share/go/genetic/genetic"
 	"gonum.org/v1/plot"
 	"gonum.org/v1/plot/plotter"
 	"gonum.org/v1/plot/plotutil"
@@ -10,7 +11,6 @@ import (
 	"path/filepath"
 	"strconv"
 	"time"
-	"xdean/share/genetic/genetic"
 )
 
 func Print() genetic.Plugin {

@@ -1,10 +1,10 @@
 package queen
 
 import (
+	"github.com/xdean/share/go/genetic/genetic"
+	"github.com/xdean/share/go/genetic/genetic/plugin"
 	"math/rand"
 	"time"
-	"xdean/share/genetic/genetic"
-	"xdean/share/genetic/genetic/plugin"
 )
 
 func GeneticMain() {

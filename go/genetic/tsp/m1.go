@@ -3,12 +3,12 @@ package tsp
 import (
 	"fmt"
 	"github.com/fogleman/gg"
+	"github.com/xdean/share/go/genetic/genetic"
 	"image"
 	"image/color"
 	"image/draw"
 	"math"
 	"math/rand"
-	"xdean/share/genetic/genetic"
 )
 
 func Random(m *Map) genetic.RandomFunc {

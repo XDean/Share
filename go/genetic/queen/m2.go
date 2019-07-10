@@ -1,9 +1,9 @@
 package queen
 
 import (
+	"github.com/xdean/share/go/genetic/genetic"
 	"math"
 	"math/rand"
-	"xdean/share/genetic/genetic"
 )
 
 func ScoreNormalizeLossReciprocal(factor float64) func(genetic.ScoreFunc) genetic.ScoreFunc {

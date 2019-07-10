@@ -3,10 +3,10 @@ package queen
 import (
 	"fmt"
 	"github.com/fogleman/gg"
+	"github.com/xdean/share/go/genetic/genetic"
 	"image"
 	"image/color"
 	"image/draw"
-	"xdean/share/genetic/genetic"
 )
 
 func ToImage(p genetic.Population, index int) image.Image {
