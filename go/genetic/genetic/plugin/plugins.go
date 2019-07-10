@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 	"strconv"
 	"time"
-	"xdean/genetic/genetic"
+	"xdean/share/genetic/genetic"
 )
 
 func Print() genetic.Plugin {

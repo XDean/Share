@@ -8,7 +8,7 @@ import (
 	"image/draw"
 	"math"
 	"math/rand"
-	"xdean/genetic/genetic"
+	"xdean/share/genetic/genetic"
 )
 
 func Random(m *Map) genetic.RandomFunc {

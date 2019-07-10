@@ -3,7 +3,7 @@ package tsp
 import (
 	"math"
 	"math/rand"
-	"xdean/genetic/genetic"
+	"xdean/share/genetic/genetic"
 )
 
 func CrossoverRange(p genetic.Population, ai int, bi int) (genetic.Single, genetic.Single) {

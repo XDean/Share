@@ -10,7 +10,7 @@ import (
 	"os"
 	"path/filepath"
 	"sync"
-	"xdean/genetic/genetic"
+	"xdean/share/genetic/genetic"
 )
 
 type ImageFunc func(population genetic.Population, index int) image.Image

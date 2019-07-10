@@ -3,7 +3,7 @@ package tsp
 import (
 	"math"
 	"math/rand"
-	"xdean/genetic/genetic"
+	"xdean/share/genetic/genetic"
 )
 
 func VariantRevertSwap(p genetic.Population, tsp genetic.Single) genetic.Single {

@@ -3,8 +3,8 @@ package queen
 import (
 	"math/rand"
 	"time"
-	"xdean/genetic/genetic"
-	"xdean/genetic/genetic/plugin"
+	"xdean/share/genetic/genetic"
+	"xdean/share/genetic/genetic/plugin"
 )
 
 func GeneticMain() {

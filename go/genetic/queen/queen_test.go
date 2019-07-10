@@ -3,7 +3,7 @@ package queen
 import (
 	"github.com/llgcode/draw2d/draw2dimg"
 	"testing"
-	"xdean/genetic/genetic"
+	"xdean/share/genetic/genetic"
 )
 
 func TestQueen_ToImage(t *testing.T) {

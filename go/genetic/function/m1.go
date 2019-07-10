@@ -3,7 +3,7 @@ package function
 import (
 	"math"
 	"math/rand"
-	"xdean/genetic/genetic"
+	"xdean/share/genetic/genetic"
 )
 
 func Random(f Function) genetic.RandomFunc {

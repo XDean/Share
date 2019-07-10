@@ -6,7 +6,7 @@ import (
 	"image"
 	"image/color"
 	"image/draw"
-	"xdean/genetic/genetic"
+	"xdean/share/genetic/genetic"
 )
 
 func ToImage(p genetic.Population, index int) image.Image {

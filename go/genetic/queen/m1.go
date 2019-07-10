@@ -2,7 +2,7 @@ package queen
 
 import (
 	"math/rand"
-	"xdean/genetic/genetic"
+	"xdean/share/genetic/genetic"
 )
 
 func Random(p genetic.Population) genetic.Single {

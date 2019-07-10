@@ -3,7 +3,7 @@ package queen
 import (
 	"math"
 	"math/rand"
-	"xdean/genetic/genetic"
+	"xdean/share/genetic/genetic"
 )
 
 func ScoreNormalizeLossReciprocal(factor float64) func(genetic.ScoreFunc) genetic.ScoreFunc {

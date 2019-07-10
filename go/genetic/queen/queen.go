@@ -1,8 +1,8 @@
 package queen
 
 import (
-	"xdean/genetic/genetic"
-	"xdean/genetic/sutil"
+	"xdean/share/genetic/genetic"
+	"xdean/share/genetic/sutil"
 )
 
 type Queen []int
