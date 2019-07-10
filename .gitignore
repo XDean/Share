@@ -31,3 +31,5 @@ nbdist/
 ### other ###
 .svn/
 .*.md.html
+
+output/
