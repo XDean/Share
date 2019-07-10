@@ -9,6 +9,7 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"time"
 	"xdean/genetic/genetic"
 )
 
@@ -27,6 +28,22 @@ func Print() genetic.Plugin {
 			fmt.Println("Find Target", p.MatchTarget())
 			fmt.Println("Best Score", p.BestScore())
 			fmt.Println("Best Answer", p.BestSingle())
+			return p
+		},
+	}
+}
+
+func Timing() genetic.Plugin {
+	start := time.Now()
+	return genetic.Plugin{
+		Start: func(p genetic.Population) genetic.Population {
+			start = time.Now()
+			return p
+		},
+		Each: genetic.EMPTY_PLUGIN_FUNC,
+		End: func(p genetic.Population) genetic.Population {
+			time := time.Since(start)
+			fmt.Printf("Total Take %s\n", time)
 			return p
 		},
 	}

@@ -3,6 +3,7 @@ package genetic
 import (
 	"math/rand"
 	"sort"
+	"sync"
 )
 
 type (
@@ -96,12 +97,18 @@ func (p Population) Child(value []Single) Population {
 
 func (p Population) Score() Population {
 	sum := 0.0
+	wg := sync.WaitGroup{}
+	wg.Add(p.Size)
 	for i, _ := range p.Value {
-		per, total := p.ScoreFunc(p, i)
-		p.SingleGeneScore[i] = per
-		p.SingleScore[i] = total
-		sum += total
+		go func(index int) {
+			per, total := p.ScoreFunc(p, index)
+			p.SingleGeneScore[index] = per
+			p.SingleScore[index] = total
+			sum += total
+			wg.Done()
+		}(i)
 	}
+	wg.Wait()
 	p.TotalScore = sum
 
 	sort.Sort(p)

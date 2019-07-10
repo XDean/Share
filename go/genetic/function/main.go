@@ -36,6 +36,7 @@ func Main() {
 
 		Plugins: []genetic.Plugin{
 			plugin.Print(),
+			plugin.Timing(),
 			plugin.BoxPlot("Function Solution by GA", "output/function.svg"),
 		},
 	}.Random().Run()

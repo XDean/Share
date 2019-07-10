@@ -27,8 +27,9 @@ func GeneticMain() {
 
 		Plugins: []genetic.Plugin{
 			plugin.Print(),
+			plugin.Timing(),
 			plugin.BoxPlot("Queen by GA", "output/queen.svg"),
-			plugin.ImagePerGenBest("output/queen/", ToImage, 10),
+			plugin.ImagePerGenBest("output/queen/", ToImage, 100000),
 		},
 	}.Random().Run()
 }
