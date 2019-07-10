@@ -9,10 +9,10 @@ import (
 
 func GeneticMain() {
 	rand.Seed(time.Now().Unix())
-	dim := 50
+	dim := 200
 
 	genetic.Population{
-		Size:            500,
+		Size:            100,
 		Dim:             dim,
 		CrossoverFactor: 1,
 		VariantFactor:   0.05,
@@ -28,7 +28,7 @@ func GeneticMain() {
 		Plugins: []genetic.Plugin{
 			plugin.Print(),
 			plugin.BoxPlot("Queen by GA", "output/queen.svg"),
-			plugin.ImageEachBest("output/queen/", ToImage),
+			plugin.ImagePerGenBest("output/queen/", ToImage, 10),
 		},
 	}.Random().Run()
 }

@@ -29,7 +29,7 @@ func ImagePerGenBest(folder string, imageFunc ImageFunc, gen int) genetic.Plugin
 	return genetic.Plugin{
 		Start: genetic.EMPTY_PLUGIN_FUNC,
 		Each: func(p genetic.Population) genetic.Population {
-			if p.Gen%gen != 0 || p.Value[0].Equal(last) {
+			if !p.MatchTarget() && (p.Gen%gen != 0 || p.Value[0].Equal(last)) {
 				return p
 			} else {
 				last = p.Value[0]
