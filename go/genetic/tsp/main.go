@@ -61,7 +61,7 @@ func Main() {
 		SelectFunc:    genetic.ScoreOrderSelectTop(0.05, 0.8),
 
 		Plugins: []genetic.Plugin{
-			plugin.Print(),
+			plugin.PrintEachBest(),
 			plugin.BoxPlot("TSP by GA", "output/tsp.svg"),
 			plugin.ImagePerGenBest("output/tsp", ToImage, 1),
 		},

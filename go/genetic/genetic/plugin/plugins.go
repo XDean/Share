@@ -13,14 +13,22 @@ import (
 	"time"
 )
 
-func Print() genetic.Plugin {
+func PrintEachBest() genetic.Plugin {
+	return Print(true)
+}
+
+func Print(printBestValue bool) genetic.Plugin {
 	return genetic.Plugin{
 		Start: func(p genetic.Population) genetic.Population {
 			fmt.Println("Start GA")
 			return p
 		},
 		Each: func(p genetic.Population) genetic.Population {
-			fmt.Printf("Gen %d, total score %.2f, best score %.4f, value %v \n", p.Gen, p.TotalScore, p.BestScore(), p.BestSingle())
+			if printBestValue {
+				fmt.Printf("Gen %d, total score %.2f, best score %.4f, value %v \n", p.Gen, p.TotalScore, p.BestScore(), p.BestSingle())
+			} else {
+				fmt.Printf("Gen %d, total score %.2f, best score %.4f\n", p.Gen, p.TotalScore, p.BestScore())
+			}
 			return p
 		},
 		End: func(p genetic.Population) genetic.Population {

@@ -26,7 +26,7 @@ func GeneticMain() {
 		SelectFunc:    genetic.ScoreOrderSelectTop(0.1, 0.9),
 
 		Plugins: []genetic.Plugin{
-			plugin.Print(),
+			plugin.Print(false),
 			plugin.Timing(),
 			plugin.BoxPlot("Queen by GA", "output/queen.svg"),
 			plugin.ImagePerGenBest("output/queen/", ToImage, 1),

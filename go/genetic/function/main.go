@@ -36,7 +36,7 @@ func Main() {
 		SelectFunc:    genetic.ScoreOrderSelectTop(0.1, 0.8),
 
 		Plugins: []genetic.Plugin{
-			plugin.Print(),
+			plugin.PrintEachBest(),
 			plugin.Timing(),
 			plugin.BoxPlot("Function Solution by GA", "output/function.svg"),
 		},
