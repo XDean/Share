@@ -22,13 +22,13 @@ func Main() {
 	targetOutput := []float64{0.51, 0.13}
 
 	result := genetic.Population{
-		Size:            50,
+		Size:            10,
 		Dim:             len(baseInput),
 		CrossoverFactor: 0.9,
 		VariantFactor:   0.2,
 		MaxGen:          2000,
 
-		TargetFunc:    genetic.TargetStableScore(100).Or(genetic.TargetScore(1)),
+		TargetFunc:    genetic.TargetStableScore(10).Or(genetic.TargetScore(1)),
 		RandomFunc:    Random(function),
 		CrossoverFunc: Crossover(),
 		VariantFunc:   Variant(0.1),
