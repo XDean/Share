@@ -24,7 +24,7 @@
 
 ### Flow
 
-![ga.svg0](ga.svg)
+![ga.png](ga.png)
 
 ## Samples
 
