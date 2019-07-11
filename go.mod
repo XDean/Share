@@ -1,4 +1,4 @@
-module github.com/xdean/share/go/genetic
+module github.com/xdean/share
 
 go 1.12
 

@@ -33,3 +33,4 @@ nbdist/
 .*.md.html
 
 output/
+*.exe
