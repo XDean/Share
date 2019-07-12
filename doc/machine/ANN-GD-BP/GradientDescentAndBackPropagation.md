@@ -185,7 +185,7 @@ $$
 {\rm Let} \quad  \Delta_{l,i,j}&=\delta_{l,j}a_{l-1,i} \\\\
 \delta_{l,j}&=\begin{cases}
 (a_{L,j} - t_j)a_{L,j}(1-a_{L,j}),\quad l=L \\\\
-\sum_{k=0}^{n{l+1}}\delta_{l+1,k}\omega_{l,j,k}a_{l,j}(1-a_{l,j}), \quad l \not= L
+\sum_{k=0}^{n_{l+1}}\delta_{l+1,k}\omega_{l,j,k}a_{l,j}(1-a_{l,j}), \quad l \not= L
 \end{cases} \\\\
 \omega_{l,i,j}* &= \omega_{l,i,j} - \eta \Delta_{l,i,j}
 \end{aligned}
