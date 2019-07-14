@@ -30,11 +30,32 @@
 
 ### [N Queen Puzzle](https://en.wikipedia.org/wiki/Eight_queens_puzzle)
 
+在N*N棋盘上放置N个皇后，任意两皇后不互相攻击。
+
 #### Classic Solution
 
-回溯法(穷举)，时间复杂度**O(n!)**
+回溯法(穷举)，时间复杂度**O(k^N)**
 
 ![8-queens.gif](Eight-queens-animation.gif)
 
-#### Encode
+#### GA Solution
+
+##### Encode
+
+用一个长度为N的数组记录一个候选解。显然每一行只能放一个皇后，即每一个候选解为N的一个排列。
+
+如 `[5, 3, 1, 7, 2, 8, 6, 4]`
+
+![8-queens.png](8-queens.png)
+
+#### Crossover
+
+皇后的交叉不能采用简单的分段交叉，因为可能会产生显然的冲突
+
+```
+  [1, 2, 3, 4, | 5, 6, 7, 8]
++ [5, 6, 7, 8, | 1, 2, 3, 4]
+---------------|------------
+= [5, 6, 7, 8, | 5, 6, 7, 8]
+```
 
