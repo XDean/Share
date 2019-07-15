@@ -5,6 +5,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"github.com/xdean/share/go/neural/neural"
+	"image/png"
 	"io"
 	"os"
 	"strconv"
@@ -24,8 +25,9 @@ func Test() {
 			Activation:   neural.Sigmoid,
 		},
 	}
-
-	err := model.Load("neural/output/model/digit-10000.model")
+	err := os.Chdir("go/neural/neural/digit")
+	neural.PanicErr(err)
+	err = model.Load("output/model/digit-10000.model")
 	neural.PanicErr(err)
 
 	reader := bufio.NewReader(os.Stdin)
@@ -36,7 +38,8 @@ func Test() {
 			fmt.Println("Bye")
 			break
 		}
-		imgFile := fmt.Sprintf("digit-data/Images/test/%s.png", line)
+		line = strings.Trim(line, "\n \t")
+		imgFile := fmt.Sprintf("data/Images/test/%s.png", line)
 		input := DigitReadImage(imgFile)
 		predict := model.Predict(input)
 		fmt.Println("Predict:", predict)
@@ -61,7 +64,7 @@ func Train() {
 	}
 	model.Init()
 
-	file, err := os.Open("digit-data/train.csv")
+	file, err := os.Open("data/train.csv")
 	neural.PanicErr(err)
 	defer file.Close()
 	reader := csv.NewReader(file)
@@ -75,7 +78,7 @@ func Train() {
 		}
 		neural.PanicErr(err)
 
-		imgFile := fmt.Sprintf("digit-data/Images/train/%s", row[0])
+		imgFile := fmt.Sprintf("data/Images/train/%s", row[0])
 		label, err := strconv.Atoi(row[1])
 		neural.PanicErr(err)
 
@@ -91,4 +94,24 @@ func Train() {
 
 	err = model.Save("output/model/digit-10000.model")
 	neural.PanicErr(err)
+}
+
+func DigitReadImage(imgFile string) []float64 {
+	imgReader, err := os.Open(imgFile)
+	neural.PanicErr(err)
+	img, err := png.Decode(imgReader)
+	neural.PanicErr(err)
+	input := make([]float64, 28*28)
+	for i := 0; i < 28; i++ {
+		for j := 0; j < 28; j++ {
+			color := img.At(i, j)
+			r, g, b, _ := color.RGBA()
+			if r+g+b > 255 {
+				input[i*28+j] = 0
+			} else {
+				input[i*28+j] = 1
+			}
+		}
+	}
+	return input
 }
