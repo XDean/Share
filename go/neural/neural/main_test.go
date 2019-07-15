@@ -13,7 +13,7 @@ import (
 	"testing"
 )
 
-func TestModel(t *testing.T) {
+func TestTrainModel(t *testing.T) {
 	inputSize := 2
 	outputSize := 1
 	model := Model{
@@ -34,6 +34,25 @@ func TestModel(t *testing.T) {
 	}
 	fmt.Println("0.1,0.2", "->", model.Predict([]float64{0.1, 0.2}))
 	fmt.Println("-0.1,0.2", "->", model.Predict([]float64{-0.1, 0.2}))
+
+	err := model.Save("output/model/test.model")
+	panicErr(err)
+}
+
+func TestTestModel(t *testing.T) {
+	inputSize := 2
+	outputSize := 1
+	model := Model{
+		Config: ModelConfig{
+			LayerCount:   4,
+			NodeCount:    []int{inputSize, 6, 3, outputSize},
+			LearningRate: 0.1,
+			Activation:   ReLU,
+		},
+	}
+	model.Init()
+	err := model.Load("output/model/test.model")
+	panicErr(err)
 
 	_ = os.MkdirAll("output", os.ModeType)
 	for i := 0; i < outputSize; i++ {

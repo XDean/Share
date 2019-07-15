@@ -1,6 +1,11 @@
 package neural
 
-import "fmt"
+import (
+	"encoding/gob"
+	"fmt"
+	"os"
+	"path/filepath"
+)
 
 type (
 	Model struct {
@@ -36,6 +41,54 @@ type (
 		Nabla float64 // δ * output[l-1][i]
 	}
 )
+
+func (m *Model) Save(file string) error {
+	err := os.MkdirAll(filepath.Dir(file), os.ModeDir)
+	if err != nil {
+		return err
+	}
+	writer, err := os.Create(file)
+	if err != nil {
+		return err
+	}
+	defer writer.Close()
+	encoder := gob.NewEncoder(writer)
+	err = encoder.Encode(m.Config.LayerCount)
+	if err != nil {
+		return err
+	}
+	err = encoder.Encode(m.Config.NodeCount)
+	if err != nil {
+		return err
+	}
+	err = encoder.Encode(m.Value.Weight)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *Model) Load(file string) error {
+	reader, err := os.Open(file)
+	if err != nil {
+		return err
+	}
+	defer reader.Close()
+	decoder := gob.NewDecoder(reader)
+	err = decoder.Decode(&m.Config.LayerCount)
+	if err != nil {
+		return err
+	}
+	err = decoder.Decode(&m.Config.NodeCount)
+	if err != nil {
+		return err
+	}
+	err = decoder.Decode(&m.Value.Weight)
+	if err != nil {
+		return err
+	}
+	return nil
+}
 
 func (m *Model) Init() {
 	m.Value.Node = make([][]Node, m.Config.LayerCount)

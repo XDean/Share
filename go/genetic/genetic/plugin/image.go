@@ -20,7 +20,7 @@ func ImageEachBest(folder string, imageFunc ImageFunc) genetic.Plugin {
 }
 
 func ImagePerGenBest(folder string, imageFunc ImageFunc, gen int) genetic.Plugin {
-	err := os.MkdirAll(folder, os.ModeType)
+	err := os.MkdirAll(folder, os.ModeDir)
 	if err != nil {
 		panic(err)
 	}

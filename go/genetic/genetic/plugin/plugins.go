@@ -93,7 +93,7 @@ func BoxPlot(title, path string) genetic.Plugin {
 			if err != nil {
 				panic(err)
 			}
-			_ = os.MkdirAll(filepath.Dir(path), os.ModeType)
+			_ = os.MkdirAll(filepath.Dir(path), os.ModeDir)
 			if err := pt.Save(vg.Length(p.Gen*20+100), vg.Length(600), path); err != nil {
 				panic(err)
 			}
