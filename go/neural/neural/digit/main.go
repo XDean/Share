@@ -13,6 +13,10 @@ import (
 )
 
 func main() {
+	err := os.Chdir("go/neural/neural/digit")
+	neural.PanicErr(err)
+
+	//Train()
 	Test()
 }
 
@@ -25,9 +29,7 @@ func Test() {
 			Activation:   neural.Sigmoid,
 		},
 	}
-	err := os.Chdir("go/neural/neural/digit")
-	neural.PanicErr(err)
-	err = model.Load("output/model/digit-10000.model")
+	err := model.Load("output/model/digit-all.model")
 	neural.PanicErr(err)
 
 	reader := bufio.NewReader(os.Stdin)
@@ -40,7 +42,11 @@ func Test() {
 		}
 		line = strings.Trim(line, "\n \t")
 		imgFile := fmt.Sprintf("data/Images/test/%s.png", line)
-		input := DigitReadImage(imgFile)
+		input, err := DigitReadImage(imgFile)
+		if err != nil {
+			fmt.Println("Fail to read image:", err)
+			continue
+		}
 		predict := model.Predict(input)
 		fmt.Println("Predict:", predict)
 		max := 0
@@ -73,7 +79,7 @@ func Train() {
 	count := 0
 	for {
 		row, err := reader.Read()
-		if err == io.EOF || count > 10000 {
+		if err == io.EOF {
 			break
 		}
 		neural.PanicErr(err)
@@ -82,7 +88,8 @@ func Train() {
 		label, err := strconv.Atoi(row[1])
 		neural.PanicErr(err)
 
-		input := DigitReadImage(imgFile)
+		input, err := DigitReadImage(imgFile)
+		neural.PanicErr(err)
 		output := make([]float64, 10)
 		output[label] = 1
 		for i := 0; i < 5; i++ {
@@ -92,15 +99,19 @@ func Train() {
 		count++
 	}
 
-	err = model.Save("output/model/digit-10000.model")
+	err = model.Save("output/model/digit-all.model")
 	neural.PanicErr(err)
 }
 
-func DigitReadImage(imgFile string) []float64 {
+func DigitReadImage(imgFile string) ([]float64, error) {
 	imgReader, err := os.Open(imgFile)
-	neural.PanicErr(err)
+	if err != nil {
+		return nil, err
+	}
 	img, err := png.Decode(imgReader)
-	neural.PanicErr(err)
+	if err != nil {
+		return nil, err
+	}
 	input := make([]float64, 28*28)
 	for i := 0; i < 28; i++ {
 		for j := 0; j < 28; j++ {
@@ -113,5 +124,5 @@ func DigitReadImage(imgFile string) []float64 {
 			}
 		}
 	}
-	return input
+	return input, nil
 }
