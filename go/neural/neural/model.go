@@ -1,22 +1,28 @@
 package neural
 
+import "fmt"
+
 type (
 	Model struct {
-		Config struct {
-			LayerCount   int
-			NodeCount    []int
-			Activation   Activation
-			LearningRate float64
-			WeightInit   WeightInit
-		}
-		Value struct {
-			Error  float64
-			Node   [][]Node
-			Weight [][][]Weight // first index starts from 1
-		}
+		Config ModelConfig
+		Value  ModelValue
 	}
 
 	WeightInit func(l, i, j int) float64
+
+	ModelConfig struct {
+		LayerCount   int
+		NodeCount    []int
+		Activation   Activation
+		LearningRate float64
+		WeightInit   WeightInit
+	}
+
+	ModelValue struct {
+		Error  float64
+		Node   [][]Node
+		Weight [][][]Weight // first index starts from 1, second index end to node count + 1 (last one is bias)
+	}
 
 	Node struct {
 		Input   float64
@@ -31,15 +37,15 @@ type (
 	}
 )
 
-func (m Model) Init() {
+func (m *Model) Init() {
 	m.Value.Node = make([][]Node, m.Config.LayerCount)
 	for l := range m.Value.Node {
 		m.Value.Node[l] = make([]Node, m.Config.NodeCount[l])
 	}
 	m.Value.Weight = make([][][]Weight, m.Config.LayerCount)
 	for l := 1; l < m.Config.LayerCount; l++ {
-		m.Value.Weight[l] = make([][]Weight, m.Config.NodeCount[l-1])
-		for i := 0; i < m.Config.NodeCount[l-1]; i++ {
+		m.Value.Weight[l] = make([][]Weight, m.Config.NodeCount[l-1]+1)
+		for i := 0; i <= m.Config.NodeCount[l-1]; i++ {
 			m.Value.Weight[l][i] = make([]Weight, m.Config.NodeCount[l])
 		}
 	}
@@ -47,39 +53,60 @@ func (m Model) Init() {
 		m.Config.WeightInit = RandomInit()
 	}
 	for l := 1; l < m.Config.LayerCount; l++ {
-		for i := 0; i < m.Config.NodeCount[l-1]; i++ {
-			for j := 0; j < m.Config.NodeCount[l]; j++ {
+		for j := 0; j < m.Config.NodeCount[l]; j++ {
+			for i := 0; i < m.Config.NodeCount[l-1]; i++ {
 				m.Value.Weight[l][i][j].Value = m.Config.WeightInit(l, i, j)
 			}
+			m.Value.Weight[l][m.Config.NodeCount[l-1]][j].Value = 0.1
 		}
 	}
 }
 
-func (m Model) Feed(input, output []float64) error {
+func (m *Model) Feed(input, output []float64) {
 	m.Input(input)
 	m.Forward()
 	m.CalcError(output)
 	m.Backward(output)
 	m.Learn()
-	return nil
 }
 
-func (m Model) Input(input []float64) {
+func (m *Model) Test(input, output []float64) float64 {
+	m.Input(input)
+	m.Forward()
+	m.CalcError(output)
+	return m.Value.Error
+}
+
+func (m *Model) Predict(input []float64) []float64 {
+	m.Input(input)
+	m.Forward()
+	result := make([]float64, m.Config.NodeCount[m.Config.LayerCount-1])
+	for i, v := range m.Value.Node[m.Config.LayerCount-1] {
+		result[i] = v.Output
+	}
+	return result
+}
+
+func (m *Model) Input(input []float64) {
 	if len(input) != m.Config.NodeCount[0] {
 		panic("wrong input length")
 	}
 	for i := range m.Value.Node[0] {
 		m.Value.Node[0][i].Input = input[i]
+		m.Value.Node[0][i].Output = input[i]
+		m.Value.Node[0][i].Partial = 1
 	}
 }
 
-func (m Model) Forward() {
+func (m *Model) Forward() {
 	for l := 1; l < m.Config.LayerCount; l++ {
-		for i, in := range m.Value.Node[l] {
+		for i := range m.Value.Node[l] {
+			in := &m.Value.Node[l][i]
 			sum := 0.0
 			for k, kn := range m.Value.Node[l-1] {
 				sum += kn.Output * m.Value.Weight[l][k][i].Value
 			}
+			sum += m.Value.Weight[l][m.Config.NodeCount[l-1]][i].Value
 			in.Input = sum
 			if l == m.Config.LayerCount-1 {
 				in.Output, in.Partial = in.Input, 1
@@ -90,14 +117,14 @@ func (m Model) Forward() {
 	}
 }
 
-func (m Model) CalcError(target []float64) {
+func (m *Model) CalcError(target []float64) {
 	m.Value.Error = 0
 	for i, v := range m.Value.Node[m.Config.LayerCount-1] {
-		m.Value.Error += (v.Output - target[i]) * (v.Input - target[i]) / 2
+		m.Value.Error += (v.Output - target[i]) * (v.Output - target[i]) / 2
 	}
 }
 
-func (m Model) Backward(target []float64) {
+func (m *Model) Backward(target []float64) {
 	for l := m.Config.LayerCount - 1; l > 0; l-- {
 		for j := 0; j < m.Config.NodeCount[l]; j++ {
 			if l == m.Config.LayerCount-1 {
@@ -112,16 +139,21 @@ func (m Model) Backward(target []float64) {
 			for i := 0; i < m.Config.NodeCount[l-1]; i++ {
 				m.Value.Weight[l][i][j].Nabla = m.Value.Node[l][j].Delta * m.Value.Node[l-1][i].Output
 			}
+			m.Value.Weight[l][m.Config.NodeCount[l-1]][j].Nabla = m.Value.Node[l][j].Delta
 		}
 	}
 }
 
-func (m Model) Learn() {
+func (m *Model) Learn() {
 	for l := 1; l < m.Config.LayerCount; l++ {
-		for i := 0; i < m.Config.NodeCount[l-1]; i++ {
+		for i := 0; i <= m.Config.NodeCount[l-1]; i++ {
 			for j := 0; j < m.Config.NodeCount[l]; j++ {
 				m.Value.Weight[l][i][j].Value -= m.Config.LearningRate * m.Value.Weight[l][i][j].Nabla
 			}
 		}
 	}
+}
+
+func (w Weight) String() string {
+	return fmt.Sprintf("%.3f", w.Value)
 }

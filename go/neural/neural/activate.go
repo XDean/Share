@@ -22,3 +22,7 @@ var (
 		}
 	}
 )
+
+func (a ActivationFunc) Active(input float64) (output, partial float64) {
+	return a(input)
+}
