@@ -83,6 +83,7 @@ func (m *Model) Load(file string) error {
 	if err != nil {
 		return err
 	}
+	m.Init()
 	err = decoder.Decode(&m.Value.Weight)
 	if err != nil {
 		return err
@@ -209,4 +210,10 @@ func (m *Model) Learn() {
 
 func (w Weight) String() string {
 	return fmt.Sprintf("%.3f", w.Value)
+}
+
+func PanicErr(err error) {
+	if err != nil {
+		panic(err)
+	}
 }

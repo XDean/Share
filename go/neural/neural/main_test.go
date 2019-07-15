@@ -36,7 +36,7 @@ func TestTrainModel(t *testing.T) {
 	fmt.Println("-0.1,0.2", "->", model.Predict([]float64{-0.1, 0.2}))
 
 	err := model.Save("output/model/test.model")
-	panicErr(err)
+	PanicErr(err)
 }
 
 func TestTestModel(t *testing.T) {
@@ -52,12 +52,12 @@ func TestTestModel(t *testing.T) {
 	}
 	model.Init()
 	err := model.Load("output/model/test.model")
-	panicErr(err)
+	PanicErr(err)
 
 	_ = os.MkdirAll("output", os.ModeType)
 	for i := 0; i < outputSize; i++ {
 		pt, err := plot.New()
-		panicErr(err)
+		PanicErr(err)
 		positive := make(plotter.XYs, 0)
 		negative := make(plotter.XYs, 0)
 		for x := -1.0; x <= 1.0; x += 0.05 {
@@ -70,21 +70,15 @@ func TestTestModel(t *testing.T) {
 			}
 		}
 		ps, err := plotter.NewScatter(positive)
-		panicErr(err)
+		PanicErr(err)
 		ps.GlyphStyle.Color = colornames.Red
 		ns, err := plotter.NewScatter(negative)
-		panicErr(err)
+		PanicErr(err)
 		ns.Shape = draw.CrossGlyph{}
 		ns.GlyphStyle.Color = colornames.Blue
 		pt.Add(ps, ns)
 		if err := pt.Save(vg.Length(600), vg.Length(600), fmt.Sprintf("output/ann_%d.svg", i)); err != nil {
 			panic(err)
 		}
-	}
-}
-
-func panicErr(err error) {
-	if err != nil {
-		panic(err)
 	}
 }
