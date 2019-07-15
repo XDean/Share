@@ -21,6 +21,10 @@ var (
 			return 0, 0
 		}
 	}
+
+	Linear ActivationFunc = func(input float64) (output, partial float64) {
+		return input, 1
+	}
 )
 
 func (a ActivationFunc) Active(input float64) (output, partial float64) {
