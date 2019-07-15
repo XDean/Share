@@ -190,10 +190,10 @@ TO
 
 ```go
 genetic.Population{
-    Size:            500,
+    Size:            100,
     Dim:             len(tspMap),
-    CrossoverFactor: 1,
-    VariantFactor:   0.3,
+    CrossoverFactor: 0.8,
+    VariantFactor:   0.2,
     MaxGen:          2000,
 
     TargetFunc:    genetic.TargetStableScore(100),
@@ -201,12 +201,12 @@ genetic.Population{
     CrossoverFunc: CrossoverNearestRevert(-2),
     VariantFunc:   VariantRevertSwap,
     ScoreFunc:     ScoreDistancePow(-1),
-    SelectFunc:    genetic.ScoreOrderSelectTop(0.05, 0.8),
-
-    Plugins: []genetic.Plugin{
-        plugin.PrintEachBest(),
-        plugin.BoxPlot("TSP by GA", "output/tsp.svg"),
-        plugin.ImagePerGenBest("output/tsp", ToImage, 1),
-    },
+    SelectFunc:    genetic.ScoreOrderSelectTop(0.1, 0.8),
 }.Random().Run()
 ```
+
+##### Result
+
+测试寻找中国32座主要城市最短路径，平均200ms，最短距离<160
+
+![tsp.gif](tsp/tsp.gif)

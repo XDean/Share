@@ -9,7 +9,7 @@ import (
 func Test_Main(t *testing.T) {
 	start := time.Now()
 
-	//queen.ClassicMain()
+	//ClassicMain()
 	GeneticMain()
 
 	elapsed := time.Since(start)

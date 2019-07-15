@@ -64,6 +64,7 @@ func Main() {
 			plugin.PrintEachBest(),
 			plugin.BoxPlot("TSP by GA", "output/tsp.svg"),
 			plugin.ImagePerGenBest("output/tsp", ToImage, 1),
+			plugin.Timing(),
 		},
 	}.Random().Run()
 }
