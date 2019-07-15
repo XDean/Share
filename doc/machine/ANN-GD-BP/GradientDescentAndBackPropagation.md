@@ -174,7 +174,7 @@ $$
 {\rm If} \quad l \not= L \\\\
 \frac{\partial E}{\partial a_{l,j}} &= \frac{\partial E(net_{l+1,0}, net_{l+1,1}, \cdots , net_{l+1,n_{l+1}})}{\partial a_{l,j}} \\\\
 &= \sum_{k=0}^{n_{l+1}}\frac{\partial E}{\partial net_{l+1,k}}\frac{\partial net_{l+1,k}}{\partial a_{l,j}} \\\\
-&= \sum_{k=0}^{n_{l+1}}\frac{\partial E}{\partial net_{l+1,k}}\omega_{l,j,k} \\\\
+&= \sum_{k=0}^{n_{l+1}}\frac{\partial E}{\partial net_{l+1,k}}\omega_{l+1,j,k} \\\\
 \end{aligned}
 $$
 
@@ -185,7 +185,7 @@ $$
 {\rm Let} \quad  \Delta_{l,i,j}&=\delta_{l,j}a_{l-1,i} \\\\
 \delta_{l,j}&=\begin{cases}
 (a_{L,j} - t_j)a_{L,j}(1-a_{L,j}),\quad l=L \\\\
-\sum_{k=0}^{n_{l+1}}\delta_{l+1,k}\omega_{l,j,k}a_{l,j}(1-a_{l,j}), \quad l \not= L
+\sum_{k=0}^{n_{l+1}}\delta_{l+1,k}\omega_{l+1,j,k}a_{l,j}(1-a_{l,j}), \quad l \not= L
 \end{cases} \\\\
 \omega_{l,i,j}* &= \omega_{l,i,j} - \eta \Delta_{l,i,j}
 \end{aligned}
