@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"encoding/csv"
 	"fmt"
+	"github.com/xdean/goex/xgo"
 	"github.com/xdean/share/go/neural/neural"
 	"image/png"
 	"io"
@@ -14,7 +15,7 @@ import (
 
 func main() {
 	err := os.Chdir("go/neural/neural/digit")
-	neural.PanicErr(err)
+	xgo.MustNoError(err)
 
 	//Train()
 	Test()
@@ -30,7 +31,7 @@ func Test() {
 		},
 	}
 	err := model.Load("output/model/digit-all.model")
-	neural.PanicErr(err)
+	xgo.MustNoError(err)
 
 	reader := bufio.NewReader(os.Stdin)
 	for {
@@ -71,25 +72,25 @@ func Train() {
 	model.Init()
 
 	file, err := os.Open("data/train.csv")
-	neural.PanicErr(err)
+	xgo.MustNoError(err)
 	defer file.Close()
 	reader := csv.NewReader(file)
 	_, err = reader.Read() // header
-	neural.PanicErr(err)
+	xgo.MustNoError(err)
 	count := 0
 	for {
 		row, err := reader.Read()
 		if err == io.EOF {
 			break
 		}
-		neural.PanicErr(err)
+		xgo.MustNoError(err)
 
 		imgFile := fmt.Sprintf("data/Images/train/%s", row[0])
 		label, err := strconv.Atoi(row[1])
-		neural.PanicErr(err)
+		xgo.MustNoError(err)
 
 		input, err := DigitReadImage(imgFile)
-		neural.PanicErr(err)
+		xgo.MustNoError(err)
 		output := make([]float64, 10)
 		output[label] = 1
 		for i := 0; i < 5; i++ {
@@ -100,7 +101,7 @@ func Train() {
 	}
 
 	err = model.Save("output/model/digit-all.model")
-	neural.PanicErr(err)
+	xgo.MustNoError(err)
 }
 
 func DigitReadImage(imgFile string) ([]float64, error) {

@@ -2,6 +2,7 @@ package neural
 
 import (
 	"fmt"
+	"github.com/xdean/goex/xgo"
 	"golang.org/x/image/colornames"
 	"gonum.org/v1/plot"
 	"gonum.org/v1/plot/plotter"
@@ -36,7 +37,7 @@ func TestTrainModel(t *testing.T) {
 	fmt.Println("-0.1,0.2", "->", model.Predict([]float64{-0.1, 0.2}))
 
 	err := model.Save("output/model/test.model")
-	PanicErr(err)
+	xgo.MustNoError(err)
 }
 
 func TestTestModel(t *testing.T) {
@@ -52,12 +53,12 @@ func TestTestModel(t *testing.T) {
 	}
 	model.Init()
 	err := model.Load("output/model/test.model")
-	PanicErr(err)
+	xgo.MustNoError(err)
 
 	_ = os.MkdirAll("output", os.ModeType)
 	for i := 0; i < outputSize; i++ {
 		pt, err := plot.New()
-		PanicErr(err)
+		xgo.MustNoError(err)
 		positive := make(plotter.XYs, 0)
 		negative := make(plotter.XYs, 0)
 		for x := -1.0; x <= 1.0; x += 0.05 {
@@ -70,10 +71,10 @@ func TestTestModel(t *testing.T) {
 			}
 		}
 		ps, err := plotter.NewScatter(positive)
-		PanicErr(err)
+		xgo.MustNoError(err)
 		ps.GlyphStyle.Color = colornames.Red
 		ns, err := plotter.NewScatter(negative)
-		PanicErr(err)
+		xgo.MustNoError(err)
 		ns.Shape = draw.CrossGlyph{}
 		ns.GlyphStyle.Color = colornames.Blue
 		pt.Add(ps, ns)
