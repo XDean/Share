@@ -34,7 +34,8 @@
 
 #### Classic Solution
 
-回溯法(穷举)，时间复杂度**O(k^N)**
+回溯法(穷举)，时间复杂度$O(k^N) ~ O(N^N)$
+<sub>[*参考](https://sites.google.com/site/nqueensolver/home/algorithm-results)</sub>
 
 ![8-queens.gif](Eight-queens-animation.gif)
 
@@ -42,15 +43,30 @@
 
 ##### Encode
 
-用一个长度为N的数组记录一个候选解。显然每一行只能放一个皇后，即每一个候选解为N的一个排列。
+用一个长度为N的数组记录一个候选组合。显然每一行只能放一个皇后，即每一个候选组合为N的一个排列。
 
 如 `[5, 3, 1, 7, 2, 8, 6, 4]`
 
 ![8-queens.png](8-queens.png)
 
-#### Crossover
+##### Fitness
 
-皇后的交叉不能采用简单的分段交叉，因为可能会产生显然的冲突
+对于候选组合中的每两个皇后，如果不相互冲突则适应度+1，如对于四皇后
+
+```
+[2, 1, 4, 3]
+
++o++
+o+++
++++o
+++o+
+```
+
+有适应度4
+
+##### Crossover
+
+皇后的交叉不能采用简单的分段交叉，因为很可能会产生平凡的错误组合
 
 ```
   [1, 2, 3, 4, | 5, 6, 7, 8]
@@ -59,3 +75,138 @@
 = [5, 6, 7, 8, | 5, 6, 7, 8]
 ```
 
+这里采用公共子集交叉，即
+
+
+```
+  [1, 2, 3, 4, 6, 5, 8, 7]
++ [2, 3, 4, 1, 8, 5, 7, 6]
+--------------------------
+= [2, 3, 4, 1, 6, 5, 8, 7]
+```
+
+亲本中有公共子集`1,2,3,4`和`6,7,8`，进行交叉
+
+##### Mutation
+
+皇后的变异也显然不能只改变一位，这里我们采用随机交换两皇后的行
+
+```
+[1, 2, (3), 4, 6, 5, (8), 7]
+
+[1, 2, (8), 4, 6, 5, (3), 7]
+```
+
+##### Other Params
+
+```go
+genetic.Population{
+    Size:            100,  // 种群大小
+    Dim:             N,    // 基因数量，N皇后
+    CrossoverFactor: 0.8,  // 交配概率 
+    VariantFactor:   0.2,  // 变异概率
+    MaxGen:          5000, // 最大代数
+
+    TargetFunc:    genetic.TargetScore(1), // 目标适应度1
+    RandomFunc:    Random,                 // 随机生成N皇后
+    CrossoverFunc: CrossoverRing,          // 按公共环交叉
+    VariantFunc:   Variant,                // 交换变异
+    ScoreFunc:     ScorePower(1),          // 适应度(正规化后)
+    SelectFunc:    genetic.ScoreOrderSelectTop(0.1, 0.9), // 选择函数
+}.Random().Run() // 随机初始化后开始迭代
+```
+
+##### Result
+
+以20皇后为例
+
+![queen-output](queen/0009.png)
+
+![queen-box](queen/queen.png)
+
+对比传统方法(寻找一组解)
+
+- 回溯法
+    - 13 皇后 1.65s
+    - 14 皇后 13.32s
+    - 15 皇后 117.56s
+- GA
+    - 20 皇后 平均<15ms
+    - 50 皇后 平均<100ms
+    - 100 皇后 平均<500ms
+    
+### Travel Sale Problem
+
+#### Classic Solution
+
+动态规划，时间复杂度$O(n^2 \cdot 2^n)$，找到最优解
+
+#### GA Solution
+
+**无法找到最优解**
+
+##### Encode
+
+为所有N个点编号，一组候选组合即为N的一个排列
+
+##### Fitness
+
+距离越小，适应度越高，故取距离倒数
+
+##### Crossover
+
+一种常规的优化是交换两个连接，如
+
+```
+[1, 3, 2, 4]
+
+1     2
+|\   /|
+| \ / |
+|  x  |
+| / \ |
+|/   \|
+4     3
+
+TO
+
+[1, 2, 3, 4]
+
+1-----2
+|     |
+|     |
+|     |
+|     |
+4-----3
+```
+
+即将一个子序列倒序
+
+##### Mutation
+
+变异的方法同理，随机选取子序列进行倒序
+
+##### Other Params
+
+```go
+genetic.Population{
+    Size:            500,
+    Dim:             len(tspMap),
+    CrossoverFactor: 1,
+    VariantFactor:   0.3,
+    MaxGen:          2000,
+
+    TargetFunc:    genetic.TargetStableScore(100),
+    RandomFunc:    Random(&tspMap),
+    CrossoverFunc: CrossoverNearestRevert(-2),
+    VariantFunc:   VariantRevertSwap,
+    ScoreFunc:     ScoreDistancePow(-1),
+    SelectFunc:    genetic.ScoreOrderSelectTop(0.05, 0.8),
+
+    Plugins: []genetic.Plugin{
+        plugin.PrintEachBest(),
+        plugin.BoxPlot("TSP by GA", "output/tsp.svg"),
+        plugin.ImagePerGenBest("output/tsp", ToImage, 1),
+    },
+}.Random().Run()
+```
