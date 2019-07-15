@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	err := os.Chdir("go/neural/neural/digit")
+	err := os.Chdir("go/neural/digit")
 	xgo.MustNoError(err)
 
 	//Train()
