@@ -22,7 +22,7 @@ var model = neural.Model{
 		Activation:   neural.Sigmoid,
 	},
 }
-var modelPath = "output/model/digit-all.model"
+var modelPath = "digit-all-200x40.model"
 
 func main() {
 	wd, err := os.Getwd()
