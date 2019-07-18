@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"encoding/csv"
+	"flag"
 	"fmt"
 	"github.com/xdean/goex/xgo"
 	"github.com/xdean/share/go/neural/neural"
@@ -13,24 +14,37 @@ import (
 	"strings"
 )
 
-func main() {
-	err := os.Chdir("go/neural/digit")
-	xgo.MustNoError(err)
+var model = neural.Model{
+	Config: neural.ModelConfig{
+		LayerCount:   4,
+		NodeCount:    []int{28 * 28, 200, 40, 10},
+		LearningRate: 0.1,
+		Activation:   neural.Sigmoid,
+	},
+}
+var modelPath = "output/model/digit-all.model"
 
-	//Train()
-	Test()
+func main() {
+	wd, err := os.Getwd()
+	xgo.MustNoError(err)
+	if strings.HasSuffix(wd, "go/neural/digit") {
+		err := os.Chdir("go/neural/digit")
+		xgo.MustNoError(err)
+	}
+
+	train := flag.Bool("train", false, "Train model")
+	flag.StringVar(&modelPath, "model", modelPath, "Model path")
+	flag.Parse()
+
+	if *train {
+		Train()
+	} else {
+		Test()
+	}
 }
 
 func Test() {
-	model := neural.Model{
-		Config: neural.ModelConfig{
-			LayerCount:   4,
-			NodeCount:    []int{28 * 28, 200, 40, 10},
-			LearningRate: 0.1,
-			Activation:   neural.Sigmoid,
-		},
-	}
-	err := model.Load("output/model/digit-all.model")
+	err := model.Load(modelPath)
 	xgo.MustNoError(err)
 
 	reader := bufio.NewReader(os.Stdin)
@@ -61,14 +75,6 @@ func Test() {
 }
 
 func Train() {
-	model := neural.Model{
-		Config: neural.ModelConfig{
-			LayerCount:   4,
-			NodeCount:    []int{28 * 28, 200, 40, 10},
-			LearningRate: 0.1,
-			Activation:   neural.Sigmoid,
-		},
-	}
 	model.Init()
 
 	file, err := os.Open("data/train.csv")
@@ -100,7 +106,7 @@ func Train() {
 		count++
 	}
 
-	err = model.Save("output/model/digit-all.model")
+	err = model.Save(modelPath)
 	xgo.MustNoError(err)
 }
 

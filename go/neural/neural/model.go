@@ -3,6 +3,7 @@ package neural
 import (
 	"encoding/gob"
 	"fmt"
+	"math/rand"
 	"os"
 	"path/filepath"
 )
@@ -210,4 +211,10 @@ func (m *Model) Learn() {
 
 func (w Weight) String() string {
 	return fmt.Sprintf("%.3f", w.Value)
+}
+
+func RandomInit() WeightInit {
+	return func(l, i, j int) float64 {
+		return rand.Float64() - 0.5
+	}
 }
