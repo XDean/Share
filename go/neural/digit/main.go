@@ -55,8 +55,9 @@ func Test() {
 			fmt.Println("Bye")
 			break
 		}
-		line = strings.Trim(line, "\n \t")
+		line = strings.Trim(line, "\n\r \t")
 		imgFile := fmt.Sprintf("data/Images/test/%s.png", line)
+		fmt.Println(imgFile)
 		input, err := DigitReadImage(imgFile)
 		if err != nil {
 			fmt.Println("Fail to read image:", err)
