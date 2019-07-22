@@ -7,14 +7,12 @@ ASML Brion
 dean.xu@asml.com
 github.com/XDean
 
-* Genetic Algorithm
+* Optimize Problem
 
-.image optimize-function.png
+.image images/optimize-function.png
 
-: 最优化问题
+* Natural Selection
 
-* Genetic Algorithm
+.image images/ns-bird.jpg
 
-
-
-: 达尔文自然选择 黑色桦尺蛾 圆嘴的鸟
+.image images/ns-wing.jpg
