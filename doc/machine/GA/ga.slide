@@ -13,6 +13,30 @@ github.com/XDean
 
 * Natural Selection
 
-.image 300 300 images/ns-bird.jpg
+.image images/ns-bird.jpg 250 250
 
-.image images/ns-wing.jpg
+.image images/ns-wing.jpg 250 180
+
+* Genetic Algorithm
+
+.image images/ga.gif 500 730
+
+* GA Flow
+
+.image images/ga-flow.png 470 850
+
+* GA Flow
+
+.image images/ga.png 550 220
+
+* GA Selection
+
+.image images/ga-selection.jpg 400 850
+
+* GA Crossover
+
+.image images/ga-crossover.png 485 850
+
+* GA Mutation
+
+.image images/ga-mutation.png 485 850
