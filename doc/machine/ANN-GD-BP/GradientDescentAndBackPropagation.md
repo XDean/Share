@@ -200,9 +200,34 @@ $$
 
 ## Q&A
 
+### FAQ
+
+**Q: 激活函数 Activation Function**
+
+A: 非线性
+
+_Also see [神经网络激励函数的作用是什么？有没有形象的解释？ - 非理的回答 - 知乎](https://www.zhihu.com/question/22334626/answer/21036590)_
+
+**Q: 偏移/偏置 Bias**
+
+A: 否则总是过"0点"
+
+![ann-bias](image/ann-bias.jpg)
+
+_Also see [神经网络中，bias有什么用，为什么要设置bias，当加权和大于某值时，激活才有意义？ - 马超的回答 - 知乎](https://www.zhihu.com/question/68247574/answer/263535786)_
+
+**Q: 正则化 Regularization**
+
+A: 防止过拟合(高方差), 简化模型。L1/L2/Dropout
+
+$$
+E = \sum_{k=0}^{n_L}(a_{L,k}-t_k)^2 / 2 + \left\|\vec \Omega \right\|_2
+$$
+
 ## Reference
 
 1. [Principles of training multi-layer neural network using backpropagation](http://galaxy.agh.edu.pl/~vlsi/AI/backp_t_en/backprop.html)
 2. [Wiki-Backpropagation](https://en.wikipedia.org/wiki/Backpropagation)
 3. [一文弄懂神经网络中的反向传播法——BackPropagation](https://www.cnblogs.com/charlotte77/p/5629865.html)
 4. [Wiki-Artificial Neural Network](https://en.wikipedia.org/wiki/Artificial_neural_network)
+5. [Github-DeepLearning-500-questions](https://github.com/scutan90/DeepLearning-500-questions)
