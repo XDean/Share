@@ -221,7 +221,7 @@ _Also see [神经网络中，bias有什么用，为什么要设置bias，当加�
 A: 防止过拟合(高方差), 简化模型。L1/L2/Dropout
 
 $$
-E = \sum_{k=0}^{n_L}(a_{L,k}-t_k)^2 / 2 + \left\|\vec{\Omega}\right\|_2
+E = \sum_{k=0}^{n_L}(a_{L,k}-t_k)^2 / 2 + \left\|\overrightarrow{\Omega}\right\|_2
 $$
 
 ## Reference
