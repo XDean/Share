@@ -212,7 +212,7 @@ _Also see [神经网络激励函数的作用是什么？有没有形象的解释
 
 A: 否则总是过"0点"
 
-![ann-bias](image/ann-bias.jpg)
+![ann-bias-before](image/ann-bias-before.jpg) ![ann-bias](image/ann-bias.jpg)
 
 _Also see [神经网络中，bias有什么用，为什么要设置bias，当加权和大于某值时，激活才有意义？ - 马超的回答 - 知乎](https://www.zhihu.com/question/68247574/answer/263535786)_
 
@@ -221,7 +221,7 @@ _Also see [神经网络中，bias有什么用，为什么要设置bias，当加�
 A: 防止过拟合(高方差), 简化模型。L1/L2/Dropout
 
 $$
-E = \sum_{k=0}^{n_L}(a_{L,k}-t_k)^2 / 2 + \left\|\vec \Omega \right\|_2
+E = \sum_{k=0}^{n_L}(a_{L,k}-t_k)^2 / 2 + \left\|\vec{\Omega}\right\|_2
 $$
 
 ## Reference
