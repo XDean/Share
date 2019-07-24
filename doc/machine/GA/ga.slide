@@ -41,6 +41,6 @@ github.com/XDean
 
 .image images/ga-mutation.png 485 850
 
-* Sample
+* Other Sample
 
-.iframe https://zhuanlan.zhihu.com/p/56319305
+.link https://zhuanlan.zhihu.com/p/56319305 "如何丝滑地入门神经网络？写个AI赛车游戏，只训练4代就能安全驾驶_知乎"
