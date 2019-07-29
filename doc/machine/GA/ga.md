@@ -24,7 +24,7 @@
 
 ### Flow
 
-![ga.png](ga.png)
+![ga.png](images/ga.png)
 
 ## Samples
 
@@ -37,7 +37,7 @@
 回溯法(穷举)，时间复杂度$O(k^N) ~ O(N^N)$
 <sub>[*参考](https://sites.google.com/site/nqueensolver/home/algorithm-results)</sub>
 
-![8-queens.gif](Eight-queens-animation.gif)
+![8-queens.gif](queen/Eight-queens-animation.gif)
 
 #### GA Solution
 
@@ -47,7 +47,7 @@
 
 如 `[5, 3, 1, 7, 2, 8, 6, 4]`
 
-![8-queens.png](8-queens.png)
+![8-queens.png](queen/8-queens.png)
 
 ##### Fitness
 
