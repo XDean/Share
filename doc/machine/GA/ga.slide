@@ -7,6 +7,11 @@ ASML Brion
 dean.xu@asml.com
 github.com/XDean
 
+.theme asml
+.agenda
+
+* Methodology
+
 * Optimize Problem
 
 .image images/optimize-function.png
@@ -17,7 +22,7 @@ github.com/XDean
 
 .image images/ns-wing.jpg 250 180
 
-* Genetic Algorithm
+* GA Flow
 
 .image images/ga.gif 500 730
 
@@ -41,6 +46,16 @@ github.com/XDean
 
 .image images/ga-mutation.png 485 850
 
-* Other Sample
+* N Queens Puzzle
+
+* Travel Sale Problem
+
+* GA + ANN
 
 .link https://zhuanlan.zhihu.com/p/56319305 "如何丝滑地入门神经网络？写个AI赛车游戏，只训练4代就能安全驾驶_知乎"
+
+* Summary
+
+* Q&A
+
+Q&A
