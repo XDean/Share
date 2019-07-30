@@ -52,13 +52,13 @@ github.com/XDean
 
 Placing N chess queens on an N×N chessboard so that no two queens threaten each other
 
-.image queen/nqueens.gif 500 500
+.image queen/nqueens.gif 400 400
 
 * Classic Solution
 
 *Backtracking*: $O(k^N) ~ O(N^N)$
 
-.image queen/Eight-queens-animation.gif
+.image queen/Eight-queens-animation.gif 400 400
 
 * GA Solution - Encode
 
