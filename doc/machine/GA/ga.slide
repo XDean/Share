@@ -44,17 +44,19 @@ github.com/XDean
 
 * GA Mutation
 
-.image images/ga-mutation.png 485 850
+.image images/ga-mutation.png 500 500
 
 * N Queens Puzzle
 
 * Puzzle
 
-.image queen/nqueens.gif
+Placing N chess queens on an N×N chessboard so that no two queens threaten each other
+
+.image queen/nqueens.gif 485 850
 
 * Classic Solution
 
-*Backtracking* $O(k^N) ~ O(N^N)$
+*Backtracking*: $O(k^N) ~ O(N^N)$
 
 .image queen/Eight-queens-animation.gif
 
