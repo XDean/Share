@@ -44,7 +44,7 @@ github.com/XDean
 
 * GA Mutation
 
-.image images/ga-mutation.png 500 500
+.image images/ga-mutation.png 485 850
 
 * N Queens Puzzle
 
@@ -52,7 +52,7 @@ github.com/XDean
 
 Placing N chess queens on an N×N chessboard so that no two queens threaten each other
 
-.image queen/nqueens.gif 485 850
+.image queen/nqueens.gif 500 500
 
 * Classic Solution
 
