@@ -9,13 +9,13 @@
 
 # Concepts
 
-### Superkey 超键
+## Superkey 超键
 
 A superkey or super-key is defined in the relational model of database organization as a set of attributes of a relation variable for which it holds that in all relations assigned to that variable, there are no two distinct tuples (rows) that have the same values for the attributes in this set.[1] It can be defined as a set of attributes of a relation schema upon which all attributes of the schema are functionally dependent.
 
 在关系模式中能够唯一标示多元组（即“行”）的属性集
 
-### Candidate Key 候选键
+## Candidate Key 候选键
 
 A minimal superkey for that relation; that is, a set of attributes such that:
 
@@ -24,25 +24,25 @@ A minimal superkey for that relation; that is, a set of attributes such that:
 
 超键且不存在真子集亦为超键
 
-### Functionally Dependent 函数依赖
+## Functionally Dependent 函数依赖
 
 Given a relation R, a set of attributes X in R is said to functionally determine another set of attributes Y, also in R, (written $X → Y$) if, and only if, each X value in R is associated with precisely one Y value in R; R is then said to satisfy the functional dependency $X → Y$. Equivalently, the projection $\Pi _{X,Y}R$ is a function, i.e. Y is a function of X. In simple words, if the values for the X attributes are known (say they are x), then the values for the Y attributes corresponding to x can be determined by looking them up in any tuple of R containing x. Customarily X is called the determinant set and Y the dependent set. A functional dependency FD: $X → Y$ is called trivial if Y is a subset of X.
 
 在关系R中，X的值可以确定Y的值，称Y函数依赖X，记作 $X \rightarrow Y$
 
-#### Fully Functionally Dependent 完全函数依赖
+### Fully Functionally Dependent 完全函数依赖
 
-#### Partial Functionally Dependent 部分函数依赖
+### Partial Functionally Dependent 部分函数依赖
 
-#### Delivery Functionally Dependent 传递函数依赖
+### Delivery Functionally Dependent 传递函数依赖
 
-### Multivalued Dependency 多值依赖
+## Multivalued Dependency 多值依赖
 
 if we denote by $(x,y,z)$ the tuple having values for $\alpha, \beta, R-\alpha -\beta$ collectively equal to $x, y, z$, correspondingly, then whenever the tuples $(a,b,c)$ and $(a,d,e)$ exist in {\displaystyle r} r, the tuples {\displaystyle (a,b,e)} (a,b,e) and $(a,d,c)$ should also exist in $r$.
 
 对于关系$R$的一组分解$(A,B,C)$，对于给定的$a \in A$，存在 $C^* \subseteq C$，对于任意 $b \in B$，值域 $C_(a,b)=C^*$，称$C$多值依赖$A$，记作 $A \twoheadrightarrow C$
 
-### Join Dependency 连接依赖
+## Join Dependency 连接依赖
 
 A table $T$ is subject to a join dependency if $T$ can always be recreated by joining multiple tables each having a subset of the attributes of $T$. If one of the tables in the join has all the attributes of the table $T$, the join dependency is called trivial.
 

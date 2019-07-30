@@ -48,9 +48,21 @@ github.com/XDean
 
 * N Queens Puzzle
 
-* N Queens Puzzle
+* Puzzle
 
+.image queen/nqueens.gif
 
+* Classic Solution
+
+*Backtracking* $O(k^N) ~ O(N^N)$
+
+.image queen/Eight-queens-animation.gif
+
+* GA Solution - Encode
+
+用一个长度为N的数组记录一个候选组合。显然每一行只能放一个皇后，即每一个候选组合为N的一个排列。
+
+如 `[5, 3, 1, 7, 2, 8, 6, 4]`
 
 * Travel Sale Problem
 
