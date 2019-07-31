@@ -63,23 +63,39 @@ Placing N chess queens on an N×N chessboard so that no two queens threaten each
 * GA Solution
 
 1. *Encode*
-
 Use a N length array to present a candidate. Each position's value means queen's row in each column. Obviously, the array has no identical numbers. So each candidate is a permutations of N. Like:
 
     [5, 3, 1, 7, 2, 8, 6, 4]
 
 2. *Fitness*
-
 For each candidate, the fitness is the amount of not-conflicted pairs of queens. For example,
 
     [2, 1, 4, 3]
-
     +o++
     o+++
     +++o
     ++o+
 
-It has fitness 4.
+It has fitness 2.
+
+* GA Solution
+
+3. *Crossover*
+
+We can't use simple crossover because it will lead ordinary error.
+
+      [1, 2, 3, 4, | 5, 6, 7, 8]
+    + [5, 6, 7, 8, | 1, 2, 3, 4]
+    ---------------|------------
+    = [5, 6, 7, 8, | 5, 6, 7, 8]
+
+Here we crossover by common subset
+
+      [1, 2, 3, 4, 6, 5, 8, 7]
+    + [2, 3, 4, 1, 8, 5, 7, 6]
+    --------------------------
+    = [2, 3, 4, 1, 6, 5, 8, 7]
+
 
 * Travel Sale Problem
 
