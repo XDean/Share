@@ -110,6 +110,33 @@ Here we mutation by exchange queens
     From [1, 2, (3), 4, 6, 5, (8), 7]
     To   [1, 2, (8), 4, 6, 5, (3), 7]
 
+* GA Solution
+
+*Other Configurations*
+
+    genetic.Population{
+        Size:            100,  // population size
+        Dim:             N,    // gene size, N queens
+        CrossoverFactor: 0.8,  // crossover probability
+        VariantFactor:   0.2,  // mutation probability
+        MaxGen:          5000, // max generation
+
+        TargetFunc:    genetic.TargetScore(1), // target fitness is 1 (normalized)
+        RandomFunc:    Random,                 // random generate individual
+        CrossoverFunc: CrossoverRing,          // crossover by common subsets
+        VariantFunc:   Variant,                // mutation by exchange
+        ScoreFunc:     ScorePower(1),          // fitness
+        SelectFunc:    genetic.ScoreOrderSelectTop(0.1, 0.9), // selection
+    }.Random().Run() // random init and run
+
+* GA Solution - 20 Queens
+
+.image queen/0009.png
+
+* GA Solution - 20 Queens
+
+.image queen/queen.png
+
 * Travel Sale Problem
 
 * GA + ANN
