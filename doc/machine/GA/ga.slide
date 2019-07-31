@@ -60,11 +60,14 @@ Placing N chess queens on an N×N chessboard so that no two queens threaten each
 
 .image queen/Eight-queens-animation.gif 400 400
 
-* GA Solution - Encode
+* GA Solution
 
-用一个长度为N的数组记录一个候选组合。显然每一行只能放一个皇后，即每一个候选组合为N的一个排列。
+1. *Encode*
 
-如 `[5, 3, 1, 7, 2, 8, 6, 4]`
+Use a N length array to present a candidate. Each position's value means queen's row in each column.
+Obviously, the array has no identical numbers. So each candidate is a permutations of N.
+
+    [5, 3, 1, 7, 2, 8, 6, 4]
 
 * Travel Sale Problem
 
