@@ -210,3 +210,7 @@ genetic.Population{
 测试寻找中国32座主要城市最短路径，平均200ms，最短距离<160(约17500km)
 
 ![tsp.gif](tsp/tsp.gif)
+
+### GA + ANN
+
+["如何丝滑地入门神经网络？写个AI赛车游戏，只训练4代就能安全驾驶_知乎"](https://zhuanlan.zhihu.com/p/56319305 )
