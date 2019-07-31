@@ -160,9 +160,54 @@ Given a list of cities and the distances between each pair of cities, what is th
 
 *DP*: $O(n^2 \cdot 2^n)$
 
-*Branch and Bound*: $O(2^n)$
+*Branch_and_Bound*: $O(2^n)$
 
 .image tsp/tsp-branch-and-bound.gif
+
+* GA Solution
+
+
+1. *Encode*
+
+Number all the vertexes (1~N). Each candidate is a permutations of N.
+
+
+
+2. *Fitness*
+
+Smaller distance is better, so we use countdown of distance as fitness
+
+* GA Solution
+
+3. *Crossover*
+4. *Mutation*
+
+A simple optimize way is to swap two path, like
+
+From
+    [1, 3, 2, 4]
+    1     2
+    |\   /|
+    | \ / |
+    |  x  |
+    | / \ |
+    |/   \|
+    4     3
+TO
+    [1, 2, 3, 4]
+    1-----2
+    |     |
+    |     |
+    |     |
+    |     |
+    4-----3
+So we revert a substring to crossover and mutation.
+
+* GA Solution - China 32 Cities
+
+Average 200ms. Answer <160 (about 17500km)
+
+.image tsp/tsp.gif
 
 * GA + ANN
 
