@@ -5,7 +5,7 @@ Introduction and Samples
 Dean Xu
 ASML Brion
 dean.xu@asml.com
-github.com/XDean
+https://github.com/XDean
 
 .theme asml
 .agenda
@@ -140,13 +140,13 @@ Here we mutation by exchange queens
 * Classic VS GA (Find 1 solution)
 
 - Backtracking
-  - 13  Queens 1.65s
-  - 14  Queens 13.32s
-  - 15  Queens 117.56s
+    13  Queens 1.65s
+    14  Queens 13.32s
+    15  Queens 117.56s
 - GA
-  - 20  Queens avg < 15ms
-  - 50  Queens avg < 100ms
-  - 100 Queens avg < 500ms
+    20  Queens avg < 15ms
+    50  Queens avg < 100ms
+    100 Queens avg < 500ms
 
 * Travel Sale Problem
 
@@ -160,7 +160,7 @@ Given a list of cities and the distances between each pair of cities, what is th
 
 *DP*: $O(n^2 \cdot 2^n)$
 
-*Branch_and_Bound*: $O(2^n)$
+*Branch*and*Bound*: $O(2^n)$
 
 .image tsp/tsp-branch-and-bound.gif
 
@@ -207,6 +207,12 @@ Average 200ms. Answer <160 (about 17500km)
 .link https://zhuanlan.zhihu.com/p/56319305 "如何丝滑地入门神经网络？写个AI赛车游戏，只训练4代就能安全驾驶_知乎"
 
 * Summary
+
+* Summary
+
+- GA is a metaheuristic methods
+- GA may can't find the best solution but a good answer
+- GA's key point is how to encode, crossover, mutation.
 
 * Q&A
 
