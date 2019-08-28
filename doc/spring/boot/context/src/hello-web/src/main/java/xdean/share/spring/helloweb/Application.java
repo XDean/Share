@@ -1,4 +1,4 @@
-package xdean.share.spring.hello;
+package xdean.share.spring.helloweb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

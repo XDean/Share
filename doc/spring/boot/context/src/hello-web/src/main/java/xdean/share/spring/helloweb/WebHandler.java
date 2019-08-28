@@ -1,11 +1,11 @@
-package xdean.share.spring.hello;
+package xdean.share.spring.helloweb;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class WebHandler {
-    @GetMapping
+    @GetMapping("/hello")
     public String helloWorld() {
         return "Hello World";
     }

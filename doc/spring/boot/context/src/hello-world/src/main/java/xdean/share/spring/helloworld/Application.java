@@ -1,4 +1,4 @@
-package xdean.share.spring.hello;
+package xdean.share.spring.helloworld;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;

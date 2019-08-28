@@ -28,7 +28,7 @@
   
 ## 现在开始
 
-Spring Boot提供的是一个快速开发框架，其上集成了许多组件集合可以开发各类应用，其中最常见的就是Web服务。本文将主要针对Spring Boot本身和Spring Boot Web进行讲解剖析。
+Spring Boot提供的是一个快速开发框架，其上集成了许多组件集合可以开发各类应用，其中最常见的就是Web服务。本教程将主要针对Spring Boot本身和Spring Boot Web进行讲解。
 
 ## Hello World
 
@@ -57,7 +57,150 @@ Spring Boot提供的是一个快速开发框架，其上集成了许多组件集
 
 在`dependencyManagement`引入`spring-boot-starter-parent`来管理依赖，这样所有Spring Boot相关依赖不再需要声明版本。
 
-*有关maven `import` scope的详细内容请参看[官方文档](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)*
+<sub>有关maven import scope的详细内容请参看[官方文档](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)</sub>
 
 引入依赖项`spring-boot-starter`，`starter`项目是一类帮助快速构建应用的工具项目，其包括了构建该类应用的必备和首选依赖，例如`spring-boot-starter-web`就包括了spring-boot, web, json, validator, tomcat等依赖。
 
+接下来写我们Java文件
+
+*Application.java*
+
+```java
+package xdean.share.spring.helloworld;
+
+@SpringBootApplication
+public class Application {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+
+    @Bean
+    public String world() {
+        return "world";
+    }
+
+    @Autowired
+    public void hello(String who) {
+        System.out.println("Hello " + who);
+    }
+}
+```
+
+典型的Spring Boot应用入口都形如该类。
+
+- 标有`@SpringBootApplication` (在接下来的章节中将详细讲解)
+- `main`中通过`SpringApplication.run`来启动服务
+
+方法`world`定义了一个Bean, 方法`hello`注入了这个Bean并输出到控制台。
+
+运行代码你将看到
+
+```text
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.1.7.RELEASE)
+
+2019-08-28 17:26:44.092  INFO 22300 --- [           main] xdean.share.spring.helloworld.Application     : Starting Application on LT413286 with PID 22300 
+2019-08-28 17:26:44.097  INFO 22300 --- [           main] xdean.share.spring.helloworld.Application     : No active profile set, falling back to default profiles: default
+Hello world
+2019-08-28 17:26:44.736  INFO 22300 --- [           main] xdean.share.spring.helloworld.Application     : Started Application in 0.982 seconds (JVM running for 2.436)
+```
+
+可以看到我们成功地输出了`Hello World`。
+
+该例演示了如何创建一个Spring Boot应用以及简单的依赖注入。
+
+## Hello Web
+
+同样的我们创建一个maven工程，不同的是我们的依赖项从`spring-boot-starter`变成了`spring-boot-starter-web`。顾名思义，这个starter将帮助我们构建一个web应用。
+
+```xml
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-parent</artifactId>
+            <version>2.1.7.RELEASE</version>
+            <scope>import</scope>
+            <type>pom</type>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+</dependencies>
+```
+
+同样的我们定义一个`Application`作为应用的入口
+
+```java
+package xdean.share.spring.helloweb;
+
+@SpringBootApplication
+public class Application {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+}
+```
+
+接着我们创建一个新的类`WebHandler`
+
+```java
+package xdean.share.spring.helloweb;
+
+@RestController
+public class WebHandler {
+    @GetMapping("/hello")
+    public String helloWorld() {
+        return "Hello World";
+    }
+}
+```
+
+- 这个类被标记为了`@RestController`
+- 他有一个方法`helloWorld`被标记为了`@GetMapping("/hello")`
+
+看上去这个`WebHandler`和`Application`之间没有任何联系
+
+让我们运行`Application`看看
+
+```text
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.1.7.RELEASE)
+
+2019-08-28 17:39:34.214  INFO 20384 --- [           main] xdean.share.spring.helloweb.Application  : Starting Application on LT413286 with PID 20384 
+2019-08-28 17:39:34.217  INFO 20384 --- [           main] xdean.share.spring.helloweb.Application  : No active profile set, falling back to default profiles: default
+2019-08-28 17:39:35.100  INFO 20384 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-28 17:39:35.118  INFO 20384 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-28 17:39:35.118  INFO 20384 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-08-28 17:39:35.186  INFO 20384 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-28 17:39:35.186  INFO 20384 --- [           main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 917 ms
+2019-08-28 17:39:35.335  INFO 20384 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-28 17:39:35.459  INFO 20384 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-28 17:39:35.461  INFO 20384 --- [           main] xdean.share.spring.helloweb.Application  : Started Application in 1.684 seconds (JVM running for 3.146)
+```
+
+Spring Boot告诉我Tomcat已经启动，我们不需要单独配置Web Server便可以启动服务。让我们来试试看我们的API有没有效
+
+```text
+$ curl localhost:8080/hello
+Hello World
+```
+
+可以看到我们的Web服务已经可用。
+
+该例演示了如何快速搭建Web服务，同时也体现了Spring Boot的自动配置。
