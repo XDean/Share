@@ -23,7 +23,7 @@ public class Application {
     }
 
     @Bean
-    public String string() {
+    public static String string() {
         return "a string";
     }
 
