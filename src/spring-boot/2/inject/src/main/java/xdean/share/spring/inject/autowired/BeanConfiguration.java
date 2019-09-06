@@ -7,6 +7,10 @@ import xdean.share.spring.inject.autowired.Beans.*;
 @Configuration
 public class BeanConfiguration {
 
+    BeanConfiguration(){
+
+    }
+
     @Bean
     public BeanB b(BeanA a) {
         System.out.println("Create b");

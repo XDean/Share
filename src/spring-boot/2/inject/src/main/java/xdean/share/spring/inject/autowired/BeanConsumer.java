@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import xdean.share.spring.inject.autowired.Beans.*;
 
+import javax.inject.Provider;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -23,7 +24,9 @@ public class BeanConsumer {
     }
 
     @Autowired
-    private void inject(Optional<BeanD> d, List<BeanE> list, Map<String, BeanE> map) {
+    private void inject(Provider<BeanB> b, Optional<BeanD> d, List<BeanE> list, Map<String, BeanE> map) {
+        System.out.println("Inject with b provider: " + b);
+        System.out.println("Inject with b: " + b.get());
         System.out.println("Inject with d: " + d);
         System.out.println("Inject with list: " + list);
         System.out.println("Inject with map: " + map);
@@ -32,7 +35,7 @@ public class BeanConsumer {
     }
 
     @Autowired
-    public void injectFail(BeanD d){
+    public void injectFail(BeanD d) {
         System.out.println("never happen");
     }
 }
