@@ -1,4 +1,4 @@
-package xdean.share.spring.inject.conditional;
+package xdean.share.spring.inject.dependson;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,25 +7,24 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.DependsOn;
 
 @SpringBootApplication
 public class Application {
     public static void main(String[] args) {
-        ConfigurableApplicationContext ctx = SpringApplication.run(Application.class, args);
-        System.out.println(ctx.getBean(BeanA.class).i);
+        SpringApplication.run(Application.class, args);
     }
 
     @Bean
-    @ConditionalOnClass(name = "xdean.share.spring.inject.conditional.SomeDriver")
+    @DependsOn("beanA2")
     public static BeanA beanA1() {
+        System.out.println("Bean 1");
         return new BeanA(1);
     }
 
     @Bean
-    @ConditionalOnMissingClass("xdean.share.spring.inject.conditional.SomeDriver")
     public static BeanA beanA2() {
+        System.out.println("Bean 2");
         return new BeanA(2);
     }
 }

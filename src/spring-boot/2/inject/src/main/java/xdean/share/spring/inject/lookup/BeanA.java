@@ -7,4 +7,14 @@ import org.springframework.stereotype.Component;
 @Component
 @Scope("prototype")
 public class BeanA {
+    int i;
+    public BeanA(int i) {
+        this.i = i;
+    }
+    @Override
+    public String toString() {
+        return "BeanA{" +
+                "i=" + i +
+                '}';
+    }
 }

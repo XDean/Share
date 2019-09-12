@@ -7,5 +7,5 @@ import org.springframework.stereotype.Component;
 @Configuration
 public abstract class UseLookUp {
     @Lookup
-    public abstract BeanA beanA();
+    public abstract BeanA beanA(int i);
 }
