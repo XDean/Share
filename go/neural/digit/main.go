@@ -100,10 +100,10 @@ func Train() {
 		xgo.MustNoError(err)
 		output := make([]float64, 10)
 		output[label] = 1
-		for i := 0; i < 5; i++ {
+		for i := 0; i < 1; i++ {
 			model.Feed(input, output)
 		}
-		fmt.Printf("%5d Error %.5f\n", count, model.Value.Error)
+		fmt.Printf("%5d: Error %.5f\n", count, model.Value.Error)
 		count++
 	}
 
