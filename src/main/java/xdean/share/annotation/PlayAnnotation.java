@@ -11,8 +11,8 @@ import lombok.Value;
 import xdean.auto.message.AutoMessage;
 import xdean.spring.auto.AutoSpringFactories;
 
-@AutoSpringFactories(EnableAutoConfiguration.class) // check your /target/classes
-@AutoMessage(path = "messages.properties") // check your /target/generated-sources
+//@AutoSpringFactories(EnableAutoConfiguration.class) // check your /target/classes
+//@AutoMessage(path = "messages.properties") // check your /target/generated-sources
 public class PlayAnnotation {
 
   // @Test // comment out this line
