@@ -18,21 +18,34 @@ public class Test extends Application {
     }
 
     FlowPane flowPane;
+    Button stubButton;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         flowPane = new FlowPane();
-        Button directButton = new Button("Schedule directly");
-        Button centerButton = new Button("FxRunCenter");
+        stubButton = new Button("stub");
+        Button directButton = new Button("Large Work");
+        Button centerButton = new Button("FxRunCenter Peak Clipping");
+        Button directSetButton = new Button("Duplicate Work");
+        Button centerSetButton = new Button("FxRunCenter De-duplication");
 
         directButton.setOnMouseClicked(e -> directSchedule());
         centerButton.setOnMouseClicked(e -> centerSchedule());
+        directSetButton.setOnMouseClicked(e -> directSetText());
+        centerSetButton.setOnMouseClicked(e -> centerSetText());
 
         primaryStage.setScene(new Scene(new VBox(
                 new HBox(
                         directButton,
-                        centerButton,
-                        new ProgressBar()
+                        centerButton
+                ),
+                new HBox(
+                        directSetButton,
+                        centerSetButton
+                ),
+                new HBox(
+                        new ProgressBar(),
+                        stubButton
                 ),
                 new ScrollPane(flowPane)
         )));
@@ -44,11 +57,8 @@ public class Test extends Application {
     private void directSchedule() {
         flowPane.getChildren().clear();
         for (int i = 0; i < 500; i++) {
-            int index = i;
-//            Platform.runLater(() -> {
             ExceptionUtil.uncheck(() -> Thread.sleep(10));
-            flowPane.getChildren().add(new Button("direct-" + index));
-//            });
+            flowPane.getChildren().add(new Button("direct-" + i));
         }
     }
 
@@ -59,6 +69,23 @@ public class Test extends Application {
             FxRunCenter.runLater(() -> {
                 ExceptionUtil.uncheck(() -> Thread.sleep(10));
                 flowPane.getChildren().add(new Button("center-" + index));
+            });
+        }
+    }
+
+    private void directSetText() {
+        for (int i = 0; i < 500; i++) {
+            ExceptionUtil.uncheck(() -> Thread.sleep(10));
+            stubButton.setText("direct-" + Math.random());
+        }
+    }
+
+    private void centerSetText() {
+        for (int i = 0; i < 500; i++) {
+            int index = i;
+            FxRunCenter.builder().id(stubButton).run(() -> {
+                ExceptionUtil.uncheck(() -> Thread.sleep(10));
+                stubButton.setText("center-" + Math.random());
             });
         }
     }
