@@ -1,4 +1,4 @@
-package xdean.share.gui.peak;
+package xdean.share.gui.schedule;
 
 import com.google.common.base.Stopwatch;
 import javafx.application.Platform;
