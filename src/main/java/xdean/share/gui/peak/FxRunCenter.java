@@ -170,8 +170,6 @@ public abstract class FxRunCenter {
 
         void run() {
             Stopwatch sw = Stopwatch.createStarted();
-            advTasks.forEach(tasks::addFirst);
-            advTasks.clear();
             running = true;
             while (!tasks.isEmpty()) {
                 Runnable r = tasks.pollFirst();

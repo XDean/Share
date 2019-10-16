@@ -37,18 +37,14 @@ public class Test extends Application {
         primaryStage.setScene(new Scene(new VBox(
                 new HBox(
                         directButton,
-                        centerButton
-                ),
+                        centerButton),
                 new HBox(
                         directSetButton,
-                        centerSetButton
-                ),
+                        centerSetButton),
                 new HBox(
                         new ProgressBar(),
-                        stubButton
-                ),
-                new ScrollPane(flowPane)
-        )));
+                        stubButton),
+                new ScrollPane(flowPane))));
         primaryStage.setWidth(500);
         primaryStage.setHeight(500);
         primaryStage.show();
@@ -76,7 +72,7 @@ public class Test extends Application {
     private void directSetText() {
         for (int i = 0; i < 500; i++) {
             ExceptionUtil.uncheck(() -> Thread.sleep(10));
-            stubButton.setText("direct-" + Math.random());
+            stubButton.setText("direct-" + i + "-" + Math.random());
         }
     }
 
@@ -85,7 +81,7 @@ public class Test extends Application {
             int index = i;
             FxRunCenter.builder().id(stubButton).run(() -> {
                 ExceptionUtil.uncheck(() -> Thread.sleep(10));
-                stubButton.setText("center-" + Math.random());
+                stubButton.setText("center-" + index + "-" + Math.random());
             });
         }
     }
