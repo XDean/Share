@@ -128,6 +128,7 @@ public abstract class FxRunCenter {
         final Deque<Runnable> advTasks = new LinkedBlockingDeque<>();
         final Map<Object, Runnable> taskMap = new ConcurrentHashMap<>();
         final AtomicBoolean scheduled = new AtomicBoolean(false);
+        boolean running;
 
         void schedule(Runnable r) {
             schedule(null, r);
@@ -153,7 +154,7 @@ public abstract class FxRunCenter {
                     }
                 }
             }
-            if (Platform.isFxApplicationThread()) {
+            if (Platform.isFxApplicationThread() && running) {
                 advTasks.addFirst(r);
             } else {
                 tasks.addLast(r);
@@ -171,6 +172,7 @@ public abstract class FxRunCenter {
             Stopwatch sw = Stopwatch.createStarted();
             advTasks.forEach(tasks::addFirst);
             advTasks.clear();
+            running = true;
             while (!tasks.isEmpty()) {
                 Runnable r = tasks.pollFirst();
                 r.run();
@@ -180,6 +182,7 @@ public abstract class FxRunCenter {
                     break;
                 }
             }
+            running = false;
             if (scheduled.compareAndSet(true, false)) {
                 if (!tasks.isEmpty()) {
                     scheduleThis();
