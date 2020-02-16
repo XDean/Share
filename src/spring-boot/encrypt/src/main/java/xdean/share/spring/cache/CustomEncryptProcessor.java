@@ -1,4 +1,4 @@
-package xdean.share.spring.encrypt.custom;
+package xdean.share.spring.cache;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.env.EnvironmentPostProcessor;
