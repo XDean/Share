@@ -1,3 +1,5 @@
 spring:
   cache:
     type: simple # Try change to redis
+
+cache
