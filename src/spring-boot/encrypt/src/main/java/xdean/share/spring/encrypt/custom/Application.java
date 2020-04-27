@@ -1,4 +1,4 @@
-package xdean.share.spring.cache;
+package xdean.share.spring.encrypt.custom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

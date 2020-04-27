@@ -1,4 +1,4 @@
-package xdean.share.spring.cache;
+package xdean.share.spring.encrypt.custom;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.env.EnvironmentPostProcessor;
@@ -6,13 +6,10 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.EnumerablePropertySource;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.PropertySource;
-import org.springframework.stereotype.Component;
 import xdean.spring.auto.AutoSpringFactories;
 
 import java.util.Base64;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 @AutoSpringFactories(EnvironmentPostProcessor.class)
 public class CustomEncryptProcessor implements EnvironmentPostProcessor {
