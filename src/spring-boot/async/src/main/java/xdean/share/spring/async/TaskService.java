@@ -34,9 +34,9 @@ public class TaskService {
         return new AsyncResult<>("runListenableFuture-" + i);
     }
 
-    @Async("special")
+    @Async("io")
     public void runQualifier(int i) {
-        System.out.printf("%s runListenableFuture-%d\n", Thread.currentThread(), i);
+        System.out.printf("%s runQualifier-%d\n", Thread.currentThread(), i);
     }
 
     @Async

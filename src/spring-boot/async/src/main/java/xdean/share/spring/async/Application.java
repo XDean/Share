@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -43,6 +44,7 @@ public class Application {
     }
 
     @Bean
+    @Primary
     public TaskExecutor executor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(2);
@@ -54,8 +56,8 @@ public class Application {
     }
 
     @Bean
-    @Qualifier("special")
-    public TaskExecutor specialExecutor() {
+    @Qualifier("io")
+    public TaskExecutor iolExecutor() {
         return new ConcurrentTaskExecutor();
     }
 
