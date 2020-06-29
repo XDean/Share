@@ -49,3 +49,34 @@ Knowledge Sharing
 
 ## 7.2
 - [Artificial Neural Network: Gradient Descent and Back Propagation](doc/machine/ANN-GD-BP/GradientDescentAndBackPropagation.md)
+
+## 8.15
+
+- [Genetic Algorithm](doc/machine/GA/ga.md)
+
+## 10.24
+
+- [UI task schedule optimization: Peak Clipping & De-duplicate](http://blog.xdean.cn/post/coding/java/gui/ui-task-optimize/)
+
+## 11.21
+
+- [Spring Boot Core](http://blog.xdean.cn/post/coding/java/spring-boot/1/)
+
+# 2020
+
+## 2.27
+
+- Spring Boot
+    - [Auto Configuration 自动配置](https://blog.xdean.cn/post/coding/java/spring-boot/6/)
+    - [Scope 作用域](https://blog.xdean.cn/post/coding/java/spring-boot/extra/1-custom-scope/)
+    - [Condition 条件](https://blog.xdean.cn/post/coding/java/spring-boot/extra/2-custom-condition/)
+    - [Encrypt 加密](https://blog.xdean.cn/post/coding/java/spring-boot/extra/3-encrypt/)
+    - [Cache 缓存](https://blog.xdean.cn/post/coding/java/spring-boot/extra/4-caching/)
+
+# 3.26
+
+- Swagger
+    - [Specification](https://swagger.io/docs/specification/about/)
+    - [Online Editor](https://editor.swagger.io/)
+    - [UI Demo](https://petstore.swagger.io/)
+    
