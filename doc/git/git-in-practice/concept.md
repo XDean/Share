@@ -1,4 +1,4 @@
-# Git进阶
+# Git概念
 
 ## Remote branch and tracking branch 远程分支和追踪分支
 
