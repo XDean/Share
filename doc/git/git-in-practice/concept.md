@@ -1,5 +1,9 @@
 # Git概念
 
+# Commit Tree
+
+![](images/commit-tree.png)
+
 ## Remote branch and tracking branch 远程分支和追踪分支
 
 ## Ref and reflog 引用和引用日志
@@ -12,7 +16,7 @@
 
 以上都有对应的remote版本，如常见的`origin/master`
 
-Reflog是指针的值的变化日志，使用`git reflog <ref>`命令可以查看，默认查看`HEAD`
+reflog是指针的值的变化日志，使用`git reflog <ref>`命令可以查看，默认查看`HEAD`
 
 ```
 $ git reflog
