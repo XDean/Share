@@ -6,7 +6,7 @@
 
 ## Ref and reflog 引用和引用日志
 
-引用是指向commit tree的指针，一般有一下几种形式
+引用是指向commit的指针，一般有一下几种形式
 
 - `HEAD`，即本地当前指针，一般指向当前分支
 - `<branch>`，分支
@@ -45,11 +45,11 @@ f46714fe (origin/main, origin/HEAD, main) HEAD@{4}: pull --no-stat -v --progress
 | `<rev1>..<rev2>` | 包含rev2及所有祖先，但排除rev1及所有祖先，可以理解为差集`rev2 \ rev1` | `HEAD~3..HEAD` |
 | `<rev1>...<rev2>` | 包含仅被rev1和rev2及他们的所有祖先，但排除共同祖先，可以理解为差集之并`rev1 \ rev2 ∪ rev2 \ rev1` | `master..feature-branch` |
 
-## Track branch 追踪分支
+## Tracking branch 追踪分支
 
-每一个本地分支可以设定一个Track Branch追踪分支，又叫upstream。
+每一个本地分支可以设定一个Tracking Branch追踪分支，又叫upstream。
 
-当进行远程操作时，track branch是默认的目标。如`git pull`, `git push`。
+当进行远程操作时，tracking branch是默认的目标。如`git pull`, `git push`。
 
 你可以用`git branch -vv`来查看追踪分支
 
