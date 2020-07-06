@@ -1,10 +1,8 @@
 # Git概念
 
-# Commit Tree
+## Commit Tree
 
 ![](images/commit-tree.png)
-
-## Remote branch and tracking branch 远程分支和追踪分支
 
 ## Ref and reflog 引用和引用日志
 
@@ -14,7 +12,7 @@
 - `<branch>`，分支
 - `<tag>`，标签
 
-以上都有对应的remote版本，如常见的`origin/master`
+以上几项都可以有对应的remote版本，如常见的`origin/master`
 
 reflog是指针的值的变化日志，使用`git reflog <ref>`命令可以查看，默认查看`HEAD`
 
@@ -46,3 +44,22 @@ f46714fe (origin/main, origin/HEAD, main) HEAD@{4}: pull --no-stat -v --progress
 | `^<rev>` | 除外改版本及所有祖先 | `^HEAD~3` |
 | `<rev1>..<rev2>` | 包含rev2及所有祖先，但排除rev1及所有祖先，可以理解为差集`rev2 \ rev1` | `HEAD~3..HEAD` |
 | `<rev1>...<rev2>` | 包含仅被rev1和rev2及他们的所有祖先，但排除共同祖先，可以理解为差集之并`rev1 \ rev2 ∪ rev2 \ rev1` | `master..feature-branch` |
+
+## Track branch 追踪分支
+
+每一个本地分支可以设定一个Track Branch追踪分支，又叫upstream。
+
+当进行远程操作时，track branch是默认的目标。如`git pull`, `git push`。
+
+你可以用`git branch -vv`来查看追踪分支
+
+```
+$ git branch -vv
+  bugfix/SCL-473-create-epic                   e9380a5 [origin/bugfix/SCL-473-create-epic] Merge remote-tracking branch 'remotes/origin/main' into bugfix/SCL-473-create-epic
+  feature/SCL-450-change-log                   4550f04 SCL-450 entity api
+* main                                         28fcd18 [origin/main] Merge pull request #457 in BRIONOPSPM/pivt from SCL-486 to main
+  release-06-15                                e9380a5 [origin/release-06-15] Merge remote-tracking branch 'remotes/origin/main' into bugfix/SCL-473-create-epic
+```
+
+当进行默认远程操作，如`git push`，而没有配置追踪分支的时候，git会报错。
+你可以使用`git branch -u <upstream>`来配置远程分支。

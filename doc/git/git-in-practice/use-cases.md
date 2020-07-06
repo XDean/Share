@@ -50,6 +50,17 @@ $ git commit --amend
 
 如果此前你已经push到了远程，则远程和本地分支不同步，需要强制push，`git push -f`
 
+## 想要通过`git diff`来查看修改，但是发现没有diff或者是diff少了，怎么回事
+
+- 先使用`git status`看一看你想要看的diff是否在stage上
+    - 如果只想要看unstage上的改动，使用`git diff`
+    - 如果只想要看stage的改动，使用`git diff --cached`
+    - 如果想要both，使用`git diff HEAD`
+
+- `git diff`命令默认拿工作树与`index`比较，所谓`index`就是`HEAD`+`stage`
+- 加上`--cached`则变成拿`index`和HEAD比较
+- 加上`HEAD`则指定拿工作树与HEAD比较
+
 ## `origin`是一个分支么，为什么可以作为`revision`使用
 
 `origin`不是revision而是远程名(remote)。
@@ -148,7 +159,8 @@ git log release/2020-06-23..release/2020-06-29 src
 ## 不小心`reset --hard`了（或者其他操作）导致文件丢失了，还能还原么
 
 - 该修改是否曾经提交到Git
-    - 如果是，你是否有其他引用指向改提交
+    - 如果是，你是否有其他引用指向该提交
         - 如果有，你可以通过该引用找到提交
         - 如果否，你可以通过`reflog`来查找
     - 如果否，没救了，Git管不了外部操作
+    
