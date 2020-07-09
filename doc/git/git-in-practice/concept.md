@@ -105,3 +105,17 @@ rebase的作用是将一系列的提交像补丁一样应用到新的位置。
 > 总的原则是，只对尚未推送或分享给别人的本地修改执行变基操作清理历史， 从不对已推送至别处的提交执行变基操作，这样，你才能享受到两种方式带来的便利。
 
 个人观点：除了reword，否则不rebase
+
+## hook 钩子
+
+`git help hooks`
+
+Git提供了hooks接口来让你再git执行过程中触发自定义的脚本。
+
+hooks脚本默认放在`.git/hooks`中，你也可以配置`core.hooksPath`来指定位置
+
+这些脚本大部分时shell脚本，同时也支持perl, ruby, python。
+
+常用的hook有：`pre-commit`, `prepare-commit-msg`, `post-commit` 等等
+
+具体有哪些hook以及输入参数，可以参考Manual或者git默认提供的sample脚本
