@@ -164,3 +164,28 @@ git log release/2020-06-23..release/2020-06-29 src
         - 如果否，你可以通过`reflog`来查找
     - 如果否，没救了，Git管不了外部操作
     
+## 如何找到某个文件的某一行谁动过 (@vhu)
+
+`git blame --help`
+
+```
+$ git blame pom.xml
+d59941e90 (Feng Yang - FENY 2019-10-01 15:40:24 -0700   1) <?xml version="1.0" encoding="UTF-8"?>
+deb44cb58 (Alex Zhang       2019-11-17 12:03:08 -0800   2) <project xmlns="http://maven.apache.org/POM/4.0.0"
+ec264cb2e (zhxie            2020-01-13 14:41:47 +0800   3)          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ec264cb2e (zhxie            2020-01-13 14:41:47 +0800   4)          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+ec264cb2e (zhxie            2020-01-13 14:41:47 +0800   5)     <modelVersion>4.0.0</modelVersion>
+```
+
+## 如何找到某个commit属于哪个PR(@Jen-Shiang Wang)
+
+你可以用如下命令来查找该提交的所有merge操作，一般而言，第一条merge就是你要找的。
+
+`git log <commit>..<main or release> --ancestry-path --merges --reverse`
+
+```
+$  git log SCL-496..main --ancestry-path --merges --reverse
+8f69d54 Merge pull request #464 in BRIONOPSPM/pivt from SCL-496_show_resave_button_when_saving_failed to main
+cfcee16 Merge pull request #465 in BRIONOPSPM/pivt from SCL-494-expire-time to main
+ec506af Merge pull request #466 in BRIONOPSPM/pivt from SCL-496_show_resave_button_when_saving_failed to main
+```
