@@ -61,7 +61,7 @@ $ git commit --amend
 - 加上`--cached`则变成拿`index`和HEAD比较
 - 加上`HEAD`则指定拿工作树与HEAD比较
 
-## `origin`是一个分支么，为什么可以作为`revision`使用
+## `origin`是一个分支么，为什么可以作为`revision`使用(@vhu)
 
 `origin`不是revision而是远程名(remote)。
 
@@ -128,7 +128,7 @@ Git 本身并不会强行禁止你在master上修改，但是Git Server可能会
 ## 远程分支被动过了导致push/pull失败怎么办 (@ddeng)
 
 - 在开始解决之前，你需要考虑为什么你的远程分支会领先本地分支
-    - 如果是因为本地修订(amend或者rebase)，则直接force push
+    - 如果是因为本地修订(amend或者rebase)，则直接force push: `git push -f`
     - 如果是因为多人协作，建议不要共享分支，合理利用branch
 
 解决的办法就是merge

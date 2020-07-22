@@ -6,6 +6,15 @@ Dean Xu
 .autoscroll
 .theme asml ppt slide.css
 
+* Agenda
+
+- Git常见问题
+- Git进阶知识
+- Git工作流
+- Git Tips
+- 附1：Git词汇表
+- 附2：Git进阶阅读
+
 * _
 
 .full
@@ -35,3 +44,7 @@ Dean Xu
 
 .full
 .md books.md
+
+* Quiz
+
+[[quiz/quiz.slide][Quiz]]
