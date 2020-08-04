@@ -15,6 +15,6 @@ import javax.persistence.Table;
 public class AuthRevisionEntity extends DefaultRevisionEntity {
   @Getter
   @Setter
-  @Column(name = "user")
+  @Column(name = "username")
   private String username;
 }
